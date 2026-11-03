@@ -1,0 +1,77 @@
+---
+# What CaseStudyHeader shows. Everything marked Placeholder is waiting for Erin's copy.
+badge:
+  label: Case study
+heading: Laguna Companion
+facts:
+  - title: Role
+    value: Placeholder
+  - title: Team
+    value: Placeholder
+  - title: Timeline
+    value: Placeholder
+---
+
+import { Gallery, Image, MediaBlock, MediaText, ProblemOpportunityBlock, StatCard, TextBlock } from 'verity-design-system';
+import hero from './images/laguna-companion-hero.webp';
+import sketches from './images/laguna-companion-sketches.webp';
+import workflowMapping from './images/workflow-mapping.avif';
+import callFlow from './images/call-flow-diagram.webp';
+import summaryStill from './animations/Creating Summary.png';
+
+{/* SAMPLE: placeholder text and real images, to test the setup. Not the real story. */}
+
+<MediaBlock caption="Placeholder caption">
+  <Image src={hero} alt="Placeholder alt text: describe the Laguna Companion hero image" loading="eager" />
+</MediaBlock>
+
+## Placeholder: first section heading
+
+Placeholder paragraph. This sample shows how Markdown text looks in Prose. Erin will write the real story.
+
+Placeholder paragraph with a [placeholder link](#placeholder-link), *emphasis*, and `inline code`.
+
+- Placeholder list item
+- Placeholder list item
+
+<ProblemOpportunityBlock
+  problem="Placeholder: what was wrong, in a sentence or two."
+  opportunity="Placeholder: what that opened up, in a sentence or two."
+/>
+
+## Placeholder: second section heading
+
+Placeholder paragraph before a MediaText.
+
+<MediaText
+  text={
+    <TextBlock heading="Placeholder: MediaText heading">
+      Placeholder text beside the image.
+    </TextBlock>
+  }
+  media={
+    <MediaBlock caption="Placeholder caption">
+      <Image src={workflowMapping} alt="Placeholder alt text: describe the workflow mapping image" />
+    </MediaBlock>
+  }
+/>
+
+> Placeholder blockquote.
+
+<Gallery>
+  <MediaBlock caption="Placeholder caption">
+    <Image src={sketches} alt="Placeholder alt text: describe the sketches" />
+  </MediaBlock>
+  <MediaBlock caption="Placeholder caption">
+    <Image src={summaryStill} alt="Placeholder alt text: describe the Creating Summary animation still" />
+  </MediaBlock>
+  <MediaBlock caption="Placeholder caption">
+    <Image src={callFlow} alt="Placeholder alt text: describe the call flow diagram" />
+  </MediaBlock>
+</Gallery>
+
+## Placeholder: outcome heading
+
+<StatCard value="Placeholder" description="Placeholder: what the number means" />
+
+Placeholder closing paragraph.

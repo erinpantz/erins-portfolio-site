@@ -19,11 +19,17 @@
     "verity-design-system": "github:erinpantz/verity-design-system#v0.1.0"
   },
   "devDependencies": {
+    "@mdx-js/rollup": "^3.1.1",
     "@react-router/dev": "^8.5.1",
     "@react-router/node": "^8.5.1",
+    "@types/mdast": "^4.0.4",
+    "@types/mdx": "^2.0.14",
     "@types/node": "^26.6.6",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "remark-frontmatter": "^5.0.0",
+    "remark-gfm": "^4.0.1",
+    "remark-mdx-frontmatter": "^6.0.0",
     "typescript": "~6.0.3",
     "vite": "^8.3.5"
   }

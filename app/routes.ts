@@ -4,6 +4,8 @@ import { type RouteConfig, index, route } from '@react-router/dev/routes';
 export default [
   index('routes/home.tsx'),
   route('portfolio', 'routes/portfolio.tsx'),
+  // Every case study, from case-studies/<slug>/index.mdx
+  route('portfolio/:slug', 'routes/case-study.tsx'),
   route('playground', 'routes/playground.tsx'),
   route('profile', 'routes/profile.tsx'),
 ] satisfies RouteConfig;
