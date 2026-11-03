@@ -1,9 +1,10 @@
 import type { ReactNode } from 'react';
-import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration, useLocation } from 'react-router';
+import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLocation } from 'react-router';
 import { Section, Shell, themeScript, type ShellProps } from 'verity-design-system';
 import 'verity-design-system/styles.css';
 import type { Route } from './+types/root';
-import { NAV_HREFS, pageTitle, siteFooter } from './site';
+import { caseStudies } from './caseStudies';
+import { NAV_HREFS, siteFooter } from './site';
 
 // The HTML around every page
 export function Layout({ children }: { children: ReactNode }) {
@@ -28,11 +29,13 @@ export function Layout({ children }: { children: ReactNode }) {
   );
 }
 
-// Which nav item is the current page. Case studies count as Portfolio.
+// Which nav item is the current page. Case studies count as Portfolio; an
+// address without a page (Page not found) has none.
 function currentPage(pathname: string): ShellProps['current'] {
-  if (pathname.startsWith('/portfolio')) return 'portfolio';
-  if (pathname.startsWith('/playground')) return 'playground';
-  if (pathname.startsWith('/profile')) return 'profile';
+  const [first, slug, ...rest] = pathname.split('/').filter(Boolean);
+  if (rest.length > 0) return undefined;
+  if (first === 'portfolio' && (!slug || caseStudies[slug])) return 'portfolio';
+  if (!slug && (first === 'playground' || first === 'profile')) return first;
   return undefined;
 }
 
@@ -53,14 +56,12 @@ export default function App() {
   );
 }
 
-// Shown instead of a page when it doesn't exist or something breaks
+// Shown instead of the page if something breaks while it's showing
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-  const notFound = isRouteErrorResponse(error) && error.status === 404;
-  if (!notFound) console.error(error);
+  console.error(error);
   return (
     <SiteShell>
-      <title>{pageTitle(notFound ? 'Page not found' : 'Something went wrong')}</title>
-      <Section headingLevel={1} heading={notFound ? 'Page not found' : 'Something went wrong'} />
+      <Section headingLevel={1} heading="Something went wrong" />
     </SiteShell>
   );
 }

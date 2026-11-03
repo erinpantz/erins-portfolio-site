@@ -9,5 +9,6 @@ const caseStudyPaths = readdirSync('case-studies', { withFileTypes: true })
 export default {
   // No server: every page is built into a finished HTML file ahead of time
   ssr: false,
-  prerender: ['/', '/portfolio', '/playground', '/profile', ...caseStudyPaths],
+  // /404 is the Page not found page, for addresses without a page
+  prerender: ['/', '/portfolio', '/playground', '/profile', ...caseStudyPaths, '/404'],
 } satisfies Config;

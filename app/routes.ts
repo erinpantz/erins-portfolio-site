@@ -8,4 +8,6 @@ export default [
   route('portfolio/:slug', 'routes/case-study.tsx'),
   route('playground', 'routes/playground.tsx'),
   route('profile', 'routes/profile.tsx'),
+  // Everything else: Page not found
+  route('*', 'routes/not-found.tsx'),
 ] satisfies RouteConfig;
