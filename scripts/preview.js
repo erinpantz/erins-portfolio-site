@@ -28,6 +28,7 @@ const TYPES = {
   '.woff': 'font/woff',
   '.pdf': 'application/pdf',
   '.ico': 'image/x-icon',
+  '.webmanifest': 'application/manifest+json',
 };
 
 const isFile = (path) => statSync(path, { throwIfNoEntry: false })?.isFile();

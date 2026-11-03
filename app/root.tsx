@@ -16,6 +16,13 @@ export function Layout({ children }: { children: ReactNode }) {
             so a Red visitor never sees a flash of Blue. It has to stay inline
             and first. */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        {/* Icons, exported from Figma into public/. Browsers that read SVG use
+            it; the PNGs are fallbacks for those that don't. */}
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+        <link rel="icon" href="/favicon-16.png" type="image/png" sizes="16x16" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
