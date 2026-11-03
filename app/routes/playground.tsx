@@ -1,3 +1,9 @@
+import { Section } from 'verity-design-system';
+import { pageTitle } from '../site';
+
+export const meta = () => [{ title: pageTitle('Playground') }];
+
+// Empty for now: only the page's name, as its heading
 export default function Playground() {
-  return <h1>Playground</h1>;
+  return <Section headingLevel={1} heading="Playground" />;
 }
