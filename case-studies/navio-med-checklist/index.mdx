@@ -1,20 +1,384 @@
 ---
-# PLACEHOLDER: title and facts are waiting for Erin's copy
-title: "Placeholder: Navio med checklist"
+title: Navio’s Med Checklist
 badge:
   label: Case study
-heading: "Placeholder: Navio med checklist case study"
+heading: Helping cancer patients take their medications on time
 facts:
+  - title: Industry
+    value: Healthcare, Medication Support
   - title: Role
-    value: Placeholder
+    value: Head of Design, research, product design, visual design
+  - title: Year
+    value: "2022"
 ---
 
-import { Section } from 'verity-design-system';
+import {
+  Container,
+  Divider,
+  Grid,
+  Image,
+  MediaBlock,
+  Section,
+  StatCard,
+  TextBlock,
+  UnorderedList,
+  UnorderedListItem,
+  VerticalStack,
+} from 'verity-design-system';
 
-{/* PLACEHOLDER: the hero image Container goes here, first, like every case study */}
+import hero from './images/hero-med-checklist.avif';
+import firstReleaseScreens from './images/first-release-screens.webp';
+import engagementChart from './images/engagement-chart.webp';
+import nonAdherenceCostsChart from './images/non-adherence-costs-chart.webp';
+import lightningDemos from './images/lightning-demos.webp';
+import sketches from './images/navio-med-checklist-sketches.webp';
+import prototypeFlow from './images/prototype-flow.webp';
+import usabilityTest from './images/usability-test.webp';
+import personaJulie from './images/persona-julie.webp';
+import personaLori from './images/persona-lori.webp';
+import personaLisa from './images/persona-lisa.webp';
+import finalMedicationsHome from './images/final-medications-home.webp';
+import finalReminderToCheckOff from './images/final-reminder-to-check-off.webp';
+import finalCheckOffGroup from './images/final-check-off-group.webp';
+import finalIllustrationsByTime from './images/final-illustrations-by-time.webp';
+import designSpecs from './images/design-specs.webp';
 
-<Section heading="Placeholder: coming soon">
+{/* Where Figma stacks paragraphs and a list together (32 apart instead of the
+    Section's 56), they sit in a VerticalStack, with the paragraphs in an
+    explicit <Prose>: the build step only adds Prose straight inside a Section
+    or TextBlock. */}
 
-Placeholder paragraph. This case study hasn’t been written yet.
+<Container>
+  <MediaBlock width="wide">
+    <Image
+      src={hero}
+      alt="Two screens from the medication checklist on a confetti background: My Medications at 10am Today, with Temozolomide (Chemo) to check off, and a success screen that says “You’ve taken all of your meds today.”"
+      loading="eager"
+    />
+  </MediaBlock>
+</Container>
+
+<Section heading="Overview">
+
+We designed the first release of Navio’s app to help brain cancer patients follow their doctor’s treatment plan. It included a calendar of key events (medications, labs, and MRIs), educational articles, and links to trusted resources.
+
+Patients returned to the app over time, but their activity was mostly around the start of each treatment cycle.
+
+<VerticalStack gap="md">
+  <MediaBlock>
+    <Image
+      src={firstReleaseScreens}
+      alt="Three screens from the first release of Navio’s app: a welcome screen saying Dr. Ridge has shared a treatment plan, a calendar of the day’s events such as antibiotic, fasting, anti-nausea, chemo, and radiation, and an article about radiation and chemotherapy."
+      aspectRatio="3:2"
+    />
+  </MediaBlock>
+  <MediaBlock>
+    <Image
+      src={engagementChart}
+      alt="A chart titled “Patients consistently engage and access Navio when it matters most,” plotting each patient’s app use from 25 days before to 100 days after their treatment start date. Use clusters around the start date for radiation and chemo patients, and around upcoming cycles for adjuvant patients."
+    />
+  </MediaBlock>
+</VerticalStack>
+
+We were pleased to help patients prepare for treatment, but now we were asking ourselves:
+
+> How might we support patients during treatment, day to day?
+
+We knew that medication adherence was a challenge. To understand the size and nature of the problem, we started with research and interviews.
 
 </Section>
+
+<Container>
+  <Divider />
+</Container>
+
+<Section heading="The opportunity">
+
+Over the past two decades, oral cancer therapies have boomed. Instead of going into a clinic and sitting in a chair for hours to receive chemotherapy, patients can take their medications at home.
+
+With convenience comes new challenges. Patients now have to remember to take each medication at the right time and know how to take it (the dose, with or without food, and so on), several times a day.
+
+Study after study has shown that adherence to oral medications is surprisingly low, leading to less effective treatment, disease progression, more hospitalizations, and even death. Taken together, the cost of non-adherence in cancer has been estimated at $70,000 to $160,000 per person.
+
+<MediaBlock>
+  <Image
+    src={nonAdherenceCostsChart}
+    alt="A bar chart of unadjusted medication non-adherence costs by condition, averaged across studies in 2015 US dollars. Cancer’s range is far higher than any other condition’s, reaching about $160,000; the rest stay under about $55,000."
+    aspectRatio="3:2"
+  />
+</MediaBlock>
+
+<VerticalStack gap="md">
+  <Prose>
+
+Contributing factors of non-adherence include:
+
+  </Prose>
+  <UnorderedList>
+    <UnorderedListItem>Lack of knowledge or experience at the start of treatment</UnorderedListItem>
+    <UnorderedListItem>Memory and forgetting</UnorderedListItem>
+    <UnorderedListItem>Side effects</UnorderedListItem>
+    <UnorderedListItem>Complex treatment schedules that change</UnorderedListItem>
+    <UnorderedListItem>Cost</UnorderedListItem>
+  </UnorderedList>
+</VerticalStack>
+
+</Section>
+
+<Container>
+  <Divider />
+</Container>
+
+<Section heading="Talking to patients and caregivers">
+
+From past conversations, we knew that caregivers played a key role in managing brain cancer treatment, because of the mental and physical challenges patients face.
+
+At the same time, we planned to expand Navio’s support beyond brain cancer, so we talked with patients and caregivers across various diagnoses about how they manage their medications.
+
+<TextBlock heading="What we learned">
+  <UnorderedList>
+    <UnorderedListItem>People commonly use physical checklists, a shot glass filled with pills for later, pillboxes, and phone alarms to remind them to take their medications.</UnorderedListItem>
+    <UnorderedListItem>Even with reminders, they still sometimes forget.</UnorderedListItem>
+    <UnorderedListItem>Even when they have taken their medications, they often can’t remember later which doses they already took, and they can get confused.</UnorderedListItem>
+  </UnorderedList>
+</TextBlock>
+
+</Section>
+
+<Container>
+  <Divider />
+</Container>
+
+<Section heading="Objective">
+
+<VerticalStack gap="md">
+  <Prose>
+
+> Help patients take their medications on time and confirm whether they’d taken earlier ones.
+
+As a product team, we had a lot of evidence that text messages work well as reminders. Given this, we wanted to design a seamless flow, starting with a timely reminder and ending with an easy way to log what had been taken.
+
+We’d design:
+
+  </Prose>
+  <UnorderedList>
+    <UnorderedListItem>Reminders by text message</UnorderedListItem>
+    <UnorderedListItem>A simple way to log when medications are taken</UnorderedListItem>
+    <UnorderedListItem>An easy way to look back at earlier doses</UnorderedListItem>
+    <UnorderedListItem>Helpful information about each medication and how to take it</UnorderedListItem>
+  </UnorderedList>
+</VerticalStack>
+
+</Section>
+
+<Container>
+  <Divider />
+</Container>
+
+<Section heading="Lightning demos and sketching">
+
+I was excited to have my friend and colleague from Vim, Tammy, as the lead designer on this feature. We started by sharing lightning demos of existing medication and task management apps. Tammy also tested a few and shared her observations with me. Then we sketched and discussed ideas for the design.
+
+<VerticalStack gap="md">
+  <MediaBlock>
+    <Image
+      src={lightningDemos}
+      alt="A board of screenshots from existing medication and task management apps, with sticky notes on the ideas worth borrowing, such as a date picker, grouping by time of day, and simple checklists."
+      aspectRatio="4:3"
+    />
+  </MediaBlock>
+  <MediaBlock>
+    <Image
+      src={sketches}
+      alt="Black-and-white sketches of app screens connected by arrows: tasks grouped by time of day, event details, notes, and medication lists and timelines."
+      aspectRatio="4:3"
+    />
+  </MediaBlock>
+</VerticalStack>
+
+</Section>
+
+<Container>
+  <Divider />
+</Container>
+
+<Section heading="Prototyping and testing">
+
+<VerticalStack gap="md">
+  <Prose>
+
+We created an interactive prototype and tested task-based scenarios with patients and caregivers. We asked participants to:
+
+  </Prose>
+  <UnorderedList>
+    <UnorderedListItem>Mark a single medication as taken</UnorderedListItem>
+    <UnorderedListItem>Mark a group of medications as taken</UnorderedListItem>
+    <UnorderedListItem>Mark a medication as skipped and log a reason</UnorderedListItem>
+    <UnorderedListItem>Move between days</UnorderedListItem>
+  </UnorderedList>
+</VerticalStack>
+
+<VerticalStack gap="md">
+  <MediaBlock>
+    <Image
+      src={prototypeFlow}
+      alt="Two prototype screens of the medication checklist for Thursday the 7th, with a check and an X button beside each medication, a Check all button for the evening, and a “Checklist updated” confirmation."
+      aspectRatio="3:2"
+    />
+  </MediaBlock>
+  <MediaBlock>
+    <Image
+      src={usabilityTest}
+      alt="A recording of a remote usability test: the prototype’s “I skipped because…” dialog, with a text field and a Submit button, beside video of a person in headphones."
+    />
+  </MediaBlock>
+</VerticalStack>
+
+I wanted to share what we learned with the broader Navio team at our next all-hands meeting. To help my colleagues empathize with users, I sketched a few personas based on our participants.
+
+<VerticalStack gap="md">
+  <MediaBlock>
+    <Image
+      src={personaJulie}
+      alt="A hand-drawn persona of Julie, a patient with two cancer diagnoses, in a clinical trial, with very little social support. Her nurse makes a paper calendar and follows up daily; Julie refers to it to take her meds, and a nurse neighbor and a doctor neighbor give her shots. Quotes: “I would feel good about this, it’s something concrete to do.” and “The nurse was a helpful reminder, she called almost every day.”"
+      aspectRatio="4:3"
+    />
+  </MediaBlock>
+  <MediaBlock>
+    <Image
+      src={personaLori}
+      alt="A hand-drawn persona of Lori, the patient’s sister-in-law: highly organized and a caretaker at heart. She gathers the doctors’ instructions into medication spreadsheets for the patient’s mother-in-law, who fills a pillbox and gives the medications to the patient, who has GBM. Quotes: “GBM patients would not be organizing and tracking, it would be a caregiver.” and “It was scary to leave it in their hands. I didn’t really know what was happening.”"
+      aspectRatio="4:3"
+    />
+  </MediaBlock>
+  <MediaBlock>
+    <Image
+      src={personaLisa}
+      alt="A hand-drawn persona of Lisa, the patient’s daughter, who shared caregiving with her father and took 2 months’ leave to help. The doctor makes a paper checklist; Lisa and her dad refer to it, give the medications, and log each one with the time for the patient, who has lung cancer. Quotes: “We wrote it down so we knew she took it that day.” and “She had the same meds morning, afternoon and evening.”"
+      aspectRatio="4:3"
+    />
+  </MediaBlock>
+</VerticalStack>
+
+<TextBlock heading="Key takeaways">
+  <UnorderedList>
+    <UnorderedListItem>There’s too much dense information, and it feels overwhelming.</UnorderedListItem>
+    <UnorderedListItem>The text is too small.</UnorderedListItem>
+    <UnorderedListItem>It needs to be simpler, especially for people who may have cognitive difficulties.</UnorderedListItem>
+    <UnorderedListItem>Most people would just check off the current medication, not look ahead.</UnorderedListItem>
+    <UnorderedListItem>People wouldn’t log skipped doses or enter a reason, unless a doctor asked them to.</UnorderedListItem>
+    <UnorderedListItem>Checking something off feels good, like you’ve accomplished something, even something small.</UnorderedListItem>
+    <UnorderedListItem>A reminder could be very helpful.</UnorderedListItem>
+    <UnorderedListItem>Reminders by text message felt important and less likely to be ignored than an alarm or push notification.</UnorderedListItem>
+    <UnorderedListItem>It could help to look back at earlier medications to confirm they were taken, but only for the current day.</UnorderedListItem>
+  </UnorderedList>
+</TextBlock>
+
+</Section>
+
+<Container>
+  <Divider />
+</Container>
+
+<Section heading="Design iteration">
+
+<VerticalStack gap="md">
+  <Prose>
+
+After testing with cancer patients and caregivers, we also interviewed internal stakeholders for feedback. It became clear that our next iteration needed to:
+
+  </Prose>
+  <UnorderedList>
+    <UnorderedListItem title="Simplify the layout">Make each view less dense, and focus on one thing at a time: the current medication to check off, on the current day.</UnorderedListItem>
+    <UnorderedListItem title="Make everything bigger">Larger text, icons, and imagery.</UnorderedListItem>
+    <UnorderedListItem title="Descope">No skipping or logging reasons. Focus on what needs to be done right now.</UnorderedListItem>
+    <UnorderedListItem title="Add delight">Navio’s design approach includes moments of delight and personality where they fit, so we looked for ways to bring a little joy to an otherwise tedious task.</UnorderedListItem>
+  </UnorderedList>
+</VerticalStack>
+
+Tammy and I challenged ourselves to “subtract until it breaks,” a principle I always come back to.
+
+Working together at Vim, I’d seen what a great illustrator Tammy was. I asked if she could take some elements from the journey illustrations I’d created and expand on them here.
+
+Our next round of designs was more focused, simpler, and more visually compelling.
+
+<VerticalStack width="wide" gap="md">
+  <MediaBlock width="wide">
+    <Image
+      src={finalMedicationsHome}
+      alt="Medications Home: two screens of the day’s medications, grouped into Morning, Afternoon, Night, and Anytime under a landscape illustration. The 9:30am dose of anti-nausea and vitamin D is checked off in green, and the second screen is scrolled further down."
+      aspectRatio="4:3"
+    />
+  </MediaBlock>
+  <MediaBlock width="wide">
+    <Image
+      src={finalReminderToCheckOff}
+      alt="Notification to checking off a med: a text message reminder with a link, then the 9:30am checklist with Ondansetron to check off and how to take it, then a screen that says All Meds Were Taken."
+      aspectRatio="4:3"
+    />
+  </MediaBlock>
+  <MediaBlock width="wide">
+    <Image
+      src={finalCheckOffGroup}
+      alt="Checking off a group of meds and checking all for the day: the 1pm checklist with a Check All button and three medications checked off, then a confetti screen that says “You’ve taken all of your meds today.”"
+      aspectRatio="4:3"
+    />
+  </MediaBlock>
+  <MediaBlock width="wide">
+    <Image
+      src={finalIllustrationsByTime}
+      alt="Illustrations change by time of day: sunny mountains for 9:30am, a sunny forest for 1:30pm, a moonlit night for 6:30pm, and mountains with a hot air balloon for Anytime, each with a pill, on both the checklist and the Medications screen."
+      aspectRatio="4:3"
+    />
+  </MediaBlock>
+</VerticalStack>
+
+We tested these designs with some of the participants from our first round. They found them easy to understand and liked how quickly they could check off their medications.
+
+We also reviewed them with internal stakeholders and made a few adjustments before preparing the handoff to engineering.
+
+</Section>
+
+<Container>
+  <Divider />
+</Container>
+
+<Section heading="Handoff to engineering">
+
+Once we’d completed the discovery and design phases, we were ready to prepare the handoff.
+
+It’s a crucial step in the design process. It helps make sure every detail is understood and built, and it shows you’re a good partner to the people building your designs.
+
+We showed every state of the app and its components, made notes about transitions and interactions, and prepared graphic assets optimized for export.
+
+<MediaBlock width="wide">
+  <Image
+    src={designSpecs}
+    alt="The design spec file for engineering, with sections for the menu, text message reminders, the medications checklist, success states, notifications, and transition animations, annotated with sticky notes."
+  />
+</MediaBlock>
+
+</Section>
+
+<Container>
+  <Divider />
+</Container>
+
+<Section heading="Results">
+
+We launched the medication checklist as part of an internal study of how well our reminders and checklist improved medication adherence. Among participants who gave feedback:
+
+<Grid itemWidth="md" gap="md">
+  <StatCard variant="brand" value="100%" description="said Navio’s texts helped them remember to take their medications" />
+  <StatCard variant="brand" value="92%" description="said Navio’s checklist helped them remember which medications they’d taken" />
+</Grid>
+
+Several participants asked to keep receiving reminders after the study ended.
+
+The medication checklist has become a key feature of Navio’s treatment support for patients.
+
+</Section>
+
+<Container>
+  <Divider />
+</Container>
