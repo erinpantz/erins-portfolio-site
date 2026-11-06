@@ -17,8 +17,8 @@ export function pageTitle(name?: string) {
   return name ? `${name} · Erin Tozour` : 'Erin Tozour';
 }
 
-// PLACEHOLDER: replace with Erin's Calendly URL
-const CALENDLY_URL = '#placeholder-calendly-url';
+// Where “Book a meeting” goes
+const CALENDLY_URL = 'https://calendly.com/meet-erin-tozour';
 
 // Link groups, starting from the example in Verity's Footer story
 const linkGroups = (
@@ -46,10 +46,9 @@ const linkGroups = (
 export const siteFooter = (
   <Footer
     callToAction={{
-      // PLACEHOLDER: heading and text
-      heading: 'Placeholder: call to action heading',
-      text: 'Placeholder: one sentence that invites people to schedule a meeting.',
-      buttonLabel: 'Schedule a meeting',
+      heading: 'Let’s chat',
+      text: 'I’m seeking a full time design role and would love to chat if you think I could bring value to your team.',
+      buttonLabel: 'Book a meeting',
       href: CALENDLY_URL,
     }}
     linkGroups={linkGroups}
