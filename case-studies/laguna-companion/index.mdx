@@ -1,81 +1,488 @@
 ---
-# What CaseStudyHeader shows. Everything marked Placeholder is waiting for Erin's copy.
+title: Laguna Companion
 badge:
   label: Case study
-heading: Laguna Companion
+heading: Designing AI that care teams trust
 facts:
+  - title: Industry
+    value: Healthcare, Care Management
   - title: Role
-    value: Placeholder
-  - title: Team
-    value: Placeholder
-  - title: Timeline
-    value: Placeholder
+    value: Head of Design, research, product designer, visual design
+  - title: Year
+    value: 2025–2026
 ---
 
-import { Section, Gallery, Image, MediaBlock, MediaText, ProblemOpportunityBlock, StatCard, TextBlock } from 'verity-design-system';
+import {
+  Animation,
+  Container,
+  Divider,
+  Grid,
+  Image,
+  MediaBlock,
+  MediaText,
+  Quote,
+  Section,
+  StatCard,
+  TextBlock,
+  UnorderedList,
+  UnorderedListItem,
+  VerticalStack,
+  Video,
+} from 'verity-design-system';
+
 import hero from './images/laguna-companion-hero.avif';
-import sketches from './images/laguna-companion-sketches.webp';
+import careManager from './images/care-manager-working-from-home.webp';
 import workflowMapping from './images/workflow-mapping.avif';
 import callFlow from './images/call-flow-diagram.webp';
-import summaryStill from './animations/Creating Summary.png';
+import sketches from './images/laguna-companion-sketches.webp';
+import idohFlowerTest from './images/idoh-flower-test.webp';
+import barriersTest from './images/barriers-test.webp';
+import callPrepTest from './images/call-prep-test.webp';
+import liveCallPrototypes from './images/live-call-prototypes.webp';
+import designSystem from './images/laguna-product-design-system.avif';
+import colors from './images/Colors--Accessible-Color-Combinations.avif';
+import decorativeIcons from './images/laguna-decorative-icons.avif';
+import productivityTable from './images/time-study-chart.avif';
 
-{/* SAMPLE: placeholder text and real images, to test the setup. Not the real story. */}
+import creatingSummary from './animations/Creating Summary.lottie?url';
+import creatingSummaryPoster from './animations/creating-summary.avif';
+import creatingCareInsights from './animations/Creating Care Insights.lottie?url';
+import creatingCareInsightsPoster from './animations/creating-care-insights.avif';
+import creatingConversationTips from './animations/Creating Conversation Tips.lottie?url';
+import creatingConversationTipsPoster from './animations/creating-conversation-tips.avif';
 
-<Section heading="Placeholder: sample">
+import callPrep from './videos/call-prep.mp4';
+import callPrepPoster from './videos/call-prep-poster.webp';
+import liveCall from './videos/live-call.mp4';
+import liveCallPoster from './videos/live-call-poster.webp';
+import postCall from './videos/post-call.mp4';
+import postCallPoster from './videos/post-call-poster.webp';
+import improvedEditing from './videos/improved-editing.mp4';
+import improvedEditingPoster from './videos/improved-editing-poster.webp';
 
-<MediaBlock caption="Placeholder caption">
-  <Image src={hero} alt="Placeholder alt text: describe the Laguna Companion hero image" loading="eager" />
-</MediaBlock>
+{/* The page follows the Figma design, Laguna Companion page (node 56:2283), top to bottom.
+    Alt text is a draft for Erin's review. */}
 
-## Placeholder: first section heading
+<Container>
+  <MediaBlock width="wide">
+    <Image
+      src={hero}
+      alt="Two Laguna Companion screens on a magenta-to-purple gradient: Jane Smith’s member view, with a case summary and the IDOH Flower, and a live call view where the SmartPad lists notes tagged “Has Transport” and “Alcohol Use.”"
+      loading="eager"
+    />
+  </MediaBlock>
+</Container>
 
-Placeholder paragraph. This sample shows how Markdown text looks in Prose. Erin will write the real story.
+<Container>
+  <Quote
+    quote="It seems prehistoric to have to copy a template from MS Word into my record. There should be easier ways to document our calls."
+    name="Case Manager"
+  />
+</Container>
 
-Placeholder paragraph with a [placeholder link](#placeholder-link), *emphasis*, and `inline code`.
-
-- Placeholder list item
-- Placeholder list item
-
-<ProblemOpportunityBlock
-  problem="Placeholder: what was wrong, in a sentence or two."
-  opportunity="Placeholder: what that opened up, in a sentence or two."
-/>
-
-## Placeholder: second section heading
-
-Placeholder paragraph before a MediaText.
+<Section heading="Overview">
 
 <MediaText
   text={
-    <TextBlock heading="Placeholder: MediaText heading">
-      Placeholder text beside the image.
+    <TextBlock heading="The admin burden">
+      {/* Figma shows this first paragraph as a lead, in body-lg-strong. Verity's TextBlock has no lead style yet, so it's a plain paragraph until Verity adds one. */}
+      <p>Case managers can spend up to 75% of their time on admin tasks instead of member care.</p>
+      <p>Laguna Companion is designed to free them up to focus on people instead of paperwork. It generates call documentation, speeds call prep, and provides personalized feedback.</p>
     </TextBlock>
   }
   media={
-    <MediaBlock caption="Placeholder caption">
-      <Image src={workflowMapping} alt="Placeholder alt text: describe the workflow mapping image" />
+    <MediaBlock>
+      <Image
+        src={careManager}
+        alt="A care manager in a headset talks with a member from a home office, at a desk with a laptop and a large monitor showing a CRM."
+        aspectRatio="3:2"
+      />
     </MediaBlock>
   }
 />
 
-> Placeholder blockquote.
+### Where I came into the picture
 
-<Gallery>
-  <MediaBlock caption="Placeholder caption">
-    <Image src={sketches} alt="Placeholder alt text: describe the sketches" />
-  </MediaBlock>
-  <MediaBlock caption="Placeholder caption">
-    <Image src={summaryStill} alt="Placeholder alt text: describe the Creating Summary animation still" />
-  </MediaBlock>
-  <MediaBlock caption="Placeholder caption">
-    <Image src={callFlow} alt="Placeholder alt text: describe the call flow diagram" />
-  </MediaBlock>
-</Gallery>
+Laguna initially offered care management services with its own clinical staff and software. When AI became viable to build on, they saw a chance to deliver a lightweight co-pilot to increase efficiency with minimal disruption of existing workflows. I joined in January 2024 and collaborated with the product team based in Israel. When their UX designer left that April, I took over the MVP design.
 
-## Placeholder: outcome heading
+<TextBlock heading="Outcomes">
+  <Grid itemWidth="sm" gap="md">
+    <StatCard variant="brand" value="66%" description="less time on call documentation" />
+    <StatCard variant="brand" value="+27%" description="satisfaction with call prep" />
+    <StatCard variant="brand" value="5 → 300" description="case managers in 14 months" />
+  </Grid>
+</TextBlock>
 
-<StatCard value="Placeholder" description="Placeholder: what the number means" />
-
-Placeholder closing paragraph.
+<Grid itemWidth="md" gap="lg">
+  <Quote
+    quote="My confidence and quality of calls has improved so much using this. As a clinician, and the quality of my work, I can tell the difference."
+    name="Case Manager"
+  />
+  <Quote
+    quote="They shifted from a cautious observer to a confident user. And for a nurse, that’s a huge step."
+    name="Director of Case Management"
+  />
+</Grid>
 
 </Section>
+
+<Container><Divider /></Container>
+
+<Section heading="Mapping the workflow">
+
+Through interviews with case managers, supervisors, directors, and VPs, I mapped the full call lifecycle (prep, live call, post-call documentation) to understand how Laguna could fit in.
+
+<TextBlock heading="Takeaways">
+  <UnorderedList>
+    <UnorderedListItem>The post-call note is the biggest time sink.</UnorderedListItem>
+    <UnorderedListItem>3-5 sources reviewed when prepping for a call.</UnorderedListItem>
+    <UnorderedListItem>Split attention on calls meant missed member needs.</UnorderedListItem>
+    <UnorderedListItem>A long, redundant SDOH list led to the same generic picks every time.</UnorderedListItem>
+    <UnorderedListItem>Supervisors lack visibility to personalize coaching.</UnorderedListItem>
+  </UnorderedList>
+</TextBlock>
+
+</Section>
+
+<Container>
+  <VerticalStack width="wide" gap="lg">
+    <MediaBlock width="wide" caption="During our live session with nurses, I took screenshots and laid them out in Figjam.">
+      <Image
+        src={workflowMapping}
+        alt="A FigJam board of screenshots from a live session with nurses, laid out step by step along their workflow from charting education to typing the program note, with sticky notes marking opportunities to save time."
+      />
+    </MediaBlock>
+    <MediaBlock width="wide" caption="I created a simplified version of the flow for our team to discuss.">
+      <Image
+        src={callFlow}
+        alt="A call flow in three stages. Pre-call: review the member’s case in the CRM, UM notes, new claims, and meds, with info spread across 3–5 systems. During the call: place the call, conduct a screener, create a program, conduct an assessment, and update the care plan. Post-call: chart education and referrals, send letters, update SDOH factors, and type the program note, which takes about as long as the call."
+      />
+    </MediaBlock>
+  </VerticalStack>
+</Container>
+
+<Container><Divider /></Container>
+
+<Section heading="Sketching ideas">
+
+I started by sketching ideas quickly by hand so that I could align with Laguna’s Chief Product Officer and our VP of AI on how the user experience might look. I explored ideas for connecting to calls, viewing the member’s SDOH factors, navigating barriers identified, and viewing call prep.
+
+<MediaBlock>
+  <Image
+    src={sketches}
+    alt="Hand-drawn sketches: a case manager on a call at a computer, a prompt that reads “Looks like you’re calling Jackie” with a Record Call button, a call prep list, the flower view of a member, and screens for reviewing suggested barriers."
+  />
+</MediaBlock>
+
+</Section>
+
+<Container><Divider /></Container>
+
+<Section heading="Testing call prep and real-time features">
+
+Once we had a shared vision, I created prototypes to test. While post-call documentation was becoming common with ambient AI applications, there were some more novel features for call prep and real-time insights that I wanted to test with clinicians.
+
+<TextBlock heading="What I tested for">
+  <UnorderedList>
+    <UnorderedListItem>Would users understand the flower and how to navigate it?</UnorderedListItem>
+    <UnorderedListItem>What info is most useful for call prep, and how would it be used?</UnorderedListItem>
+    <UnorderedListItem>Could the barriers be used to select more specific SDOH items?</UnorderedListItem>
+    <UnorderedListItem>Would nudges and other dynamic content be digestible during live calls?</UnorderedListItem>
+    <UnorderedListItem>In general, is the UI intuitive and usable? Do users know what to do?</UnorderedListItem>
+  </UnorderedList>
+</TextBlock>
+
+### The IDOH Flower
+
+The IDOH Flower was intended to give case managers a 360° view of a member’s “Individual Determinants of Health.” Using progressive disclosure, we would indicate member needs across 6 categories and the user could drill down for more info. I chose a flower to reflect the nurturing nature of the care manager.
+
+<MediaBlock>
+  <Image
+    src={idohFlowerTest}
+    alt="A remote usability test: the prototype’s IDOH Flower, a 360° view of the member in six petals, shown beside the video feeds of a participant and me."
+  />
+</MediaBlock>
+
+<Grid itemWidth="md" gap="lg">
+  <Quote
+    quote="So this is like a quick look at this person before you call… this would jog my memory if I haven’t had too many calls with them."
+    name="Test user"
+  />
+  <Quote
+    quote="I would honestly be afraid of this flower. I would be like, I don’t know how to start there."
+    name="Test user"
+  />
+</Grid>
+
+### Barriers
+
+Laguna was already designed to extract SDOH factors from conversations. In our conversation with health plan leadership, they liked the idea of Companion presenting the barriers that were mentioned on a call so that the clinician could more easily find specific barriers in their own CRM.
+
+<MediaBlock>
+  <Image
+    src={barriersTest}
+    alt="A remote usability test: the prototype’s Barriers tab, listing barriers picked up from the conversation, such as pain management, each with Dismiss and Accept buttons, beside the video feeds of a participant and me."
+  />
+</MediaBlock>
+
+<Grid itemWidth="md" gap="lg">
+  <Quote
+    quote="The whole point of what we do at our job is like getting them over their barriers… so this would be great."
+    name="Test user"
+  />
+  <Quote
+    quote="Our barriers align more with the barriers that generate from Change Health."
+    name="Customer feedback"
+  />
+</Grid>
+
+### Suggested actions
+
+After each conversation, Laguna Companion would extract suggested actions for the next call. These were available within the call prep tab and intended to help users set goals for the next conversation.
+
+<MediaBlock>
+  <Image
+    src={callPrepTest}
+    alt="A remote usability test: the prototype’s Call Prep tab, with three numbered suggested actions for the next call, beside the video feeds of a participant and me."
+  />
+</MediaBlock>
+
+<Grid itemWidth="md" gap="lg">
+  <Quote
+    quote="This is nice because it’s all right there versus having to click on different tabs"
+    name="Test user"
+  />
+  <Quote
+    quote="Because they have one, two, three, this is showing the level of importance"
+    name="Test user"
+  />
+</Grid>
+
+### Live call view
+
+We wanted to provide member context during live calls while also presenting dynamic insights from member barriers to conversation feedback. I tested a side by side view of the main app with a live call drawer.
+
+<MediaBlock>
+  <Image
+    src={liveCallPrototypes}
+    alt="Two versions of the live call prototype, each with the member’s flower beside a call drawer: one shows real-time suggestions about pain management, the other conversation kudos."
+  />
+</MediaBlock>
+
+<Grid itemWidth="md" gap="lg">
+  <Quote
+    quote="I’m not sure where I should be looking"
+    name="Test user"
+  />
+  <Quote
+    quote="Nurses are used to multi-tasking, so I think it could be helpful. Just depends on what the info is"
+    name="Test user"
+  />
+</Grid>
+
+<TextBlock heading="Improvements needed">
+  <UnorderedList>
+    <UnorderedListItem title="Simplify member details">To simplify the member info tab, we removed barriers, since duplicating what the existing CRM content showed added little value.</UnorderedListItem>
+    <UnorderedListItem title="The flower needed clarity">I added labels and redesigned how statuses were presented. I also added a list view per user request.</UnorderedListItem>
+    <UnorderedListItem title="Numbering implied clinical judgment">Users were concerned about the AI overriding their judgment, so I dropped the ordering of items.</UnorderedListItem>
+    <UnorderedListItem title="The live call view was crowded">I picked one focal feature and called it the SmartPad, then moved the other features one click away.</UnorderedListItem>
+  </UnorderedList>
+</TextBlock>
+
+</Section>
+
+<Container><Divider /></Container>
+
+<Section heading="Design system">
+
+When I started on the product screens, Laguna’s components were scattered across different Figma files and pages. It was hard to find the latest version of anything, or to know whether we already had a component we could reuse for a new feature. All we had for a system was a small style guide for color and type.
+
+### A central Figma library
+
+Together with the R&D team, I chose Material Design as our base and built one central library for all of our styles and components. Then, I added pages for custom components. It became the hub for product design: easier to find what already existed, easier to add new pieces, and a smoother handoff to engineers.
+
+<MediaBlock width="wide">
+  <Image
+    src={designSystem}
+    alt="Laguna’s central Figma library: the page list on the left, and outbound and inbound call dialog components laid out on the canvas."
+  />
+</MediaBlock>
+
+### Bringing our brand into the product
+
+I brought our brand personality into the product, checking our brand colors for accessibility and incorporating those colors into our UI components. I also designed rules for creating icons and illustrations that would be unique to Laguna. These assets came in handy for both product and sales presentations.
+
+<VerticalStack width="wide" gap="md">
+  <MediaBlock width="wide">
+    <Image
+      src={colors}
+      alt="A chart of Laguna’s brand colors, from gradients and magenta through purple, indigo, and blue, showing which color combinations pass WCAG AA contrast for white and dark indigo text."
+    />
+  </MediaBlock>
+  <MediaBlock width="wide">
+    <Image
+      src={decorativeIcons}
+      alt="Laguna’s decorative icons: line illustrations with flat and gradient color, beside rules for creating new ones on an 80 × 80 grid with rounded corners and accent colors."
+    />
+  </MediaBlock>
+</VerticalStack>
+
+I also created animations for moments when the system is generating or loading something in order to provide user feedback and a moment of delight.
+
+<Grid itemWidth="sm" gap="md">
+  <MediaBlock>
+    <Animation
+      src={creatingSummary}
+      poster={creatingSummaryPoster}
+      alt="A loading animation for “Creating your call Summary…”: colored lines and shapes fill in on a card, like a note being written."
+      aspectRatio="1:1"
+    />
+  </MediaBlock>
+  <MediaBlock>
+    <Animation
+      src={creatingCareInsights}
+      poster={creatingCareInsightsPoster}
+      alt="A loading animation for “Generating Care Insights…”: a line drawing of a person with colored dots orbiting around them."
+      aspectRatio="1:1"
+    />
+  </MediaBlock>
+  <MediaBlock>
+    <Animation
+      src={creatingConversationTips}
+      poster={creatingConversationTipsPoster}
+      alt="A loading animation for conversation tips: a light bulb and a thumbs-up, with sparkles around them."
+      aspectRatio="1:1"
+    />
+  </MediaBlock>
+</Grid>
+
+</Section>
+
+<Container><Divider /></Container>
+
+<Section heading="Final designs">
+
+<TextBlock heading="Call prep">
+
+Before Laguna, case managers pieced together a member’s story from many different places. Call prep put it in one place they could glance at to get up to speed quickly.
+
+<UnorderedList>
+  <UnorderedListItem title="Case summary">A narrative, at-a-glance overview of the member’s case, updated automatically after every conversation. Testers reached for it first, so it moved to the top of the screen.</UnorderedListItem>
+  <UnorderedListItem title="IDOH Flower">A categorized view of the member’s traits that shows areas of risk, non-issues, and unknowns to guide the next conversation. After testing, I added labels and clearer status colors, plus a list view for anyone who preferred it.</UnorderedListItem>
+  <UnorderedListItem title="Suggested actions">Tasks recommended for the next conversation, based on the last one. I removed their numbering after testers said it felt like the AI was telling them how to do their job.</UnorderedListItem>
+</UnorderedList>
+
+</TextBlock>
+
+<MediaBlock width="wide">
+  <Video
+    src={callPrep}
+    poster={callPrepPoster}
+    alt="Call prep for Jane Smith. The member view opens on her case summary and IDOH Flower. Opening the Social Determinants of Health petal shows Housing Stability as a potential issue, Has Transport as a non-issue, and several unknowns. Opening Housing Stability shows what was picked up from the conversation, and its status is set. Then the Call Prep tab lists suggested actions for the next call, and a new one, “Discuss exercise routine,” is added."
+  />
+</MediaBlock>
+
+### Live call
+
+With so much to cover in a call, it’s easy to miss a key topic. The SmartPad sends gentle nudges when something comes up that should be addressed. Early versions showed too much at once, so I simplified the live view to the SmartPad alone, with the transcript and prep notes one click away.
+
+The live transcript turned out to be more helpful than we expected: when a member had a strong accent or a speech impediment, or when a case manager just wanted to look back at what was said. It uncovered benefits of Laguna Companion we had underestimated.
+
+<MediaBlock width="wide">
+  <Video
+    src={liveCall}
+    poster={liveCallPoster}
+    alt="A live call with Jane Smith. The SmartPad starts out listening to the conversation, then adds a note that Jane has trouble with the stairs, tagged Mobility Issues. Opening the tag shows what was picked up and lets the case manager confirm the status. Then the case manager checks the call prep tab’s suggested actions and returns to the SmartPad."
+  />
+</MediaBlock>
+
+<TextBlock heading="Post-call">
+
+Before Laguna, documenting a call took about as long as the call itself, and feedback depended on a supervisor finding time to listen in. Post-call took care of both as soon as the case manager hung up.
+
+<UnorderedList>
+  <UnorderedListItem title="Post-call summary">A call note generated about a minute after the call, in a compliant format case managers could copy straight into their records. It was the biggest time saver in their workflow, and it kept getting faster: Laguna learned from the edits case managers made and adjusted the model over time.</UnorderedListItem>
+  <UnorderedListItem title="Post-call feedback">Personalized feedback on each conversation, highlighting what went well and what to try next time. Supervisors rarely had time to listen to every call and coach each person, so this gave case managers a way to keep growing between those conversations.</UnorderedListItem>
+</UnorderedList>
+
+</TextBlock>
+
+<MediaBlock width="wide">
+  <Video
+    src={postCall}
+    poster={postCallPoster}
+    alt="After a call with Jane Smith. A loading animation plays, then the call page opens. The SmartPad shows the notes from the call; Feedback shows a conversational alliance rating of Very good and conversation tips; Transcript shows the conversation line by line. Last, the generated program note appears, with Copy all and Edit buttons."
+  />
+</MediaBlock>
+
+</Section>
+
+<Container><Divider /></Container>
+
+<Section heading="Launching and learning on site">
+
+We launched in October 2024 with 5 champion users, then 22 more two weeks later. Staging the rollout let early adopters surface issues and become go-to resources for their teammates. The response was strong enough that the health plan invited us onsite.
+
+In November, I spent three days shadowing case managers. A lot was working: they got up to speed quickly, the post-call notes were high quality, and they told me they felt more present with members. Post-call feedback was a standout.
+
+<Quote
+  quote="It’s my favorite screen. It’s like my cheerleader… even if it’s just an AI system, it’s my cheerleader and it keeps me going."
+  name="Case Manager"
+/>
+
+I also saw what needed work. The case summary’s expanded view was hard to find, editing felt cramped next to the wide Word document they were used to, and our installation flow broke under the health plan’s strict IT policies.
+
+Over the next few months, we shipped fixes: a wider editing mode that opens automatically, a case summary that starts expanded, an installation flow the health plan could manage, and versions of the post-call note tailored to each clinical team’s documentation style.
+
+<MediaBlock width="wide" caption="Many users felt that the small editing screen was difficult to work with so we released a new version where the screen goes wide in editing mode.">
+  <Video
+    src={improvedEditing}
+    poster={improvedEditingPoster}
+    alt="Laguna Companion open beside a member’s record in the customer’s CRM. The case manager scrolls the program note in the narrow panel, then presses Edit, and the editor opens wide across the screen with each section of the note, such as the outreach summary and the member’s goals, in its own field. After the edits are saved, the panel returns to its narrow size."
+  />
+</MediaBlock>
+
+</Section>
+
+<Container><Divider /></Container>
+
+<Section heading="Results">
+
+From December 2024 to March 2025, the health plan ran its own time study and satisfaction survey across six clinical teams.
+
+<MediaBlock caption="Table of documentation time before and after Laguna for six clinical teams. Time savings ranged from 56% (Wellness) to 79% (Behavioral Health), with potential enrollment increases of up to 126 per case manager a year.">
+  <Image
+    src={productivityTable}
+    alt="A table titled “Productivity improvements with Laguna.” Average documentation time in minutes, before and after Laguna, with time savings and potential enrollment increase per case manager a year: Specialty 9.32 to 3.02, down 68%, plus 48. Wellness 8.72 to 3.84, down 56%, plus 95. Commercial 8.08 to 2.89, down 64%, plus 25. Government 7.57 to 2.56, down 66%, plus 113. Social Work 6.79 to 2.37, down 65%, plus 126. Behavioral Health 4.49 to 0.95, down 79%, enrollment data unavailable."
+  />
+</MediaBlock>
+
+<Grid itemWidth="md" gap="md">
+  <StatCard variant="brand" value="66%" description="less time on post-call documentation" />
+  <StatCard variant="brand" value="+51%" description="satisfaction with documentation time" />
+  <StatCard variant="brand" value="+96" description="enrollments per case manager per year" />
+  <StatCard variant="brand" value="5 → 300" description="case managers in 14 months" />
+</Grid>
+
+By April and May 2025, with trust and process established, we trained four more cohorts, each going from training to live in a single day.
+
+<Quote
+  quote="Laguna has been amazing. It is actually a relief to have it on a busy day when you’re wondering how you will get through all of your calls. It’s truly my ‘work companion.’"
+  name="Case Manager"
+/>
+
+</Section>
+
+<Container><Divider /></Container>
+
+<Section heading="What I learned">
+
+<UnorderedList>
+  <UnorderedListItem title="Good design isn’t enough if the AI content isn’t good.">Every UX fundamental I’d relied on for a decade still applied, but none of it mattered if the summary missed the mark or the real-time nudges were noise instead of signal. That’s a different kind of design problem, and I learned it as we went.</UnorderedListItem>
+  <UnorderedListItem title="“Just make it a copilot” undersells how hard the mundane parts are.">Getting a case manager to hit record at exactly the right moment, while introducing themselves and pulling up their CRM, took as much iteration as any headline feature, because getting it wrong broke trust in everything else.</UnorderedListItem>
+  <UnorderedListItem title="Deep customization built trust, but it came at a real cost.">Tailoring the product to each team’s documentation needs set us apart and was a big part of why users loved it. It also asked a lot of our customer: several rounds of review to get to “good.” I still think about how to reach that bar with less upfront effort from the people we’re serving.</UnorderedListItem>
+</UnorderedList>
+
+</Section>
+
+<Container><Divider /></Container>
