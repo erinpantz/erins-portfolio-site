@@ -50,6 +50,7 @@ export const siteFooter = (
       text: 'I’m seeking a full time design role and would love to chat if you think I could bring value to your team.',
       buttonLabel: 'Book a meeting',
       href: CALENDLY_URL,
+      opensInNewTab: true,
     }}
     linkGroups={linkGroups}
     copyrightName="Erin Tozour"
