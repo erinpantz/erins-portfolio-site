@@ -12,7 +12,7 @@ facts:
     value: Placeholder
 ---
 
-import { Gallery, Image, MediaBlock, MediaText, ProblemOpportunityBlock, StatCard, TextBlock } from 'verity-design-system';
+import { Section, Gallery, Image, MediaBlock, MediaText, ProblemOpportunityBlock, StatCard, TextBlock } from 'verity-design-system';
 import hero from './images/laguna-companion-hero.avif';
 import sketches from './images/laguna-companion-sketches.webp';
 import workflowMapping from './images/workflow-mapping.avif';
@@ -20,6 +20,8 @@ import callFlow from './images/call-flow-diagram.webp';
 import summaryStill from './animations/Creating Summary.png';
 
 {/* SAMPLE: placeholder text and real images, to test the setup. Not the real story. */}
+
+<Section heading="Placeholder: sample">
 
 <MediaBlock caption="Placeholder caption">
   <Image src={hero} alt="Placeholder alt text: describe the Laguna Companion hero image" loading="eager" />
@@ -75,3 +77,5 @@ Placeholder paragraph before a MediaText.
 <StatCard value="Placeholder" description="Placeholder: what the number means" />
 
 Placeholder closing paragraph.
+
+</Section>
