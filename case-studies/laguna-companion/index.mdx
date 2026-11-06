@@ -67,7 +67,7 @@ import improvedEditingPoster from './videos/improved-editing-poster.webp';
   <MediaBlock width="wide">
     <Image
       src={hero}
-      alt="Two Laguna Companion screens on a magenta-to-purple gradient: Jane Smith’s member view, with a case summary and the IDOH Flower, and a live call view where the SmartPad lists notes tagged “Has Transport” and “Alcohol Use.”"
+      alt="Laguna Companion’s member view, with the case summary and IDOH Flower, beside the live call view, where the SmartPad has tagged notes such as “Has Transport” and “Alcohol Use.”"
       loading="eager"
     />
   </MediaBlock>
@@ -94,7 +94,7 @@ import improvedEditingPoster from './videos/improved-editing-poster.webp';
     <MediaBlock>
       <Image
         src={careManager}
-        alt="A care manager in a headset talks with a member from a home office, at a desk with a laptop and a large monitor showing a CRM."
+        alt="A care manager in a headset on a call with a member, working from home at a desk with a laptop and a monitor showing the CRM."
         aspectRatio="3:2"
       />
     </MediaBlock>
@@ -149,13 +149,13 @@ Through interviews with case managers, supervisors, directors, and VPs, I mapped
     <MediaBlock width="wide" caption="During our live session with nurses, I took screenshots and laid them out in Figjam.">
       <Image
         src={workflowMapping}
-        alt="A FigJam board of screenshots from a live session with nurses, laid out step by step along their workflow from charting education to typing the program note, with sticky notes marking opportunities to save time."
+        alt="A board of screenshots following the nurses’ workflow step by step, from charting education to typing the program note, with sticky notes marking where time could be saved."
       />
     </MediaBlock>
     <MediaBlock width="wide" caption="I created a simplified version of the flow for our team to discuss.">
       <Image
         src={callFlow}
-        alt="A call flow in three stages. Pre-call: review the member’s case in the CRM, UM notes, new claims, and meds, with info spread across 3–5 systems. During the call: place the call, conduct a screener, create a program, conduct an assessment, and update the care plan. Post-call: chart education and referrals, send letters, update SDOH factors, and type the program note, which takes about as long as the call."
+        alt="A diagram of the call in three stages, prep, the live call, and post-call documentation, with the steps in each, ending with the program note."
       />
     </MediaBlock>
   </VerticalStack>
@@ -170,7 +170,7 @@ I started by sketching ideas quickly by hand so that I could align with Laguna�
 <MediaBlock>
   <Image
     src={sketches}
-    alt="Hand-drawn sketches: a case manager on a call at a computer, a prompt that reads “Looks like you’re calling Jackie” with a Record Call button, a call prep list, the flower view of a member, and screens for reviewing suggested barriers."
+    alt="Hand-drawn sketches of a case manager on a call, a “Looks like you’re calling Jackie” prompt with a Record Call button, a call prep list, the flower view, and suggested barriers."
   />
 </MediaBlock>
 
@@ -199,7 +199,7 @@ The IDOH Flower was intended to give case managers a 360° view of a member’s 
 <MediaBlock>
   <Image
     src={idohFlowerTest}
-    alt="A remote usability test: the prototype’s IDOH Flower, a 360° view of the member in six petals, shown beside the video feeds of a participant and me."
+    alt="A remote usability test of the IDOH Flower, with the prototype beside video of the participant and me."
   />
 </MediaBlock>
 
@@ -221,7 +221,7 @@ Laguna was already designed to extract SDOH factors from conversations. In our c
 <MediaBlock>
   <Image
     src={barriersTest}
-    alt="A remote usability test: the prototype’s Barriers tab, listing barriers picked up from the conversation, such as pain management, each with Dismiss and Accept buttons, beside the video feeds of a participant and me."
+    alt="A remote usability test of the Barriers tab, with Dismiss and Accept on each barrier, beside video of the participant and me."
   />
 </MediaBlock>
 
@@ -243,7 +243,7 @@ After each conversation, Laguna Companion would extract suggested actions for th
 <MediaBlock>
   <Image
     src={callPrepTest}
-    alt="A remote usability test: the prototype’s Call Prep tab, with three numbered suggested actions for the next call, beside the video feeds of a participant and me."
+    alt="A remote usability test of call prep’s three numbered suggested actions, beside video of the participant and me."
   />
 </MediaBlock>
 
@@ -265,7 +265,7 @@ We wanted to provide member context during live calls while also presenting dyna
 <MediaBlock>
   <Image
     src={liveCallPrototypes}
-    alt="Two versions of the live call prototype, each with the member’s flower beside a call drawer: one shows real-time suggestions about pain management, the other conversation kudos."
+    alt="Two versions of the live call prototype, each with the member’s flower beside the call drawer: one shows real-time suggestions about pain management, the other conversation kudos."
   />
 </MediaBlock>
 
@@ -304,7 +304,7 @@ Together with the R&D team, I chose Material Design as our base and built one ce
 <MediaBlock width="wide">
   <Image
     src={designSystem}
-    alt="Laguna’s central Figma library: the page list on the left, and outbound and inbound call dialog components laid out on the canvas."
+    alt="Laguna’s central Figma library, with its page list and the outbound and inbound call dialog components."
   />
 </MediaBlock>
 
@@ -316,13 +316,13 @@ I brought our brand personality into the product, checking our brand colors for 
   <MediaBlock width="wide">
     <Image
       src={colors}
-      alt="A chart of Laguna’s brand colors, from gradients and magenta through purple, indigo, and blue, showing which color combinations pass WCAG AA contrast for white and dark indigo text."
+      alt="Laguna’s brand colors in a grid showing which text and background pairs pass WCAG AA contrast."
     />
   </MediaBlock>
   <MediaBlock width="wide">
     <Image
       src={decorativeIcons}
-      alt="Laguna’s decorative icons: line illustrations with flat and gradient color, beside rules for creating new ones on an 80 × 80 grid with rounded corners and accent colors."
+      alt="Laguna’s decorative icons beside the rules for drawing new ones on an 80 × 80 grid."
     />
   </MediaBlock>
 </VerticalStack>
@@ -334,7 +334,7 @@ I also created animations for moments when the system is generating or loading s
     <Animation
       src={creatingSummary}
       poster={creatingSummaryPoster}
-      alt="A loading animation for “Creating your call Summary…”: colored lines and shapes fill in on a card, like a note being written."
+      alt="“Creating your call Summary…” loading animation: shapes fill in on a card."
       aspectRatio="1:1"
     />
   </MediaBlock>
@@ -342,7 +342,7 @@ I also created animations for moments when the system is generating or loading s
     <Animation
       src={creatingCareInsights}
       poster={creatingCareInsightsPoster}
-      alt="A loading animation for “Generating Care Insights…”: a line drawing of a person with colored dots orbiting around them."
+      alt="“Generating Care Insights…” loading animation: dots orbit a person."
       aspectRatio="1:1"
     />
   </MediaBlock>
@@ -350,7 +350,7 @@ I also created animations for moments when the system is generating or loading s
     <Animation
       src={creatingConversationTips}
       poster={creatingConversationTipsPoster}
-      alt="A loading animation for conversation tips: a light bulb and a thumbs-up, with sparkles around them."
+      alt="Loading animation for conversation tips: a light bulb and a thumbs-up, with sparkles."
       aspectRatio="1:1"
     />
   </MediaBlock>
@@ -378,7 +378,7 @@ Before Laguna, case managers pieced together a member’s story from many differ
   <Video
     src={callPrep}
     poster={callPrepPoster}
-    alt="Call prep for Jane Smith. The member view opens on her case summary and IDOH Flower. Opening the Social Determinants of Health petal shows Housing Stability as a potential issue, Has Transport as a non-issue, and several unknowns. Opening Housing Stability shows what was picked up from the conversation, and its status is set. Then the Call Prep tab lists suggested actions for the next call, and a new one, “Discuss exercise routine,” is added."
+    alt="Call prep walkthrough: expanding the case summary, opening the SDOH petal of the IDOH Flower to set Housing Stability’s status, then adding a suggested action for the next call."
   />
 </MediaBlock>
 
@@ -392,7 +392,7 @@ The live transcript turned out to be more helpful than we expected: when a membe
   <Video
     src={liveCall}
     poster={liveCallPoster}
-    alt="A live call with Jane Smith. The SmartPad starts out listening to the conversation, then adds a note that Jane has trouble with the stairs, tagged Mobility Issues. Opening the tag shows what was picked up and lets the case manager confirm the status. Then the case manager checks the call prep tab’s suggested actions and returns to the SmartPad."
+    alt="Live call walkthrough: the SmartPad listens, then flags that the member mentioned stairs and tags a mobility issue. The case manager checks it in the member profile, looks through the live transcript and call prep, and returns to the SmartPad."
   />
 </MediaBlock>
 
@@ -411,7 +411,7 @@ Before Laguna, documenting a call took about as long as the call itself, and fee
   <Video
     src={postCall}
     poster={postCallPoster}
-    alt="After a call with Jane Smith. A loading animation plays, then the call page opens. The SmartPad shows the notes from the call; Feedback shows a conversational alliance rating of Very good and conversation tips; Transcript shows the conversation line by line. Last, the generated program note appears, with Copy all and Edit buttons."
+    alt="Post-call walkthrough: after a loading animation, the call’s screen offers the SmartPad notes, Feedback with conversation tips, and the transcript. Then the case manager edits the program note and copies it."
   />
 </MediaBlock>
 
@@ -438,7 +438,7 @@ Over the next few months, we shipped fixes: a wider editing mode that opens auto
   <Video
     src={improvedEditing}
     poster={improvedEditingPoster}
-    alt="Laguna Companion open beside a member’s record in the customer’s CRM. The case manager scrolls the program note in the narrow panel, then presses Edit, and the editor opens wide across the screen with each section of the note, such as the outreach summary and the member’s goals, in its own field. After the edits are saved, the panel returns to its narrow size."
+    alt="Editing the program note: the narrow side panel is cramped, so the case manager opens the wide editor over the CRM, makes an edit, and saves."
   />
 </MediaBlock>
 
@@ -453,7 +453,7 @@ From December 2024 to March 2025, the health plan ran its own time study and sat
 <MediaBlock caption="Table of documentation time before and after Laguna for six clinical teams. Time savings ranged from 56% (Wellness) to 79% (Behavioral Health), with potential enrollment increases of up to 126 per case manager a year.">
   <Image
     src={productivityTable}
-    alt="A table titled “Productivity improvements with Laguna.” Average documentation time in minutes, before and after Laguna, with time savings and potential enrollment increase per case manager a year: Specialty 9.32 to 3.02, down 68%, plus 48. Wellness 8.72 to 3.84, down 56%, plus 95. Commercial 8.08 to 2.89, down 64%, plus 25. Government 7.57 to 2.56, down 66%, plus 113. Social Work 6.79 to 2.37, down 65%, plus 126. Behavioral Health 4.49 to 0.95, down 79%, enrollment data unavailable."
+    alt="Table of documentation time before and after Laguna for six clinical teams. Time savings ranged from 56% (Wellness) to 79% (Behavioral Health), with potential enrollment increases of up to 126 per case manager a year."
   />
 </MediaBlock>
 
