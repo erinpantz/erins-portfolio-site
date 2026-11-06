@@ -5,7 +5,7 @@ import { pageTitle } from '../site';
 import type { Route } from './+types/case-study';
 
 export const meta = ({ params }: Route.MetaArgs) => [
-  { title: pageTitle(caseStudies[params.slug]?.frontmatter.heading ?? 'Page not found') },
+  { title: pageTitle(caseStudies[params.slug]?.frontmatter.title ?? 'Page not found') },
 ];
 
 // Components the MDX can use without importing them. Prose comes from
@@ -22,10 +22,11 @@ export default function CaseStudy({ params }: Route.ComponentProps) {
   const caseStudy = caseStudies[params.slug];
   if (!caseStudy) return <NotFound />;
   const { default: Body, frontmatter } = caseStudy;
+  const { badge, heading, facts } = frontmatter;
   return (
     <>
       <Container>
-        <CaseStudyHeader {...frontmatter} />
+        <CaseStudyHeader badge={badge} heading={heading} facts={facts} />
       </Container>
       <Body components={mdxComponents} />
     </>
