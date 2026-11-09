@@ -14,6 +14,7 @@ facts:
 
 import {
   Animation,
+  CaseStudyHighlights,
   Container,
   Divider,
   Grid,
@@ -31,6 +32,9 @@ import {
 } from 'verity-design-system';
 
 import hero from './images/laguna-companion-hero.avif';
+import highlightsProductScreens from './images/highlights-product-screens.avif';
+import highlightsUIComponents from './images/highlights-UI-components.avif';
+import highlightsIllustrations from './images/highlights-illustrations.avif';
 import careManager from './images/care-manager-working-from-home.webp';
 import workflowMapping from './images/workflow-mapping.avif';
 import callFlow from './images/call-flow-diagram.webp';
@@ -73,37 +77,36 @@ import improvedEditingPoster from './videos/improved-editing-poster.webp';
   </MediaBlock>
 </Container>
 
-<Container>
-  <Quote
-    quote="It seems prehistoric to have to copy a template from MS Word into my record. There should be easier ways to document our calls."
-    name="Case Manager"
-  />
-</Container>
-
 <Section heading="Overview">
 
-<MediaText
-  text={
-    <TextBlock heading="The admin burden">
-      {/* Figma shows this first paragraph as a lead, in body-lg-strong. Verity's TextBlock has no lead style yet, so it's a plain paragraph until Verity adds one. */}
-      <p>Case managers can spend up to 75% of their time on admin tasks instead of member care.</p>
-      <p>Laguna Companion is designed to free them up to focus on people instead of paperwork. It generates call documentation, speeds call prep, and provides personalized feedback.</p>
-    </TextBlock>
-  }
-  media={
-    <MediaBlock>
-      <Image
-        src={careManager}
-        alt="A care manager in a headset on a call with a member, working from home at a desk with a laptop and a monitor showing the CRM."
-        aspectRatio="3:2"
-      />
-    </MediaBlock>
-  }
-/>
+{/* Figma sets these three paragraphs in body-lg. Verity's Prose has no body-lg paragraphs yet, so they're body-default until Verity adds a way. */}
 
-### Where I came into the picture
+Laguna started as a care management company, with its own clinical staff and software. When AI became practical to build on, it saw a chance to give care management teams an AI copilot: one that would take on the admin work, like documentation, so case managers could focus on the people in their care.
 
-Laguna initially offered care management services with its own clinical staff and software. When AI became viable to build on, they saw a chance to deliver a lightweight co-pilot to increase efficiency with minimal disruption of existing workflows. I joined in January 2024 and collaborated with the product team based in Israel. When their UX designer left that April, I took over the MVP design.
+I joined as head of design in January 2024 and became lead designer for the MVP that April, after working alongside our UX designer in Israel. I designed the end-to-end experience for call prep, live call support, and post-call documentation.
+
+The first five case managers quickly went from cautious testers to enthusiastic advocates, driving a rapid rollout across teams. For our health plan client, employee satisfaction went up, and post-call documentation took 66% less time.
+
+<CaseStudyHighlights>
+  <MediaBlock caption="Laguna Companion product screens">
+    <Image
+      src={highlightsProductScreens}
+      alt="Four Laguna Companion screens side by side: entering an activation code, a list of members to choose from, a member’s case summary above the IDOH Flower, and the SmartPad during a call, with tags such as “Has Transport” and “Alcohol Use.”"
+    />
+  </MediaBlock>
+  <MediaBlock caption="Laguna Companion UI components">
+    <Image
+      src={highlightsUIComponents}
+      alt="Components from the Laguna Companion interface: Sync buttons in their default, tooltip, and syncing states, a grid of small icons, the Suggested Actions card empty and filled, a call bar’s menu with End and Revoke Consent, and inbound and outbound call dialogs."
+    />
+  </MediaBlock>
+  <MediaBlock caption="Laguna custom illustrations, hand drawn and finalized with Adobe Illustrator">
+    <Image
+      src={highlightsIllustrations}
+      alt="Purple-toned illustrations: a case manager in a headset, arms raised, above a cloud of laptops, papers, and calendars; a case manager and a member talking on the phone; spot illustrations of a light bulb, a thumbs-up, a growing team, and a rocket; and a panel of twelve line icons with color accents."
+    />
+  </MediaBlock>
+</CaseStudyHighlights>
 
 <TextBlock heading="Outcomes">
   <Grid itemWidth="sm" gap="md">
@@ -123,6 +126,35 @@ Laguna initially offered care management services with its own clinical staff an
     name="Director of Case Management"
   />
 </Grid>
+
+</Section>
+
+<Container><Divider /></Container>
+
+<Section heading="The challenge">
+
+<MediaText
+  text={
+    <TextBlock heading="Overwhelming admin burden">
+      <p>Case managers were spending up to 75% of their time on admin tasks instead of member care.</p>
+      <p>Laguna Companion is designed to free them up to focus on people instead of paperwork. It generates call documentation, speeds call prep, and provides personalized feedback.</p>
+    </TextBlock>
+  }
+  media={
+    <MediaBlock>
+      <Image
+        src={careManager}
+        alt="A care manager in a headset on a call with a member, working from home at a desk with a laptop and a monitor showing the CRM."
+        aspectRatio="3:2"
+      />
+    </MediaBlock>
+  }
+/>
+
+<Quote
+  quote="It seems prehistoric to have to copy a template from MS Word into my record. There should be easier ways to document our calls."
+  name="Case Manager"
+/>
 
 </Section>
 
