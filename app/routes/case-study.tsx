@@ -22,11 +22,11 @@ export default function CaseStudy({ params }: Route.ComponentProps) {
   const caseStudy = caseStudies[params.slug];
   if (!caseStudy) return <NotFound />;
   const { default: Body, frontmatter } = caseStudy;
-  const { badge, heading, facts } = frontmatter;
+  const { heading, facts } = frontmatter;
   return (
     <>
       <Container>
-        <CaseStudyHeader badge={badge} heading={heading} facts={facts} />
+        <CaseStudyHeader heading={heading} facts={facts} />
       </Container>
       <Body components={mdxComponents} />
     </>

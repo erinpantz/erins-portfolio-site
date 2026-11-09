@@ -36,20 +36,38 @@ export function Layout({ children }: { children: ReactNode }) {
   );
 }
 
+// Whether an address is a case study: /portfolio/<slug>, for a slug with a
+// case-studies/<slug>/index.mdx. This is the one place that decides it, so a
+// new case study is covered as soon as its folder exists.
+function isCaseStudy(pathname: string) {
+  const [first, slug, ...rest] = pathname.split('/').filter(Boolean);
+  return first === 'portfolio' && !!slug && rest.length === 0 && !!caseStudies[slug];
+}
+
 // Which nav item is the current page. Case studies count as Portfolio; an
 // address without a page (Page not found) has none.
 function currentPage(pathname: string): ShellProps['current'] {
-  const [first, slug, ...rest] = pathname.split('/').filter(Boolean);
+  if (isCaseStudy(pathname)) return 'portfolio';
+  const [first, ...rest] = pathname.split('/').filter(Boolean);
   if (rest.length > 0) return undefined;
-  if (first === 'portfolio' && (!slug || caseStudies[slug])) return 'portfolio';
-  if (!slug && (first === 'playground' || first === 'profile')) return first;
+  if (first === 'portfolio' || first === 'playground' || first === 'profile') return first;
   return undefined;
 }
 
+// Case studies are for reading one piece of work, so they use Shell's focused
+// mode: no nav, and a link back to the Portfolio in the corner. Every other
+// page, /portfolio included, has the nav.
 function SiteShell({ children }: { children: ReactNode }) {
   const { pathname } = useLocation();
+  const focused = isCaseStudy(pathname);
   return (
-    <Shell current={currentPage(pathname)} hrefs={NAV_HREFS} footer={siteFooter}>
+    <Shell
+      mode={focused ? 'focused' : 'default'}
+      backLink={focused ? { href: NAV_HREFS.portfolio, label: 'Portfolio' } : undefined}
+      current={currentPage(pathname)}
+      hrefs={NAV_HREFS}
+      footer={siteFooter}
+    >
       {children}
     </Shell>
   );

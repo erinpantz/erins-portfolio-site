@@ -3,14 +3,17 @@ import { Footer, Link, LinkGroup, type ShellProps } from 'verity-design-system';
 // Site-wide content: where the nav links go and what the footer says.
 // Anything marked PLACEHOLDER isn't real yet.
 
-/** Where each nav link goes. Resume points to a PDF that doesn't exist yet. */
-export const NAV_HREFS: ShellProps['hrefs'] = {
+/**
+ * Where each nav link goes. The footer's Resume uses the same address.
+ * Resume points to a PDF that doesn't exist yet.
+ */
+export const NAV_HREFS = {
   home: '/',
   portfolio: '/portfolio',
   playground: '/playground',
   profile: '/profile',
   resume: '/erin-tozour-resume.pdf',
-};
+} satisfies ShellProps['hrefs'];
 
 /** The browser tab text for a page: “Laguna Companion · Erin Tozour” */
 export function pageTitle(name?: string) {
@@ -27,6 +30,8 @@ const linkGroups = (
       <Link href="/portfolio">Portfolio</Link>
       <Link href="/playground">Playground</Link>
       <Link href="/profile">Profile</Link>
+      {/* Opens the same way as the nav's Resume: the PDF, in the same tab */}
+      <Link href={NAV_HREFS.resume}>Resume</Link>
     </LinkGroup>
     <LinkGroup label="Fun stuff">
       {/* PLACEHOLDER: the albums page doesn't exist yet */}

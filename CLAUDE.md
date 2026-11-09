@@ -66,6 +66,7 @@ public/                  files that need a fixed address, like the favicons, the
 
 - **Page titles** use `pageTitle()` from `app/site.tsx`: “Laguna Companion · Erin Tozour”, and “Erin Tozour” for Home.
 - **The nav** comes from Verity’s `Shell`. `app/site.tsx` sets where each link goes. The current page is worked out in `app/root.tsx`; case studies count as Portfolio.
+- **Case studies use Shell's focused mode:** no nav, a “Portfolio” back link in the top-left corner. `isCaseStudy()` in `app/root.tsx` decides it from the address, so a new case study folder gets it automatically; every other page, `/portfolio` included, has the nav.
 
 ## Building a case study
 
@@ -78,7 +79,7 @@ Every case study tells its own story, so its outline differs: how many Sections,
 
 ### What every case study has
 
-- **Frontmatter:** `title` (the project's name, for the browser tab: “Laguna Companion · Erin Tozour”), then `CaseStudyHeader`'s props: `badge`, `heading` (the page's only `<h1>`), and `facts`. The template (`app/routes/case-study.tsx`) renders the header from it, in a Container, at the top of Main.
+- **Frontmatter:** `title` (the project's name, for the browser tab: “Laguna Companion · Erin Tozour”), then `CaseStudyHeader`'s props: `heading` (the page's only `<h1>`) and `facts`. The template (`app/routes/case-study.tsx`) renders the header from it, in a Container, at the top of Main.
 - **A hero image first:** the body starts with `<Container><MediaBlock width="wide"><Image … loading="eager" /></MediaBlock></Container>`.
 
 After that, the template puts the MDX body straight into Main: everything in it is a Container or a Section, and Main's gap spaces them.
