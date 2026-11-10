@@ -54,7 +54,8 @@ app/
   routes/                one file per page; case-study.tsx is the template for every
                          case study, and not-found.tsx is Page not found (built to /404)
   site.tsx               site-wide content: nav addresses, the footer, page titles
-  caseStudies.ts         finds every case-studies/<slug>/index.mdx
+  caseStudies.ts         finds every case-studies/<slug>/index.mdx, and lists the ones on
+                         the Portfolio page, in order (PORTFOLIO_ORDER)
   NotFound.tsx           the Page not found content
 case-studies/<slug>/     index.mdx, plus the images/, animations/, and videos/ it uses
 assets/                  images and illustrations shared across pages
@@ -80,6 +81,7 @@ Every case study tells its own story, so its outline differs: how many Sections,
 ### What every case study has
 
 - **Frontmatter:** `title` (the project's name, for the browser tab: “Laguna Companion · Erin Tozour”), then `CaseStudyHeader`'s props: `heading` (the page's only `<h1>`) and `facts`. The template (`app/routes/case-study.tsx`) renders the header from it, in a Container, at the top of Main.
+- **Its Portfolio card** comes from the same frontmatter: `heading`, `title` as the project, and the fact titled “Year”, plus `images/case-study-thumbnail.avif` (3:2). A case study shows on Portfolio only once its slug is in `PORTFOLIO_ORDER` in `app/caseStudies.ts`; the build stops if a listed one has no Year fact or thumbnail.
 - **A hero image first:** the body starts with `<Container><MediaBlock width="wide"><Image … loading="eager" /></MediaBlock></Container>`.
 
 After that, the template puts the MDX body straight into Main: everything in it is a Container or a Section, and Main's gap spaces them.
