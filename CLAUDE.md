@@ -55,7 +55,9 @@ app/
                          case study, and not-found.tsx is Page not found (built to /404)
   site.tsx               site-wide content: nav addresses, the footer, page titles
   caseStudies.ts         finds every case-studies/<slug>/index.mdx, and lists the ones on
-                         the Portfolio page, in order (PORTFOLIO_ORDER)
+                         the Portfolio page, in order (PORTFOLIO_ORDER), and the up to
+                         three that Home features (HOME_FEATURED, each also in
+                         PORTFOLIO_ORDER)
   NotFound.tsx           the Page not found content
 case-studies/<slug>/     index.mdx, plus the images/, animations/, and videos/ it uses
 assets/                  images and illustrations shared across pages

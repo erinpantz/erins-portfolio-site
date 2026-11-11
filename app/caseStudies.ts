@@ -32,6 +32,13 @@ export const caseStudies = Object.fromEntries(
  */
 const PORTFOLIO_ORDER = ['laguna-companion', 'navio-med-checklist'];
 
+/**
+ * The case studies Home features, in order, up to three. Each must also be in
+ * PORTFOLIO_ORDER, so Home never shows something the Portfolio page doesn't.
+ */
+const HOME_FEATURED = ['laguna-companion', 'navio-med-checklist'];
+const HOME_FEATURED_MAX = 3;
+
 // Each case study's thumbnail for its PortfolioCard. The name is fixed:
 // case-studies/<slug>/images/case-study-thumbnail.avif.
 const thumbnails = import.meta.glob<string>('../case-studies/*/images/case-study-thumbnail.avif', {
@@ -40,27 +47,51 @@ const thumbnails = import.meta.glob<string>('../case-studies/*/images/case-study
 });
 
 /**
- * What each PortfolioCard on the Portfolio page shows, from its case study's
- * frontmatter. A missing case study, thumbnail, or Year fact stops the build,
- * with a message saying which and where.
+ * What one case study's PortfolioCard shows, from its frontmatter. A missing
+ * case study, thumbnail, or Year fact stops the build, with a message saying
+ * which and where. `listedIn` names the list that asked, for the message.
  */
+function caseStudyCard(slug: string, listedIn: string) {
+  const caseStudy = caseStudies[slug];
+  if (!caseStudy) {
+    throw new Error(`${listedIn} lists “${slug}”, but there's no case-studies/${slug}/index.mdx.`);
+  }
+  const { title, heading, facts } = caseStudy.frontmatter;
+  const year = facts?.find((fact) => fact.title === 'Year')?.value;
+  if (!year) {
+    throw new Error(
+      `case-studies/${slug}/index.mdx has no fact titled “Year” in its frontmatter, and its card on ${listedIn} needs one.`,
+    );
+  }
+  const thumbnail = thumbnails[`../case-studies/${slug}/images/case-study-thumbnail.avif`];
+  if (!thumbnail) {
+    throw new Error(`${listedIn} lists “${slug}”, but there's no case-studies/${slug}/images/case-study-thumbnail.avif.`);
+  }
+  return { slug, href: `/portfolio/${slug}`, heading, project: title, year: String(year), thumbnail };
+}
+
+/** The cards on the Portfolio page, in PORTFOLIO_ORDER */
 export function portfolioCaseStudies() {
-  return PORTFOLIO_ORDER.map((slug) => {
-    const caseStudy = caseStudies[slug];
-    if (!caseStudy) {
-      throw new Error(`Portfolio lists “${slug}”, but there's no case-studies/${slug}/index.mdx.`);
-    }
-    const { title, heading, facts } = caseStudy.frontmatter;
-    const year = facts?.find((fact) => fact.title === 'Year')?.value;
-    if (!year) {
+  return PORTFOLIO_ORDER.map((slug) => caseStudyCard(slug, 'PORTFOLIO_ORDER (the Portfolio page)'));
+}
+
+/**
+ * The cards Home features, in HOME_FEATURED order. The build stops if the
+ * list is longer than three, or names a case study the Portfolio page
+ * doesn't show.
+ */
+export function homeFeaturedCaseStudies() {
+  if (HOME_FEATURED.length > HOME_FEATURED_MAX) {
+    throw new Error(
+      `HOME_FEATURED in app/caseStudies.ts lists ${HOME_FEATURED.length} case studies, but Home shows at most ${HOME_FEATURED_MAX}.`,
+    );
+  }
+  for (const slug of HOME_FEATURED) {
+    if (!PORTFOLIO_ORDER.includes(slug)) {
       throw new Error(
-        `case-studies/${slug}/index.mdx has no fact titled “Year” in its frontmatter, and the Portfolio page needs one for its card.`,
+        `HOME_FEATURED in app/caseStudies.ts lists “${slug}”, but it isn't in PORTFOLIO_ORDER. Home only features case studies the Portfolio page shows, so add it there first.`,
       );
     }
-    const thumbnail = thumbnails[`../case-studies/${slug}/images/case-study-thumbnail.avif`];
-    if (!thumbnail) {
-      throw new Error(`Portfolio lists “${slug}”, but there's no case-studies/${slug}/images/case-study-thumbnail.avif.`);
-    }
-    return { slug, href: `/portfolio/${slug}`, heading, project: title, year: String(year), thumbnail };
-  });
+  }
+  return HOME_FEATURED.map((slug) => caseStudyCard(slug, 'HOME_FEATURED (Home)'));
 }
