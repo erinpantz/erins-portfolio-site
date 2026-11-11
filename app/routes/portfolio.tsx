@@ -27,7 +27,7 @@ export default function Portfolio() {
               headingLevel={2}
               href={card.href}
               heading={card.heading}
-              company={card.project}
+              company={card.company}
               year={card.year}
               thumbnail={card.thumbnail}
             />

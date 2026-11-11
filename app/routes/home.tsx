@@ -41,7 +41,7 @@ export default function Home() {
                   headingLevel={3}
                   href={card.href}
                   heading={card.heading}
-                  company={card.project}
+                  company={card.company}
                   year={card.year}
                   thumbnail={card.thumbnail}
                 />
