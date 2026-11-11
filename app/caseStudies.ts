@@ -30,7 +30,7 @@ export const caseStudies = Object.fromEntries(
  * these are listed: add a slug here when a case study is ready, and move it
  * to change the order.
  */
-const PORTFOLIO_ORDER = ['laguna-companion', 'navio-med-checklist'];
+const PORTFOLIO_ORDER = ['laguna-companion', 'navio-med-checklist', 'vim-brand-system'];
 
 /**
  * The case studies Home features, in order, up to three. Each must also be in
