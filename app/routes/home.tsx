@@ -9,9 +9,10 @@ import { pageTitle } from '../site';
 
 export const meta = () => [{ title: pageTitle() }];
 
-// Home: a wide Hero on the subtle band, whose headline is the page's h1, with
-// a Reel beside it: five screens from Erin's work turning on a disc, showing
-// the “creative toolkit” the headline names. Then a wide “Featured work”
+// Home: a wide Hero on the default background, whose headline is the page's
+// h1, with a Reel beside it: five screens from Erin's work turning on a disc,
+// showing the “creative toolkit” the headline names. With no band, there's no
+// side padding, so the Reel has more room. Then a wide “Featured work”
 // Section with the featured case studies (HOME_FEATURED in
 // app/caseStudies.ts) as small PortfolioCards. The Section is wide so its
 // heading lines up with the cards' left edge; the cards' headings are level
@@ -25,7 +26,6 @@ export default function Home() {
       <Container>
         <Hero
           width="wide"
-          background="subtle"
           heading="Product designer with a creative toolkit."
           intro="20+ years in product, brand, illustration, motion, and print"
           media={
