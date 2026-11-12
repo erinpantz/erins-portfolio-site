@@ -1,14 +1,21 @@
-import { Container, Grid, Hero, NavCard, NavCardGroup, PortfolioCard, Section } from 'verity-design-system';
+import { Container, Grid, Hero, PortfolioCard, Reel, Section } from 'verity-design-system';
+import reelMemberProfile from '../../assets/images/home-reel/reel-01-member-profile.avif';
+import reelCareCalendar from '../../assets/images/home-reel/reel-02-care-calendar.avif';
+import reelMammogramCampaign from '../../assets/images/home-reel/reel-03-mammogram-campaign.avif';
+import reelProductivityDashboard from '../../assets/images/home-reel/reel-04-productivity-dashboard.avif';
+import reelCallStoryboard from '../../assets/images/home-reel/reel-05-call-storyboard.avif';
 import { homeFeaturedCaseStudies } from '../caseStudies';
-import { NAV_HREFS, pageTitle } from '../site';
+import { pageTitle } from '../site';
 
 export const meta = () => [{ title: pageTitle() }];
 
-// Home: a wide Hero, whose headline is the page's h1, with a pair of NavCards
-// beside it, then a wide “Featured work” Section with the featured case
-// studies (HOME_FEATURED in app/caseStudies.ts) as small PortfolioCards. The
-// Section is wide so its heading lines up with the cards' left edge; the
-// cards' headings are level 3, under it.
+// Home: a wide Hero on the subtle band, whose headline is the page's h1, with
+// a Reel beside it: five screens from Erin's work turning on a disc, showing
+// the “creative toolkit” the headline names. Then a wide “Featured work”
+// Section with the featured case studies (HOME_FEATURED in
+// app/caseStudies.ts) as small PortfolioCards. The Section is wide so its
+// heading lines up with the cards' left edge; the cards' headings are level
+// 3, under it.
 export default function Home() {
   // Worked out while the page is pre-rendered, so a bad featured list stops
   // the build, with the message in the output
@@ -18,13 +25,19 @@ export default function Home() {
       <Container>
         <Hero
           width="wide"
+          background="subtle"
           heading="Product designer with a creative toolkit."
-          intro="20+ years of experience spanning product, brand, illustration, motion, and print design."
+          intro="20+ years in product, brand, illustration, motion, and print"
           media={
-            <NavCardGroup>
-              <NavCard page="portfolio" label="Portfolio" href={NAV_HREFS.portfolio} />
-              <NavCard page="profile" label="Profile" href={NAV_HREFS.profile} />
-            </NavCardGroup>
+            <Reel
+              images={[
+                { src: reelMemberProfile },
+                { src: reelCareCalendar },
+                { src: reelMammogramCampaign },
+                { src: reelProductivityDashboard },
+                { src: reelCallStoryboard },
+              ]}
+            />
           }
         />
       </Container>
