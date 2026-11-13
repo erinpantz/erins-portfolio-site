@@ -82,30 +82,26 @@ function sectionOf(pathname: string): ShellProps['pending'] {
   return currentPage(pathname);
 }
 
+// Whether a page change in progress came from the browser's Back or Forward
+// button. Those move the browser's history first, and React Router then loads
+// the page; a link's page change only adds to the history once its page has
+// loaded. So while a page change loads, history already at the page it's
+// going to (the same key) means Back or Forward. It holds after a reload too,
+// since the browser keeps each entry's key.
+function isBackOrForward(going: { key: string }) {
+  const entry: unknown = window.history.state;
+  return typeof entry === 'object' && entry !== null && 'key' in entry && entry.key === going.key;
+}
+
 // The section a page change is going to, while React Router loads it. None
 // for the browser's Back and Forward buttons, where people expect the page
-// they left right away: those fire a popstate event and links don't, so a
-// popstate marks the page change that follows. None for a link to the page
-// someone is already on.
+// they left right away, and none for a link to the page someone is already on.
 function usePendingSection(): ShellProps['pending'] {
   const navigation = useNavigation();
-  const location = useLocation();
-  const fromHistory = useRef(false);
-  useEffect(() => {
-    const onPopState = () => {
-      fromHistory.current = true;
-    };
-    window.addEventListener('popstate', onPopState);
-    return () => window.removeEventListener('popstate', onPopState);
-  }, []);
-  // A page change that's done clears the mark, whether or not it loaded
-  useEffect(() => {
-    if (navigation.state === 'idle') fromHistory.current = false;
-  }, [navigation.state, location.key]);
-
+  const { pathname } = useLocation();
   const going = navigation.location;
-  if (navigation.state !== 'loading' || !going || fromHistory.current) return undefined;
-  if (going.pathname === location.pathname) return undefined;
+  if (navigation.state !== 'loading' || !going) return undefined;
+  if (going.pathname === pathname || isBackOrForward(going)) return undefined;
   return sectionOf(going.pathname);
 }
 
