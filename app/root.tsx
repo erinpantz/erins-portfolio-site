@@ -1,6 +1,6 @@
-import type { ReactNode } from 'react';
-import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLocation } from 'react-router';
-import { Section, Shell, themeScript, type ShellProps } from 'verity-design-system';
+import { useEffect, useRef, type ReactNode } from 'react';
+import { Links, Meta, Outlet, Link as RouterLink, Scripts, ScrollRestoration, useLocation } from 'react-router';
+import { LinkProvider, Section, Shell, themeScript, type LinkComponent, type ShellProps } from 'verity-design-system';
 import 'verity-design-system/styles.css';
 import type { Route } from './+types/root';
 import { caseStudies } from './caseStudies';
@@ -54,22 +54,46 @@ function currentPage(pathname: string): ShellProps['current'] {
   return undefined;
 }
 
+// Verity's links to the site's own pages go through React Router's Link, so
+// following one changes the page in the app instead of reloading it. A page
+// starts loading when someone hovers over or focuses its link. Verity keeps
+// other sites, mailto:, new tabs, and files like the resume PDF as plain links.
+const SiteLink: LinkComponent = ({ href = '', ...props }) => <RouterLink to={href} prefetch="intent" {...props} />;
+
+// A page change in the app doesn't reset focus the way a reload does, so after
+// one (not the first load), focus moves to Main, where the skip link sends it:
+// keyboard and screen reader users start at the new page. It doesn't scroll:
+// ScrollRestoration decides that (the top for a new page, where you were for
+// Back and Forward).
+function useFocusMainOnPageChange() {
+  const { key } = useLocation();
+  const firstKey = useRef(key);
+  useEffect(() => {
+    if (key === firstKey.current) return;
+    document.querySelector<HTMLElement>('main')?.focus({ preventScroll: true });
+  }, [key]);
+}
+
 // Case studies are for reading one piece of work, so they use Shell's focused
 // mode: no nav, and a link back to the Portfolio in the corner. Every other
-// page, /portfolio included, has the nav.
+// page, /portfolio included, has the nav. Its links change pages in the app
+// (SiteLink).
 function SiteShell({ children }: { children: ReactNode }) {
   const { pathname } = useLocation();
   const focused = isCaseStudy(pathname);
+  useFocusMainOnPageChange();
   return (
-    <Shell
-      mode={focused ? 'focused' : 'default'}
-      backLink={focused ? { href: NAV_HREFS.portfolio, label: 'Portfolio' } : undefined}
-      current={currentPage(pathname)}
-      hrefs={NAV_HREFS}
-      footer={siteFooter}
-    >
-      {children}
-    </Shell>
+    <LinkProvider component={SiteLink}>
+      <Shell
+        mode={focused ? 'focused' : 'default'}
+        backLink={focused ? { href: NAV_HREFS.portfolio, label: 'Portfolio' } : undefined}
+        current={currentPage(pathname)}
+        hrefs={NAV_HREFS}
+        footer={siteFooter}
+      >
+        {children}
+      </Shell>
+    </LinkProvider>
   );
 }
 
