@@ -1,9 +1,10 @@
 import { useEffect, useRef, type ReactNode } from 'react';
-import { Links, Meta, Outlet, Link as RouterLink, Scripts, ScrollRestoration, useLocation } from 'react-router';
+import { Links, Meta, Outlet, Link as RouterLink, Scripts, ScrollRestoration, useLocation, useNavigation } from 'react-router';
 import { LinkProvider, Section, Shell, themeScript, type LinkComponent, type ShellProps } from 'verity-design-system';
 import 'verity-design-system/styles.css';
 import type { Route } from './+types/root';
 import { caseStudies } from './caseStudies';
+import { PAGE_LOADER_WORDS } from './pageLoaderWords';
 import { NAV_HREFS, siteFooter } from './site';
 
 // The HTML around every page
@@ -74,13 +75,50 @@ function useFocusMainOnPageChange() {
   }, [key]);
 }
 
+// Which section an address is in, for the page loader: Home, then the same
+// sections as currentPage. Anything else (Page not found) has no loader.
+function sectionOf(pathname: string): ShellProps['pending'] {
+  if (pathname === '/') return 'home';
+  return currentPage(pathname);
+}
+
+// The section a page change is going to, while React Router loads it. None
+// for the browser's Back and Forward buttons, where people expect the page
+// they left right away: those fire a popstate event and links don't, so a
+// popstate marks the page change that follows. None for a link to the page
+// someone is already on.
+function usePendingSection(): ShellProps['pending'] {
+  const navigation = useNavigation();
+  const location = useLocation();
+  const fromHistory = useRef(false);
+  useEffect(() => {
+    const onPopState = () => {
+      fromHistory.current = true;
+    };
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
+  }, []);
+  // A page change that's done clears the mark, whether or not it loaded
+  useEffect(() => {
+    if (navigation.state === 'idle') fromHistory.current = false;
+  }, [navigation.state, location.key]);
+
+  const going = navigation.location;
+  if (navigation.state !== 'loading' || !going || fromHistory.current) return undefined;
+  if (going.pathname === location.pathname) return undefined;
+  return sectionOf(going.pathname);
+}
+
 // Case studies are for reading one piece of work, so they use Shell's focused
 // mode: no nav, and a link back to the Portfolio in the corner. Every other
 // page, /portfolio included, has the nav. Its links change pages in the app
-// (SiteLink).
+// (SiteLink). Moving to another section shows Verity's PageLoader, with the
+// words in app/pageLoaderWords.ts: Shell decides when, from the section the
+// page change is going to.
 function SiteShell({ children }: { children: ReactNode }) {
   const { pathname } = useLocation();
   const focused = isCaseStudy(pathname);
+  const pending = usePendingSection();
   useFocusMainOnPageChange();
   return (
     <LinkProvider component={SiteLink}>
@@ -90,6 +128,8 @@ function SiteShell({ children }: { children: ReactNode }) {
         current={currentPage(pathname)}
         hrefs={NAV_HREFS}
         footer={siteFooter}
+        pending={pending}
+        loaderWords={PAGE_LOADER_WORDS}
       >
         {children}
       </Shell>
