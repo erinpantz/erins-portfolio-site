@@ -8,7 +8,7 @@ import { RESUME_HREF } from './site';
 // colors and tilt), the same one visitors see in the nav. It says “this is
 // me” without another heading between the page's h1 and the cards' h2s, and
 // it's decorative (NavIcon is hidden from screen readers): the paragraph says
-// who Erin is. Then the paragraph in body/xl and a button to her resume. It's
+// who Erin is. Then the paragraph in body/xl and a button to her résumé. It's
 // the site's own markup because Verity's TextBlock only sets its text in
 // body/default. Its styles are in IntroCard.module.css, using only Verity's
 // CSS variables.
@@ -24,7 +24,7 @@ export function IntroCard() {
           four healthcare startups, most recently bringing AI into the tools care teams use every day. Now I’m designing
           in code too, building my own design system with AI as a collaborator.
         </p>
-        {/* The same address as the footer's Resume link, in the same tab */}
+        {/* The same address as the footer's Résumé link, in the same tab */}
         <Button href={RESUME_HREF} startIcon="resume">
           Résumé
         </Button>

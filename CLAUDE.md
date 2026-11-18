@@ -67,7 +67,7 @@ assets/                  images and illustrations shared across pages
 plugins/                 build steps, such as remarkProseRuns.ts for case studies
 scripts/                 verity.js (switching Verity copies) and preview.js
 public/                  files that need a fixed address, like the favicons, the web
-                         manifest, and (later) the resume PDF; copied into the build as-is
+                         manifest, and (later) the résumé PDF; copied into the build as-is
 ```
 
 - **Page titles** use `pageTitle()` from `app/site.tsx`: “Laguna Companion · Erin Tozour”, and “Erin Tozour” for the front page.

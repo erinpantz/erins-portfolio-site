@@ -16,7 +16,7 @@ export const NAV_HREFS = {
 } satisfies ShellProps['hrefs'];
 
 /**
- * Where the resume goes: the footer's Resume link and the Portfolio intro's
+ * Where the résumé goes: the footer's Résumé link and the Portfolio intro's
  * button. It isn't in the nav. It points to a PDF that doesn't exist yet.
  */
 export const RESUME_HREF = '/erin-tozour-resume.pdf';
@@ -37,7 +37,7 @@ const linkGroups = (
       <Link href={NAV_HREFS.playground}>Playground</Link>
       <Link href={NAV_HREFS.profile}>Profile</Link>
       {/* The PDF, in the same tab */}
-      <Link href={RESUME_HREF}>Resume</Link>
+      <Link href={RESUME_HREF}>Résumé</Link>
     </LinkGroup>
     <LinkGroup label="Fun stuff">
       {/* PLACEHOLDER: the albums page doesn't exist yet */}

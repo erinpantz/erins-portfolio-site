@@ -60,7 +60,7 @@ function sectionOf(pathname: string): ShellProps['current'] {
 // Verity's links to the site's own pages go through React Router's Link, so
 // following one changes the page in the app instead of reloading it. A page
 // starts loading when someone hovers over or focuses its link. Verity keeps
-// other sites, mailto:, new tabs, and files like the resume PDF as plain links.
+// other sites, mailto:, new tabs, and files like the résumé PDF as plain links.
 const SiteLink: LinkComponent = ({ href = '', ...props }) => <RouterLink to={href} prefetch="intent" {...props} />;
 
 // A page change in the app doesn't reset focus the way a reload does, so after
