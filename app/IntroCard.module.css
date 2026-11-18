@@ -18,11 +18,18 @@
   background: var(--verity-color-background-subtle);
 }
 
-/* The Profile nav icon, as large as a nav icon on a NavCard. NavIcon fills
-   this box. */
+/* The Profile nav icon, as large as a nav icon on a NavCard, and a link to
+   Profile. NavIcon fills this box. Keyboard focus shows Verity's focus ring. */
 .icon {
+  display: block;
   width: var(--verity-nav-card-icon-size);
   height: var(--verity-nav-card-icon-size);
+  cursor: pointer;
+}
+
+.icon:focus-visible {
+  outline: var(--verity-focus-ring-width) solid var(--verity-color-border-focus);
+  outline-offset: var(--verity-focus-ring-offset);
 }
 
 /* The paragraph and the button, pushed to the bottom of the card */
