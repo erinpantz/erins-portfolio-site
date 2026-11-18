@@ -21,6 +21,7 @@ The code for erintozour.com, the portfolio of Erin Tozour, a product designer. I
 
 - Every component, token, font, and style comes from `verity-design-system`. No Tailwind, no CSS-in-JS, no hand-written values, and no new components here.
 - **If something is missing** (a component, a prop, a token, a variant), stop and tell Erin. It gets added to Verity and released as a new tag, not built or worked around here.
+- **The one exception: site components Erin asks for.** When Erin decides a piece of one page should be the site’s own markup instead of a Verity component (like `IntroCard`, the Portfolio’s intro card), it’s a small component in `app/` with a CSS Module beside it (`IntroCard.tsx` and `IntroCard.module.css`). Its styles use only Verity’s CSS variables (`--verity-…`), with no typed values. Text styles use the `--verity-viewport-typography-…` variables, which change at each breakpoint on their own, so no media queries are needed. It still uses Verity’s components inside it, like `Button`. Only build one when Erin asks; otherwise, anything missing goes to Verity.
 - `verity-design-system/styles.css` is imported once, in `app/root.tsx`. Verity’s `themeScript` is inline in `<head>` there, before anything that paints. Keep it inline and imported, never copied.
 - **Media queries** appear only in page-level layout, and only with Verity’s generated breakpoints: `@value medium from 'verity-design-system/breakpoints.module.css';`, then `@media medium { … }`. Never type a breakpoint width by hand.
 - **Links go somewhere, buttons do something.** Something that goes to a page or URL is a link (`<a href>`); `Button` with `href` renders one styled as a button.
@@ -59,6 +60,8 @@ app/
   caseStudies.ts         finds every case-studies/<slug>/index.mdx, and lists the ones on
                          the Portfolio page, in order (PORTFOLIO_ORDER)
   NotFound.tsx           the Page not found content
+  IntroCard.tsx          the Portfolio’s intro card, a site component (see “The one
+                         exception” above), with IntroCard.module.css
 case-studies/<slug>/     index.mdx, plus the images/, animations/, and videos/ it uses
 assets/                  images and illustrations shared across pages
 plugins/                 build steps, such as remarkProseRuns.ts for case studies
