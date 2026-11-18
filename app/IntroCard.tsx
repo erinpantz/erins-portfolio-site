@@ -20,8 +20,7 @@ export function IntroCard() {
       </div>
       <div className={styles.text}>
         <p className={styles.body}>
-          I’m a product and visual designer with 20+ years of experience. For the past 11 years, I’ve led design at
-          four healthcare startups, most recently bringing AI into the tools care teams use every day. Now I’m designing
+          I’m a product and visual designer with 20+ years of experience. For the past 11 years, I’ve led design at healthcare startups, most recently bringing AI into the tools care teams use every day. Now I’m designing
           in code too, building my own design system with AI as a collaborator.
         </p>
         {/* The same address as the footer's Résumé link, in the same tab */}
