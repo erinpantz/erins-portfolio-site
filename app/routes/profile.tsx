@@ -9,21 +9,24 @@ import { pageTitle } from '../site';
 export const meta = () => [{ title: pageTitle('Profile') }];
 
 // Profile: a wide Hero on the default background. Its headline is the page's
-// h1, with an intro and Erin's photo beside it (at most hero/media-width,
-// wrapping under the text when they don't both fit). The photo is a
-// LayeredImage: the photo and four shapes, exported from the Profile page in
-// Figma (frame erin-profile-photo, 800 × 800), placed and sized in percent of
-// that frame. As a mouse moves over it, each layer moves by its depth and the
-// picture tilts toward the pointer; it stays still on touch and with reduce
-// motion. Screen readers hear it as one image, named by alt. The rest of the
-// page's sections are still to come.
+// h1, with a two-paragraph intro and Erin's photo beside it (at most
+// hero/media-width, wrapping under the text when they don't both fit). The
+// photo is a LayeredImage: the photo and four shapes, exported from the
+// Profile page in Figma (frame erin-profile-photo, 800 × 800), placed and
+// sized in percent of that frame. As a mouse moves over it, each layer moves
+// by its depth and the picture tilts toward the pointer; it stays still on
+// touch and with reduce motion. Screen readers hear it as one image, named by
+// alt. The rest of the page's sections are still to come.
 export default function Profile() {
   return (
     <Container>
       <Hero
         width="wide"
         heading="Hi, I’m Erin"
-        intro="I’ve been learning new design skills and tools for over 20 years. Lately, that means designing in code, building my own design system with AI as a collaborator. I still spend stupid amounts of time on craft, like my own typeface and hand-drawn illustrations, because craft, taste, and human creativity will always matter."
+        intro={[
+          'I’ve been learning new design skills and tools for over 20 years. Lately, that means designing in code, building my own design system with AI as a collaborator.',
+          'I still spend stupid amounts of time on craft, like my own typeface and hand-drawn illustrations, because craft, taste, and human creativity will always matter.',
+        ]}
         media={
           <LayeredImage
             alt="Erin smiling in a bright yellow shirt and red glasses, in front of a wall of colorful illustrated portraits"
