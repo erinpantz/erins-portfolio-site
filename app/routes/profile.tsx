@@ -23,7 +23,7 @@ export default function Profile() {
       <Hero
         width="wide"
         heading="Hi, I’m Erin"
-        intro="For the past 11 years, I’ve led design at four healthcare startups, most recently bringing AI into the tools care teams use every day. Now I’m designing in code too, building my own design system with AI as a collaborator."
+        intro="I’ve been learning new design skills and tools for over 20 years. Lately, that means designing in code, building my own design system and portfolio with AI as a collaborator. I still spend stupid amounts of time on craft, like my own typeface and hand-drawn illustrations, because craft, taste, and human creativity will always matter."
         media={
           <LayeredImage
             alt="Erin smiling in a bright yellow shirt and red glasses, in front of a wall of colorful illustrated portraits"
