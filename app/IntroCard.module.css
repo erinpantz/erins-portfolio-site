@@ -1,48 +1,48 @@
 /* The Portfolio's intro card. Every value is one of Verity's CSS variables.
-   The --verity-viewport-* text styles change at each breakpoint on their own
-   (Verity sets them per breakpoint), so there are no media queries here. */
+   Verity sets the sizes (the --verity-viewport-* text styles and the nav card
+   icon size) per breakpoint on its own, so there are no media queries here. */
 
 /* A plain block with a subtle fill, so it has its own place in the Grid
    beside the ProjectCards. No border or shadow: it isn't a link, so it
    shouldn't look like the cards you can click. The Grid stretches it to the
-   height of the card beside it, and its content stays at the top. */
+   height of the card beside it: the icon stays at the top, the words go to the
+   bottom, and the space between them grows. When the card is only as tall as
+   its content (on its own row, or on a phone), it's a plain stack with
+   spacing/lg between the icon, the paragraph, and the button. */
 .introCard {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: var(--verity-spacing-md);
+  gap: var(--verity-spacing-lg);
   padding: var(--verity-padding-lg);
   border-radius: var(--verity-border-radius-md);
   background: var(--verity-color-background-subtle);
 }
 
-/* The heading and the paragraph */
+/* The Profile nav icon, as large as a nav icon on a NavCard. NavIcon fills
+   this box. */
+.icon {
+  width: var(--verity-nav-card-icon-size);
+  height: var(--verity-nav-card-icon-size);
+}
+
+/* The paragraph and the button, pushed to the bottom of the card */
 .text {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  gap: var(--verity-spacing-sm);
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: var(--verity-spacing-lg);
 }
 
-/* An <h2> (a part of the page, under its h1) in the heading-3 text style */
-.heading {
-  margin: 0;
-  color: var(--verity-color-content-default);
-  font-family: var(--verity-viewport-typography-heading-3-font-family);
-  font-size: var(--verity-viewport-typography-heading-3-font-size);
-  font-weight: var(--verity-viewport-typography-heading-3-font-weight);
-  line-height: var(--verity-viewport-typography-heading-3-line-height);
-  letter-spacing: var(--verity-viewport-typography-heading-3-letter-spacing);
-  text-transform: var(--verity-viewport-typography-heading-3-text-transform);
-}
-
-/* The paragraph, in body/lg */
+/* The paragraph, in body/xl */
 .body {
   margin: 0;
   color: var(--verity-color-content-default);
-  font-family: var(--verity-viewport-typography-body-lg-font-family);
-  font-size: var(--verity-viewport-typography-body-lg-font-size);
-  font-weight: var(--verity-viewport-typography-body-lg-font-weight);
-  line-height: var(--verity-viewport-typography-body-lg-line-height);
-  letter-spacing: var(--verity-viewport-typography-body-lg-letter-spacing);
-  text-transform: var(--verity-viewport-typography-body-lg-text-transform);
+  font-family: var(--verity-viewport-typography-body-xl-font-family);
+  font-size: var(--verity-viewport-typography-body-xl-font-size);
+  font-weight: var(--verity-viewport-typography-body-xl-font-weight);
+  line-height: var(--verity-viewport-typography-body-xl-line-height);
+  letter-spacing: var(--verity-viewport-typography-body-xl-letter-spacing);
+  text-transform: var(--verity-viewport-typography-body-xl-text-transform);
 }
