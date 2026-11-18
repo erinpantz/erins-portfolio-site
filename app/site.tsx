@@ -16,10 +16,10 @@ export const NAV_HREFS = {
 } satisfies ShellProps['hrefs'];
 
 /**
- * Where the footer's Resume link goes. It isn't in the nav. It points to a PDF
- * that doesn't exist yet.
+ * Where the resume goes: the footer's Resume link and the Portfolio intro's
+ * button. It isn't in the nav. It points to a PDF that doesn't exist yet.
  */
-const RESUME_HREF = '/erin-tozour-resume.pdf';
+export const RESUME_HREF = '/erin-tozour-resume.pdf';
 
 /** The browser tab text for a page: “Laguna Companion · Erin Tozour” */
 export function pageTitle(name?: string) {
