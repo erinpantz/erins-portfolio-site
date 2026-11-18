@@ -3,10 +3,14 @@ import { Footer, Link, LinkGroup, type ShellProps } from 'verity-design-system';
 // Site-wide content: where the nav links go and what the footer says.
 // Anything marked PLACEHOLDER isn't real yet.
 
-/** Where each nav link goes: the logo (home) and the three pages */
+/**
+ * Where each nav link goes: the logo (home) and the three pages. The
+ * Portfolio is the front page, so the logo and Portfolio both go to /.
+ * Case studies stay at /portfolio/<slug>.
+ */
 export const NAV_HREFS = {
   home: '/',
-  portfolio: '/portfolio',
+  portfolio: '/',
   playground: '/playground',
   profile: '/profile',
 } satisfies ShellProps['hrefs'];
@@ -29,9 +33,9 @@ const CALENDLY_URL = 'https://calendly.com/meet-erin-tozour';
 const linkGroups = (
   <>
     <LinkGroup label="Pages">
-      <Link href="/portfolio">Portfolio</Link>
-      <Link href="/playground">Playground</Link>
-      <Link href="/profile">Profile</Link>
+      <Link href={NAV_HREFS.portfolio}>Portfolio</Link>
+      <Link href={NAV_HREFS.playground}>Playground</Link>
+      <Link href={NAV_HREFS.profile}>Profile</Link>
       {/* The PDF, in the same tab */}
       <Link href={RESUME_HREF}>Resume</Link>
     </LinkGroup>

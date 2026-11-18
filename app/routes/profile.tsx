@@ -4,10 +4,10 @@ import { pageTitle } from '../site';
 
 export const meta = () => [{ title: pageTitle('Profile') }];
 
-// Profile: a wide Hero on the default background, built like Home's, so the
-// two pages line up. Its headline is the page's h1, with an intro and Erin's
-// photo beside it (at most hero/media-width, wrapping under the text when they
-// don't both fit). The rest of the page's sections are still to come.
+// Profile: a wide Hero on the default background. Its headline is the page's
+// h1, with an intro and Erin's photo beside it (at most hero/media-width,
+// wrapping under the text when they don't both fit). The rest of the page's
+// sections are still to come.
 export default function Profile() {
   return (
     <Container>

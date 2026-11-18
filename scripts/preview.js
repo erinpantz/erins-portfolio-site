@@ -4,7 +4,7 @@
 // 404 status.
 // Run `npm run build` first, then `npm run preview`.
 //
-// (Vite's own preview server sends the Home page for /profile, which breaks
+// (Vite's own preview server sends the front page for /profile, which breaks
 // the pre-rendered pages, so the site doesn't use it.)
 
 import { createReadStream, statSync } from 'node:fs';

@@ -32,13 +32,6 @@ export const caseStudies = Object.fromEntries(
  */
 const PORTFOLIO_ORDER = ['laguna-companion', 'navio-med-checklist', 'vim-brand-system'];
 
-/**
- * The case studies Home features, in order, up to three. Each must also be in
- * PORTFOLIO_ORDER, so Home never shows something the Portfolio page doesn't.
- */
-const HOME_FEATURED = ['laguna-companion', 'navio-med-checklist'];
-const HOME_FEATURED_MAX = 3;
-
 // Each case study's thumbnail for its PortfolioCard. The name is fixed:
 // case-studies/<slug>/images/case-study-thumbnail.avif.
 const thumbnails = import.meta.glob<string>('../case-studies/*/images/case-study-thumbnail.avif', {
@@ -82,23 +75,3 @@ export function portfolioCaseStudies() {
   return PORTFOLIO_ORDER.map((slug) => caseStudyCard(slug, 'PORTFOLIO_ORDER (the Portfolio page)'));
 }
 
-/**
- * The cards Home features, in HOME_FEATURED order. The build stops if the
- * list is longer than three, or names a case study the Portfolio page
- * doesn't show.
- */
-export function homeFeaturedCaseStudies() {
-  if (HOME_FEATURED.length > HOME_FEATURED_MAX) {
-    throw new Error(
-      `HOME_FEATURED in app/caseStudies.ts lists ${HOME_FEATURED.length} case studies, but Home shows at most ${HOME_FEATURED_MAX}.`,
-    );
-  }
-  for (const slug of HOME_FEATURED) {
-    if (!PORTFOLIO_ORDER.includes(slug)) {
-      throw new Error(
-        `HOME_FEATURED in app/caseStudies.ts lists “${slug}”, but it isn't in PORTFOLIO_ORDER. Home only features case studies the Portfolio page shows, so add it there first.`,
-      );
-    }
-  }
-  return HOME_FEATURED.map((slug) => caseStudyCard(slug, 'HOME_FEATURED (Home)'));
-}

@@ -45,13 +45,15 @@ function isCaseStudy(pathname: string) {
   return first === 'portfolio' && !!slug && rest.length === 0 && !!caseStudies[slug];
 }
 
-// Which nav item is the current page. Case studies count as Portfolio; an
-// address without a page (Page not found) has none.
-function currentPage(pathname: string): ShellProps['current'] {
-  if (isCaseStudy(pathname)) return 'portfolio';
+// Which section an address is in. The front page is the Portfolio, and case
+// studies count as Portfolio too; an address without a page (Page not found)
+// is in none. The nav marks it as the current page (except on a case study,
+// which has no nav), and the page loader uses its words.
+function sectionOf(pathname: string): ShellProps['current'] {
+  if (pathname === '/' || isCaseStudy(pathname)) return 'portfolio';
   const [first, ...rest] = pathname.split('/').filter(Boolean);
   if (rest.length > 0) return undefined;
-  if (first === 'portfolio' || first === 'playground' || first === 'profile') return first;
+  if (first === 'playground' || first === 'profile') return first;
   return undefined;
 }
 
@@ -73,13 +75,6 @@ function useFocusMainOnPageChange() {
     if (key === firstKey.current) return;
     document.querySelector<HTMLElement>('main')?.focus({ preventScroll: true });
   }, [key]);
-}
-
-// Which section an address is in, for the page loader: Home, then the same
-// sections as currentPage. Anything else (Page not found) has no loader.
-function sectionOf(pathname: string): ShellProps['pending'] {
-  if (pathname === '/') return 'home';
-  return currentPage(pathname);
 }
 
 // Whether a page change in progress came from the browser's Back or Forward
@@ -106,8 +101,8 @@ function usePendingSection(): ShellProps['pending'] {
 }
 
 // Case studies are for reading one piece of work, so they use Shell's focused
-// mode: no nav, and a link back to the Portfolio in the corner. Every other
-// page, /portfolio included, has the nav. Its links change pages in the app
+// mode: no nav, and a link back to the Portfolio (the front page) in the
+// corner. Every other page has the nav. Its links change pages in the app
 // (SiteLink). Moving to another section shows Verity's PageLoader, with the
 // words in app/pageLoaderWords.ts: Shell decides when, from the section the
 // page change is going to.
@@ -121,7 +116,7 @@ function SiteShell({ children }: { children: ReactNode }) {
       <Shell
         mode={focused ? 'focused' : 'default'}
         backLink={focused ? { href: NAV_HREFS.portfolio, label: 'Portfolio' } : undefined}
-        current={currentPage(pathname)}
+        current={sectionOf(pathname)}
         hrefs={NAV_HREFS}
         footer={siteFooter}
         pending={pending}

@@ -40,7 +40,7 @@ Locally they’re in `../verity-design-system/src/guidelines/`. Each component�
 
 - `npm run dev`: start the site at http://localhost:5173, reloading on every save
 - `npm run build`: pre-render every page into `build/client/`
-- `npm run preview`: serve `build/client/` at http://localhost:4173 the way a static host does (run `npm run build` first). Don’t use `vite preview`: it sends the Home page for addresses like `/profile`, which breaks pre-rendered pages.
+- `npm run preview`: serve `build/client/` at http://localhost:4173 the way a static host does (run `npm run build` first). Don’t use `vite preview`: it sends the front page for addresses like `/profile`, which breaks pre-rendered pages.
 - `npm run typecheck`: check the code with TypeScript
 - `npm run verity:local`, `npm run verity:tag`, `npm run verity:which`: switch between the linked Verity folder and the tagged version (see README.md)
 
@@ -51,13 +51,13 @@ app/
   root.tsx               the HTML around every page: <head> with themeScript, Verity's
                          styles, and Shell (nav and footer)
   routes.ts              which address shows which page
-  routes/                one file per page; case-study.tsx is the template for every
-                         case study, and not-found.tsx is Page not found (built to /404)
+  routes/                one file per page; portfolio.tsx is the front page (/),
+                         case-study.tsx is the template for every case study,
+                         portfolio-redirect.tsx sends the old /portfolio to /, and
+                         not-found.tsx is Page not found (built to /404)
   site.tsx               site-wide content: nav addresses, the footer, page titles
   caseStudies.ts         finds every case-studies/<slug>/index.mdx, and lists the ones on
-                         the Portfolio page, in order (PORTFOLIO_ORDER), and the up to
-                         three that Home features (HOME_FEATURED, each also in
-                         PORTFOLIO_ORDER)
+                         the Portfolio page, in order (PORTFOLIO_ORDER)
   NotFound.tsx           the Page not found content
 case-studies/<slug>/     index.mdx, plus the images/, animations/, and videos/ it uses
 assets/                  images and illustrations shared across pages
@@ -67,9 +67,10 @@ public/                  files that need a fixed address, like the favicons, the
                          manifest, and (later) the resume PDF; copied into the build as-is
 ```
 
-- **Page titles** use `pageTitle()` from `app/site.tsx`: “Laguna Companion · Erin Tozour”, and “Erin Tozour” for Home.
-- **The nav** comes from Verity’s `Shell`. `app/site.tsx` sets where each link goes. The current page is worked out in `app/root.tsx`; case studies count as Portfolio.
-- **Case studies use Shell's focused mode:** no nav, a “Portfolio” back link in the top-left corner. `isCaseStudy()` in `app/root.tsx` decides it from the address, so a new case study folder gets it automatically; every other page, `/portfolio` included, has the nav.
+- **Page titles** use `pageTitle()` from `app/site.tsx`: “Laguna Companion · Erin Tozour”, and “Erin Tozour” for the front page.
+- **The front page is the Portfolio,** at `/`. `/portfolio` is built as a redirect to `/`, so old links still work; case studies stay at `/portfolio/<slug>`.
+- **The nav** comes from Verity’s `Shell`. `app/site.tsx` sets where each link goes. The current page is worked out in `app/root.tsx`; the front page and case studies count as Portfolio.
+- **Case studies use Shell's focused mode:** no nav, a “Portfolio” back link in the top-left corner. `isCaseStudy()` in `app/root.tsx` decides it from the address, so a new case study folder gets it automatically; every other page has the nav.
 
 ## Building a case study
 

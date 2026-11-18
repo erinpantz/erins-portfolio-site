@@ -2,15 +2,16 @@ import { Container, Grid, Heading, ProjectCard, VerticalStack } from 'verity-des
 import { portfolioCaseStudies } from '../caseStudies';
 import { pageTitle } from '../site';
 
-export const meta = () => [{ title: pageTitle('Portfolio') }];
+// The front page, so the tab says just “Erin Tozour”
+export const meta = () => [{ title: pageTitle() }];
 
-// The page's title, then a ProjectCard for each case study, in the order set
-// in app/caseStudies.ts. One wide stack holds both, so the title lines up with
-// the cards' left edge, with spacing/xl between them; the Container caps it at
-// the wide width. The cards sit in the same Grid as Home's Featured work, so
-// the two pages match: a list, cards sharing each row, and one alone on the
-// last row taking the full width. When brand galleries come, the cards move
-// under two Sections and their headings to level 3.
+// The front page (/): the page's title, then a ProjectCard for each case
+// study, in the order set in app/caseStudies.ts. One wide stack holds both, so
+// the title lines up with the cards' left edge, with spacing/xl between them;
+// the Container caps it at the wide width. The cards are a list, sharing each
+// row, and one alone on the last row takes the full width. When brand
+// galleries come, the cards move under two Sections and their headings to
+// level 3.
 export default function Portfolio() {
   // Worked out while the page is pre-rendered, so a case study missing its
   // thumbnail (or a fact the build checks) stops the build, with the message

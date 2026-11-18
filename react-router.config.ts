@@ -9,6 +9,7 @@ const caseStudyPaths = readdirSync('case-studies', { withFileTypes: true })
 export default {
   // No server: every page is built into a finished HTML file ahead of time
   ssr: false,
-  // /404 is the Page not found page, for addresses without a page
+  // /404 is the Page not found page, for addresses without a page. /portfolio
+  // is built as a redirect to / (app/routes/portfolio-redirect.tsx).
   prerender: ['/', '/portfolio', '/playground', '/profile', ...caseStudyPaths, '/404'],
 } satisfies Config;
