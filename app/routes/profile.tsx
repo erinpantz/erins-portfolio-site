@@ -54,7 +54,7 @@ export default function Profile() {
               {/* Kept on one line: a disabled link sits in a tooltip box, which
                   a line can break before even after a no-break space */}
               <span className={utilities.noWrap}>
-                <Emoji>🧩</Emoji> <VerityLink>my own design system</VerityLink>
+                <Emoji>🧩</Emoji> <VerityLink>my design system</VerityLink>
               </span>{' '}
               with AI as a collaborator.
             </>,
