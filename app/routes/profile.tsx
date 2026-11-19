@@ -5,7 +5,8 @@ import marker from '../../assets/images/profile/layers/marker.svg';
 import photo from '../../assets/images/profile/layers/photo.avif';
 import squiggle from '../../assets/images/profile/layers/squiggle.svg';
 import { EXPERIENCE } from '../experience';
-import { MUSIC_HREF, pageTitle } from '../site';
+import { MUSIC_HREF, pageTitle, VerityLink } from '../site';
+import utilities from '../utilities.module.css';
 
 export const meta = () => [{ title: pageTitle('Profile') }];
 
@@ -27,10 +28,12 @@ function Emoji({ children }: { children: string }) {
 // sized in percent of that frame. As a mouse moves over it, each layer moves
 // by its depth and the picture tilts toward the pointer; it stays still on
 // touch and with reduce motion. Screen readers hear it as one image, named by
-// alt. The intro links to two of Erin's side projects, her typeface
-// (Imperfecto, in Playground) and her favorite albums (Music), each with an
-// emoji before it. The links go through the site's router (LinkProvider), so
-// they change the page in the app.
+// alt. The intro links to three of Erin's side projects, each with an emoji
+// before it: her design system (Verity's Storybook, “Coming soon” until it's
+// public; VerityLink in app/site.tsx), her typeface (Imperfecto, in
+// Playground), and her favorite albums (Music). The links to the site's own
+// pages go through its router (LinkProvider), so they change the page in the
+// app.
 //
 // Then Experience: a wide Section (its heading is the page's h2) holding a
 // wide list, one ExperienceItem per role in app/experience.ts, most recent
@@ -45,7 +48,16 @@ export default function Profile() {
           width="wide"
           heading="Hi, I’m Erin"
           intro={[
-            'I’ve been learning new design skills and tools for over 20 years. Lately, that means designing in code, building my own design system with AI as a collaborator.',
+            <>
+              I’ve been learning new design skills and tools for over 20 years. Lately, that means designing in code,
+              building{' '}
+              {/* Kept on one line: a disabled link sits in a tooltip box, which
+                  a line can break before even after a no-break space */}
+              <span className={utilities.noWrap}>
+                <Emoji>🧩</Emoji> <VerityLink>my own design system</VerityLink>
+              </span>{' '}
+              with AI as a collaborator.
+            </>,
             <>
               I still spend stupid amounts of time on craft, like <Emoji>✏️</Emoji>
               {NO_BREAK_SPACE}

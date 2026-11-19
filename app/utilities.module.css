@@ -14,3 +14,9 @@
   white-space: nowrap;
   border: 0;
 }
+
+/* Kept on one line: for a few words that shouldn't be split, like an emoji
+   and the short link it introduces */
+.noWrap {
+  white-space: nowrap;
+}

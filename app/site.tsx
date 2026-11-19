@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { Footer, Link, LinkGroup, type ShellProps } from 'verity-design-system';
 
 // Site-wide content: where the nav links go and what the footer says.
@@ -24,6 +25,32 @@ export const MUSIC_HREF = '/profile/music';
  */
 export const RESUME_HREF = '/erin-tozour-resume.pdf';
 
+/**
+ * Verity's Storybook, where the footer's Verity link and the Profile intro's
+ * link go. PLACEHOLDER: Storybook isn't public yet, so it's empty, and both
+ * links show as “Coming soon” (VerityLink). Put the address here when it goes
+ * live, and both become links that open in a new tab.
+ */
+export const VERITY_STORYBOOK_URL: string | undefined = undefined;
+
+/**
+ * A link to Verity's Storybook: while VERITY_STORYBOOK_URL is empty, a
+ * disabled link with the tooltip “Coming soon” (keyboard users can still
+ * reach it and hear why); once it's set, a link that opens in a new tab. The
+ * footer and the Profile intro both use it, so they change together.
+ */
+export function VerityLink({ children }: { children: ReactNode }) {
+  return VERITY_STORYBOOK_URL ? (
+    <Link href={VERITY_STORYBOOK_URL} opensInNewTab>
+      {children}
+    </Link>
+  ) : (
+    <Link disabled tooltip="Coming soon">
+      {children}
+    </Link>
+  );
+}
+
 /** The browser tab text for a page: “Laguna Companion · Erin Tozour” */
 export function pageTitle(name?: string) {
   return name ? `${name} · Erin Tozour` : 'Erin Tozour';
@@ -44,10 +71,8 @@ const linkGroups = (
     </LinkGroup>
     <LinkGroup label="Fun stuff">
       <Link href={MUSIC_HREF}>Music</Link>
-      {/* PLACEHOLDER: from the story, where it's coming soon. Decide where it goes. */}
-      <Link disabled tooltip="Coming soon">
-        Verity Design System
-      </Link>
+      {/* Verity's Storybook: “Coming soon” until VERITY_STORYBOOK_URL is set */}
+      <VerityLink>Verity Design System</VerityLink>
     </LinkGroup>
     <LinkGroup label="Connect">
       {/* PLACEHOLDER: replace with Erin's LinkedIn URL */}
