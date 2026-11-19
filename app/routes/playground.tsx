@@ -1,8 +1,7 @@
 import { Grid, ProjectCard, Section } from 'verity-design-system';
-// PLACEHOLDER: the word “Imperfecto” drawn from the font's outlines, white on
-// the Blue theme's brand color (so it stays blue in the Red theme too). Erin
-// will design the real thumbnail in Figma; it replaces this file.
-import imperfectoThumbnail from '../playground/imperfecto/thumbnail-placeholder.svg';
+// Imperfecto's thumbnail, exported from Figma (on the Blue theme's brand
+// color, in both themes, since an image can't follow the theme)
+import imperfectoThumbnail from '../playground/imperfecto/thumbnail.svg';
 import { pageTitle } from '../site';
 
 export const meta = () => [{ title: pageTitle('Playground') }];

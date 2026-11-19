@@ -24,7 +24,17 @@ const START_SIZE = 96;
 // The field is a textarea with no box of its own: the text sits right on the
 // surface, wraps onto as many lines as it needs (long words break rather than
 // scroll sideways), and the field grows to fit it. Its label, “Text to
-// preview,” is for screen readers only. The count under it is quiet; screen
+// preview,” is for screen readers only.
+//
+// While the field isn't focused, a blinking cursor sits at the end of its
+// text, so people can see it's a place to type. The browser only draws a real
+// cursor in a focused field, and focusing it when the page loads would skip
+// screen reader users past the intro and open the keyboard on phones. So the
+// cursor is drawn: a copy of the text, laid out exactly like the field's but
+// invisible, with the cursor after it, on top of the field. It's hidden from
+// screen readers and lets clicks through to the field, and once the field has
+// focus, it hides and the real cursor takes over. With reduce motion, it holds
+// still instead of blinking. The count under it is quiet; screen
 // readers hear about it only once the limit is reached. The slider's value
 // shows beside it and is read as “96 px”.
 export function TypeTester() {
@@ -75,19 +85,26 @@ export function TypeTester() {
       <label htmlFor={textId} className={utilities.visuallyHidden}>
         Text to preview
       </label>
-      <textarea
-        ref={fieldRef}
-        id={textId}
-        className={styles.field}
-        // The size from the slider; the line height follows it (in the CSS)
-        style={{ fontSize: `${size}px` }}
-        value={text}
-        maxLength={MAX_LENGTH}
-        rows={1}
-        spellCheck={false}
-        autoComplete="off"
-        onChange={(event) => setText(event.target.value)}
-      />
+      <div className={styles.fieldArea}>
+        <textarea
+          ref={fieldRef}
+          id={textId}
+          className={styles.field}
+          // The size from the slider; the line height follows it (in the CSS)
+          style={{ fontSize: `${size}px` }}
+          value={text}
+          maxLength={MAX_LENGTH}
+          rows={1}
+          spellCheck={false}
+          autoComplete="off"
+          onChange={(event) => setText(event.target.value)}
+        />
+        {/* The drawn cursor, at the end of a hidden copy of the text */}
+        <div className={styles.idleCursor} style={{ fontSize: `${size}px` }} aria-hidden="true">
+          <span className={styles.hiddenText}>{text}</span>
+          <span className={styles.cursor} />
+        </div>
+      </div>
       <p className={styles.count} aria-hidden="true">
         {text.length} / {MAX_LENGTH}
       </p>

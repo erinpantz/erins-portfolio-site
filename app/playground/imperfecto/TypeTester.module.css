@@ -59,12 +59,19 @@
   outline-offset: var(--verity-focus-ring-offset);
 }
 
+/* The field and the drawn cursor's copy of the text on top of it */
+.fieldArea {
+  position: relative;
+}
+
 /* The text field, with no box of its own: Imperfecto Bold on the surface.
    Its size comes from the slider (inline), and its line height follows it at
    1.1, the same ratio as Verity's display text (88 on 80); no token says it
    as a ratio. Long words break instead of scrolling sideways, and the field's
-   height grows with its text (in TypeTester.tsx). */
-.field {
+   height grows with its text (in TypeTester.tsx). The drawn cursor's copy of
+   the text shares all of this, so its lines break in the same places. */
+.field,
+.idleCursor {
   display: block;
   width: 100%;
   margin: 0;
@@ -77,9 +84,56 @@
   letter-spacing: var(--verity-viewport-typography-display-default-letter-spacing);
   font-synthesis: none;
   line-height: 1.1;
+  white-space: pre-wrap;
   overflow: hidden;
   overflow-wrap: anywhere;
+}
+
+.field {
   resize: none;
+  caret-color: var(--verity-color-content-default);
+}
+
+/* The drawn cursor: over the field, letting clicks through, and gone once
+   the field has focus (the real cursor takes over) */
+.idleCursor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.field:focus + .idleCursor {
+  display: none;
+}
+
+/* The copy of the text is there only to put the cursor in the right place */
+.hiddenText {
+  visibility: hidden;
+}
+
+/* A bar as tall as the letters, a little thicker as the text gets bigger
+   (0.06em: no token is relative to the text's size) */
+.cursor {
+  display: inline-block;
+  width: 0.06em;
+  height: 1em;
+  margin-inline-start: 0.04em;
+  vertical-align: text-bottom;
+  background: currentColor;
+}
+
+/* It blinks on and off about once a second, like a text cursor (no Verity
+   duration is this long); with reduce motion, it stays on */
+@media (prefers-reduced-motion: no-preference) {
+  .cursor {
+    animation: blink 1.1s steps(1) infinite;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
 }
 
 /* The count, quietly */
