@@ -1,9 +1,9 @@
-// PLACEHOLDER: a screenshot of the two nav cards on this project's page (Blue
-// theme), until Erin designs a thumbnail in Figma
-import thumbnail from './thumbnail-placeholder.webp';
+import thumbnail from './thumbnail.svg';
 
 // The nav cards' card on the Playground page
 export const card = {
   heading: 'Nav cards that shuffle',
+  // Exported from Figma (Playground page, NavCardGroup), on the Red theme's
+  // brand color in both themes, since an image can't follow the theme
   thumbnail,
 };
