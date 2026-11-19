@@ -65,6 +65,8 @@ app/
   NotFound.tsx           the Page not found content
   IntroCard.tsx          the Portfolio’s intro card, a site component (see “The one
                          exception” above), with IntroCard.module.css
+  PlaygroundGrid.tsx     the Playground page’s projects (square thumbnails with their titles
+                         under them), a site component, with PlaygroundGrid.module.css
   playground/            Playground projects: projects.ts lists them, and each has a
                          folder (<slug>/) with its page (route.tsx) and its own code
   profile/music/         the Music page (route.tsx), its albums (albums.ts), their

@@ -1,0 +1,90 @@
+/* The Playground page's project links. Every value is one of Verity's tokens.
+   The lift on hover and focus is ProjectCard's (Verity's linkCard.module.css),
+   the same as the Music page's covers (AlbumGrid.module.css): the same scale,
+   lift, shadows, durations, and easing. */
+
+/* A link with no box of its own: the thumbnail and its title */
+.project {
+  --shadow-x: var(--verity-shadow-sm-x);
+  --shadow-y: var(--verity-shadow-sm-y);
+  --shadow-blur: var(--verity-shadow-sm-blur);
+  --shadow-spread: var(--verity-shadow-sm-spread);
+  --shadow-color: var(--verity-shadow-sm-color);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--verity-spacing-xs);
+  border-radius: var(--verity-border-radius-md);
+  color: var(--verity-color-content-default);
+  text-decoration: none;
+  transition:
+    scale var(--verity-motion-duration-playful) var(--verity-motion-easing-standard),
+    translate var(--verity-motion-duration-playful) var(--verity-motion-easing-standard);
+}
+
+/* The thumbnail: square, filling the item, with Verity's card corners and
+   shadow */
+.thumbnail {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--verity-border-radius-md);
+  background: var(--verity-color-background-subtle);
+  box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--shadow-spread) var(--shadow-color);
+  transition: box-shadow var(--verity-motion-duration-fast) var(--verity-motion-easing-standard);
+}
+
+/* The title, in title/sm, as the album titles are */
+.title {
+  margin: 0;
+  font-family: var(--verity-viewport-typography-title-sm-font-family);
+  font-size: var(--verity-viewport-typography-title-sm-font-size);
+  font-weight: var(--verity-viewport-typography-title-sm-font-weight);
+  line-height: var(--verity-viewport-typography-title-sm-line-height);
+  letter-spacing: var(--verity-viewport-typography-title-sm-letter-spacing);
+  text-transform: var(--verity-viewport-typography-title-sm-text-transform);
+}
+
+/* Hover only with a real pointer, so a tap doesn't leave a thumbnail raised */
+@media (hover: hover) {
+  .project:hover {
+    --shadow-x: var(--verity-shadow-lg-x);
+    --shadow-y: var(--verity-shadow-lg-y);
+    --shadow-blur: var(--verity-shadow-lg-blur);
+    --shadow-spread: var(--verity-shadow-lg-spread);
+    --shadow-color: var(--verity-shadow-lg-color);
+    scale: var(--verity-motion-scale-hover);
+    translate: 0 calc(-1 * var(--verity-motion-lift-md));
+  }
+}
+
+.project:focus-visible {
+  --shadow-x: var(--verity-shadow-lg-x);
+  --shadow-y: var(--verity-shadow-lg-y);
+  --shadow-blur: var(--verity-shadow-lg-blur);
+  --shadow-spread: var(--verity-shadow-lg-spread);
+  --shadow-color: var(--verity-shadow-lg-color);
+  scale: var(--verity-motion-scale-hover);
+  translate: 0 calc(-1 * var(--verity-motion-lift-md));
+  outline: var(--verity-focus-ring-width) solid var(--verity-color-border-focus);
+  outline-offset: var(--verity-focus-ring-offset);
+}
+
+/* Pressed: it settles back down, as a ProjectCard does */
+.project:active {
+  scale: none;
+  translate: none;
+}
+
+/* Reduce motion: no lift or growth. The shadow still changes, since it
+   doesn't move anything. */
+@media (prefers-reduced-motion: reduce) {
+  .project,
+  .project:hover,
+  .project:focus-visible {
+    scale: none;
+    translate: none;
+  }
+}

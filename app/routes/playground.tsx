@@ -1,4 +1,5 @@
-import { Grid, ProjectCard, Section } from 'verity-design-system';
+import { Section } from 'verity-design-system';
+import { PlaygroundGrid } from '../PlaygroundGrid';
 import { PLAYGROUND_PROJECTS } from '../playground/projects';
 import { pageTitle } from '../site';
 
@@ -22,22 +23,14 @@ function playgroundCards() {
   });
 }
 
-// Playground: the page's heading (its h1), then a card for each Playground
-// project, laid out like the Portfolio's cards: a wide Grid with items at
-// least xl wide that share each row (fill rows). It's a list of projects
-// (ul), and each card's title is a level 2 heading. The projects and their
-// order are in app/playground/projects.ts.
+// Playground: the page's heading (its h1), then each Playground project as a
+// square thumbnail with its title under it, linking to its page
+// (PlaygroundGrid.tsx). The projects and their order are in
+// app/playground/projects.ts.
 export default function Playground() {
-  const cards = playgroundCards();
   return (
     <Section headingLevel={1} heading="Playground" width="wide">
-      <Grid as="ul" width="wide" itemWidth="xl" gap="md" fillRows>
-        {cards.map((card) => (
-          <li key={card.slug}>
-            <ProjectCard href={card.href} heading={card.heading} headingLevel={2} thumbnail={card.thumbnail} />
-          </li>
-        ))}
-      </Grid>
+      <PlaygroundGrid items={playgroundCards()} />
     </Section>
   );
 }
