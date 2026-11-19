@@ -15,7 +15,8 @@ export interface PlaygroundItem {
 // image, so this is the site's own markup, from Verity's tokens.
 //
 // A list (so screen readers hear how many there are), laid out by Verity's
-// Grid with items at least md wide (grid/item-min-width/md). Each item is a
+// Grid with items at least md wide (grid/item-min-width/md), spaced with
+// spacing/lg so the thumbnails and titles have room. Each item is a
 // link to the project's page, through React Router, like the site's other
 // links. The title is a level 2 heading, under the page's h1. The thumbnail
 // is decorative: the link's name is the title. On hover (with a real pointer)
@@ -23,7 +24,7 @@ export interface PlaygroundItem {
 // with reduce motion it doesn't move.
 export function PlaygroundGrid({ items }: { items: PlaygroundItem[] }) {
   return (
-    <Grid as="ul" width="wide" itemWidth="md" gap="md">
+    <Grid as="ul" width="wide" itemWidth="md" gap="lg">
       {items.map((item) => (
         <li key={item.slug}>
           <Link to={item.href} prefetch="intent" className={styles.project}>
