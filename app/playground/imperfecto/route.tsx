@@ -11,8 +11,10 @@ export const meta = () => [{ title: pageTitle('Imperfecto') }];
 // so this runs once, at build time, and its result is saved with the page.
 export const loader = () => ({ characterGroups: imperfectoCharacterGroups() });
 
-// Imperfecto, a Playground project: Erin's typeface, to try out. A Hero with
-// its name (the page's h1) and what it is, then a type tester with its own
+// Imperfecto, a Playground project: Erin's typeface, to try out. A wide Hero
+// with its name (the page's h1) and what it is, so its text starts at the same
+// left edge as the wide blocks below it (it stays the column's width), then a
+// type tester with its own
 // “Try it” heading inside its box (TypeTester.tsx), and a wide Section,
 // “Character set,” with every character in the font, in groups
 // (CharacterSet.tsx). Both are this project's own components, built from
@@ -23,6 +25,7 @@ export default function Imperfecto({ loaderData }: Route.ComponentProps) {
     <>
       <Container>
         <Hero
+          width="wide"
           heading="Imperfecto"
           intro="An imperfect typeface to keep me noodling in the weeds of design craft. I created every letter from scratch, then spaced and kerned it in Glyphs. I’m not a type designer, and the name says so. Imperfecto is a forever work in progress."
         />
