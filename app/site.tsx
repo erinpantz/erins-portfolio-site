@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Footer, Link, VerityMark, type ShellProps } from 'verity-design-system';
+import { ActionCard, Button, Footer, IconButton, Link, type ShellProps } from 'verity-design-system';
 
 // Site-wide content: where the nav links go and what the footer says.
 // Anything marked PLACEHOLDER isn't real yet.
@@ -25,9 +25,11 @@ export const MUSIC_HREF = '/profile/music';
 export const RESUME_HREF = '/erin-tozour-resume.pdf';
 
 /**
- * Verity's Storybook, where the footer's aside and the Profile intro link. PLACEHOLDER: Storybook isn't public yet, so it's empty, and both
- * links show as “Coming soon” (VerityLink). Put the address here when it goes
- * live, and both become links that open in a new tab.
+ * Verity's Storybook, where the footer's Verity card and the Profile intro
+ * link. PLACEHOLDER: Storybook isn't public yet, so it's empty: the card's
+ * button is disabled and the intro's link is disabled (VerityLink), both with
+ * “Coming soon.” Put the address here when it goes live, and both open it in
+ * a new tab.
  */
 export const VERITY_STORYBOOK_URL: string | undefined = undefined;
 
@@ -35,7 +37,7 @@ export const VERITY_STORYBOOK_URL: string | undefined = undefined;
  * A link to Verity's Storybook: while VERITY_STORYBOOK_URL is empty, a
  * disabled link with the tooltip “Coming soon” (keyboard users can still
  * reach it and hear why); once it's set, a link that opens in a new tab. The
- * footer and the Profile intro both use it, so they change together.
+ * Profile intro uses it.
  */
 export function VerityLink({ children }: { children: ReactNode }) {
   return VERITY_STORYBOOK_URL ? (
@@ -54,34 +56,64 @@ export function pageTitle(name?: string) {
   return name ? `${name} · Erin Tozour` : 'Erin Tozour';
 }
 
-// Where “Book a meeting” goes
+// Where “Book a call” goes
 const CALENDLY_URL = 'https://calendly.com/meet-erin-tozour';
 
+const LINKEDIN_URL = 'https://www.linkedin.com/in/erintozour/';
+
+// The footer on every page: three ActionCards, in Verity's Footer grid, then
+// the copyright line. Each card's heading is level 3, as in the old footer.
+// - Let’s chat: Book a call (Calendly) and LinkedIn, both in a new tab.
+// - Verity: Check it out, to Verity's Storybook in a new tab. While
+//   VERITY_STORYBOOK_URL is empty, it's disabled with the tooltip “Coming
+//   soon” (keyboard users can still reach it and hear why).
+// - Music: Take a listen, to the Music page, through the router link
+//   (LinkProvider in root.tsx), so the page changes without reloading.
 export const siteFooter = (
   <Footer
-    callToAction={{
-      heading: 'Let’s chat',
-      text: 'I’m seeking a full time design role and would love to chat if you think I could bring value to your team.',
-      buttonLabel: 'Book a meeting',
-      href: CALENDLY_URL,
-      opensInNewTab: true,
-      // A second way to get in touch, as an icon button after Book a meeting
-      secondaryAction: {
-        icon: 'linkedin',
-        label: 'LinkedIn',
-        href: 'https://www.linkedin.com/in/erintozour/',
-        opensInNewTab: true,
-      },
-    }}
-    // On the right: a line about how the site is built. “Verity” is
-    // VerityLink, so it's “Coming soon” until Storybook is public.
-    aside={
+    cards={
       <>
-        <VerityMark />
-        <p>
-          This site is built with <VerityLink>Verity</VerityLink>, my design system. Every color, size, and space comes
-          from a token.
-        </p>
+        <ActionCard
+          heading="Let’s chat"
+          headingLevel={3}
+          icon="hand"
+          iconColor="accent-one"
+          body="I’m looking for my next design role and would love to chat if you think I could bring value to your team."
+          actions={
+            <>
+              <Button href={CALENDLY_URL} opensInNewTab>
+                Book a call
+              </Button>
+              <IconButton icon="linkedin" label="LinkedIn" href={LINKEDIN_URL} opensInNewTab />
+            </>
+          }
+        />
+        <ActionCard
+          heading="Verity"
+          headingLevel={3}
+          icon="verity"
+          iconColor="accent-two"
+          body="This site is built with Verity, my design system. Every color, size, and space comes from a token."
+          actions={
+            VERITY_STORYBOOK_URL ? (
+              <Button href={VERITY_STORYBOOK_URL} opensInNewTab>
+                Check it out
+              </Button>
+            ) : (
+              <Button disabled tooltip="Coming soon">
+                Check it out
+              </Button>
+            )
+          }
+        />
+        <ActionCard
+          heading="Music"
+          headingLevel={3}
+          icon="music"
+          iconColor="accent-three"
+          body="Music keeps me going. I love to keep up with new artists and share my favorites with others."
+          actions={<Button href={MUSIC_HREF}>Take a listen</Button>}
+        />
       </>
     }
     copyrightName="Erin Tozour"
