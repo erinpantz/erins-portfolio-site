@@ -4,6 +4,7 @@ import { LinkProvider, Section, Shell, themeScript, type LinkComponent, type She
 import 'verity-design-system/styles.css';
 import type { Route } from './+types/root';
 import { caseStudies } from './caseStudies';
+import { isPlaygroundProject } from './playground/projects';
 import { PAGE_LOADER_WORDS } from './pageLoaderWords';
 import { NAV_HREFS, siteFooter } from './site';
 
@@ -37,20 +38,34 @@ export function Layout({ children }: { children: ReactNode }) {
   );
 }
 
-// Whether an address is a case study: /portfolio/<slug>, for a slug with a
-// case-studies/<slug>/index.mdx. This is the one place that decides it, so a
-// new case study is covered as soon as its folder exists.
-function isCaseStudy(pathname: string) {
+// The pages inside a section, one level down: a case study at
+// /portfolio/<slug> (for a slug with a case-studies/<slug>/index.mdx), or a
+// Playground project at /playground/<slug> (for a slug in
+// app/playground/projects.ts). This is the one place that decides it, so a
+// new case study or project is covered as soon as it exists. Each opens in
+// Shell's focused mode, with a link back to its section's page.
+const SUBPAGES = {
+  portfolio: { isPage: (slug: string) => !!caseStudies[slug], backLink: { href: NAV_HREFS.portfolio, label: 'Portfolio' } },
+  playground: { isPage: isPlaygroundProject, backLink: { href: NAV_HREFS.playground, label: 'Playground' } },
+} satisfies Record<string, { isPage: (slug: string) => boolean; backLink: ShellProps['backLink'] }>;
+
+// The section of a subpage (above), or undefined for any other address
+function subpageSection(pathname: string) {
   const [first, slug, ...rest] = pathname.split('/').filter(Boolean);
-  return first === 'portfolio' && !!slug && rest.length === 0 && !!caseStudies[slug];
+  if (!slug || rest.length > 0 || !(first in SUBPAGES)) return undefined;
+  const section = first as keyof typeof SUBPAGES;
+  return SUBPAGES[section].isPage(slug) ? section : undefined;
 }
 
-// Which section an address is in. The front page is the Portfolio, and case
-// studies count as Portfolio too; an address without a page (Page not found)
-// is in none. The nav marks it as the current page (except on a case study,
-// which has no nav), and the page loader uses its words.
+// Which section an address is in. The front page is the Portfolio, and a
+// subpage (a case study or a Playground project) counts as its section; an
+// address without a page (Page not found) is in none. The nav marks it as the
+// current page (except on a subpage, which has no nav), and the page loader
+// uses its words.
 function sectionOf(pathname: string): ShellProps['current'] {
-  if (pathname === '/' || isCaseStudy(pathname)) return 'portfolio';
+  if (pathname === '/') return 'portfolio';
+  const subpage = subpageSection(pathname);
+  if (subpage) return subpage;
   const [first, ...rest] = pathname.split('/').filter(Boolean);
   if (rest.length > 0) return undefined;
   if (first === 'playground' || first === 'profile') return first;
@@ -100,22 +115,23 @@ function usePendingSection(): ShellProps['pending'] {
   return sectionOf(going.pathname);
 }
 
-// Case studies are for reading one piece of work, so they use Shell's focused
-// mode: no nav, and a link back to the Portfolio (the front page) in the
-// corner. Every other page has the nav. Its links change pages in the app
+// Subpages (case studies and Playground projects) are for one piece of work,
+// so they use Shell's focused mode: no nav, and a link back to their section
+// in the corner (Portfolio, the front page, or Playground). Every other page
+// has the nav. Its links change pages in the app
 // (SiteLink). Moving to another section shows Verity's PageLoader, with the
 // words in app/pageLoaderWords.ts: Shell decides when, from the section the
 // page change is going to.
 function SiteShell({ children }: { children: ReactNode }) {
   const { pathname } = useLocation();
-  const focused = isCaseStudy(pathname);
+  const subpage = subpageSection(pathname);
   const pending = usePendingSection();
   useFocusMainOnPageChange();
   return (
     <LinkProvider component={SiteLink}>
       <Shell
-        mode={focused ? 'focused' : 'default'}
-        backLink={focused ? { href: NAV_HREFS.portfolio, label: 'Portfolio' } : undefined}
+        mode={subpage ? 'focused' : 'default'}
+        backLink={subpage ? SUBPAGES[subpage].backLink : undefined}
         current={sectionOf(pathname)}
         hrefs={NAV_HREFS}
         footer={siteFooter}

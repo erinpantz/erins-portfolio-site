@@ -1,6 +1,8 @@
 import { type RouteConfig, index, route } from '@react-router/dev/routes';
+import { PLAYGROUND_PROJECTS } from './playground/projects';
 
-// Which page each address shows. Each file is in app/routes/.
+// Which page each address shows. Each file is in app/routes/, except the
+// Playground projects, which live with their code in app/playground/.
 export default [
   // The Portfolio is the front page
   index('routes/portfolio.tsx'),
@@ -9,6 +11,8 @@ export default [
   // Every case study, from case-studies/<slug>/index.mdx
   route('portfolio/:slug', 'routes/case-study.tsx'),
   route('playground', 'routes/playground.tsx'),
+  // Every Playground project, each from app/playground/<slug>/route.tsx
+  ...PLAYGROUND_PROJECTS.map((slug) => route(`playground/${slug}`, `playground/${slug}/route.tsx`)),
   route('profile', 'routes/profile.tsx'),
   // Everything else: Page not found
   route('*', 'routes/not-found.tsx'),

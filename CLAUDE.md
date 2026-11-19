@@ -64,6 +64,8 @@ app/
   NotFound.tsx           the Page not found content
   IntroCard.tsx          the Portfolio’s intro card, a site component (see “The one
                          exception” above), with IntroCard.module.css
+  playground/            Playground projects: projects.ts lists them, and each has a
+                         folder (<slug>/) with its page (route.tsx) and its own code
 case-studies/<slug>/     index.mdx, plus the images/, animations/, and videos/ it uses
 assets/                  images and illustrations shared across pages
 plugins/                 build steps, such as remarkProseRuns.ts for case studies
@@ -75,7 +77,7 @@ public/                  files that need a fixed address, like the favicons, the
 - **Page titles** use `pageTitle()` from `app/site.tsx`: “Laguna Companion · Erin Tozour”, and “Erin Tozour” for the front page.
 - **The front page is the Portfolio,** at `/`. `/portfolio` is built as a redirect to `/`, so old links still work; case studies stay at `/portfolio/<slug>`.
 - **The nav** comes from Verity’s `Shell`. `app/site.tsx` sets where each link goes. The current page is worked out in `app/root.tsx`; the front page and case studies count as Portfolio.
-- **Case studies use Shell's focused mode:** no nav, a “Portfolio” back link in the top-left corner. `isCaseStudy()` in `app/root.tsx` decides it from the address, so a new case study folder gets it automatically; every other page has the nav.
+- **Case studies and Playground projects use Shell's focused mode:** no nav, and a back link in the top-left corner to their section: “Portfolio” for a case study (`/portfolio/<slug>`), “Playground” for a project (`/playground/<slug>`). `SUBPAGES` in `app/root.tsx` is the one place that decides it from the address, so a new case study folder, or a new slug in `app/playground/projects.ts`, gets it automatically. They count as their section for the page loader. Every other page has the nav.
 
 ## Building a case study
 
