@@ -15,5 +15,5 @@ export default {
   ssr: false,
   // /404 is the Page not found page, for addresses without a page. /portfolio
   // is built as a redirect to / (app/routes/portfolio-redirect.tsx).
-  prerender: ['/', '/portfolio', '/playground', '/profile', ...caseStudyPaths, ...playgroundPaths, '/404'],
+  prerender: ['/', '/portfolio', '/playground', '/profile', '/profile/music', ...caseStudyPaths, ...playgroundPaths, '/404'],
 } satisfies Config;

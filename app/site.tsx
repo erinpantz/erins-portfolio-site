@@ -15,6 +15,9 @@ export const NAV_HREFS = {
   profile: '/profile',
 } satisfies ShellProps['hrefs'];
 
+/** The Music page, below Profile: Erin's favorite albums */
+export const MUSIC_HREF = '/profile/music';
+
 /**
  * Where the résumé goes: the footer's Résumé link and the Portfolio intro's
  * button. It isn't in the nav. It points to a PDF that doesn't exist yet.
@@ -40,8 +43,7 @@ const linkGroups = (
       <Link href={RESUME_HREF}>Résumé</Link>
     </LinkGroup>
     <LinkGroup label="Fun stuff">
-      {/* PLACEHOLDER: the albums page doesn't exist yet */}
-      <Link href="#placeholder-albums">My 20 favorite albums</Link>
+      <Link href={MUSIC_HREF}>Music</Link>
       {/* PLACEHOLDER: from the story, where it's coming soon. Decide where it goes. */}
       <Link disabled tooltip="Coming soon">
         Verity Design System

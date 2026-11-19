@@ -6,7 +6,7 @@ import type { Route } from './+types/root';
 import { caseStudies } from './caseStudies';
 import { isPlaygroundProject } from './playground/projects';
 import { PAGE_LOADER_WORDS } from './pageLoaderWords';
-import { NAV_HREFS, siteFooter } from './site';
+import { MUSIC_HREF, NAV_HREFS, siteFooter } from './site';
 
 // The HTML around every page
 export function Layout({ children }: { children: ReactNode }) {
@@ -39,14 +39,15 @@ export function Layout({ children }: { children: ReactNode }) {
 }
 
 // The pages inside a section, one level down: a case study at
-// /portfolio/<slug> (for a slug with a case-studies/<slug>/index.mdx), or a
+// /portfolio/<slug> (for a slug with a case-studies/<slug>/index.mdx), a
 // Playground project at /playground/<slug> (for a slug in
-// app/playground/projects.ts). This is the one place that decides it, so a
+// app/playground/projects.ts), or the Music page at /profile/music. This is the one place that decides it, so a
 // new case study or project is covered as soon as it exists. Each opens in
 // Shell's focused mode, with a link back to its section's page.
 const SUBPAGES = {
   portfolio: { isPage: (slug: string) => !!caseStudies[slug], backLink: { href: NAV_HREFS.portfolio, label: 'Portfolio' } },
   playground: { isPage: isPlaygroundProject, backLink: { href: NAV_HREFS.playground, label: 'Playground' } },
+  profile: { isPage: (slug: string) => `/profile/${slug}` === MUSIC_HREF, backLink: { href: NAV_HREFS.profile, label: 'Profile' } },
 } satisfies Record<string, { isPage: (slug: string) => boolean; backLink: ShellProps['backLink'] }>;
 
 // The section of a subpage (above), or undefined for any other address
@@ -115,9 +116,9 @@ function usePendingSection(): ShellProps['pending'] {
   return sectionOf(going.pathname);
 }
 
-// Subpages (case studies and Playground projects) are for one piece of work,
-// so they use Shell's focused mode: no nav, and a link back to their section
-// in the corner (Portfolio, the front page, or Playground). Every other page
+// Subpages (case studies, Playground projects, and Music) are for one piece
+// of work, so they use Shell's focused mode: no nav, and a link back to their
+// section in the corner (Portfolio, the front page, Playground, or Profile). Every other page
 // has the nav. Its links change pages in the app
 // (SiteLink). Moving to another section shows Verity's PageLoader, with the
 // words in app/pageLoaderWords.ts: Shell decides when, from the section the
