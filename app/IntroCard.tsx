@@ -47,8 +47,9 @@ export function IntroCard() {
           I’m a product and visual designer with 20+ years of experience. For the past 11 years, I’ve led design at
           healthcare startups, most recently bringing AI into the tools care teams use every day.
         </p>
-        {/* The résumé PDF (RESUME_HREF), in the same tab. This is the only link to it. */}
-        <Button href={RESUME_HREF} startIcon="resume">
+        {/* The résumé PDF (RESUME_HREF), in a new tab, so the Portfolio stays open
+            behind it. This is the only link to it. */}
+        <Button href={RESUME_HREF} startIcon="resume" opensInNewTab>
           Résumé
         </Button>
       </div>
