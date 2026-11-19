@@ -13,6 +13,8 @@ export interface Album {
 }
 
 export const ALBUMS: Album[] = [
+  { title: 'LUX', artist: 'Rosalía', spotifyUrl: 'https://open.spotify.com/album/3SUEJULSGgBDG1j4GQhfYY' },
+  { title: 'Jean', artist: 'Yebba', spotifyUrl: 'https://open.spotify.com/album/27SQuR7jPiGkJJXl8njEqY' },
   { title: 'Preacher’s Daughter', artist: 'Ethel Cain', spotifyUrl: 'https://open.spotify.com/album/3WmujGwOS0ANHkJRnMH6n8' },
   { title: 'Ænema', artist: 'Tool', spotifyUrl: 'https://open.spotify.com/album/6yWMN087PgSimbcVmHLEwG' },
   { title: 'Ctrl', artist: 'SZA', spotifyUrl: 'https://open.spotify.com/album/76290XdXVF9rPzGdNRWdCh' },
