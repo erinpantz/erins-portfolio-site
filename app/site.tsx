@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Footer, Link, LinkGroup, type ShellProps } from 'verity-design-system';
+import { Footer, Link, type ShellProps } from 'verity-design-system';
 
 // Site-wide content: where the nav links go and what the footer says.
 // Anything marked PLACEHOLDER isn't real yet.
@@ -20,8 +20,7 @@ export const NAV_HREFS = {
 export const MUSIC_HREF = '/profile/music';
 
 /**
- * Where the résumé goes: the footer's Résumé link and the Portfolio intro's
- * button. It isn't in the nav. It points to a PDF that doesn't exist yet.
+ * Where the résumé goes: the Portfolio intro's button. It isn't in the nav. It points to a PDF that doesn't exist yet.
  */
 export const RESUME_HREF = '/erin-tozour-resume.pdf';
 
@@ -59,28 +58,6 @@ export function pageTitle(name?: string) {
 // Where “Book a meeting” goes
 const CALENDLY_URL = 'https://calendly.com/meet-erin-tozour';
 
-// Link groups, starting from the example in Verity's Footer story
-const linkGroups = (
-  <>
-    <LinkGroup label="Pages">
-      <Link href={NAV_HREFS.portfolio}>Portfolio</Link>
-      <Link href={NAV_HREFS.playground}>Playground</Link>
-      <Link href={NAV_HREFS.profile}>Profile</Link>
-      {/* The PDF, in the same tab */}
-      <Link href={RESUME_HREF}>Résumé</Link>
-    </LinkGroup>
-    <LinkGroup label="Fun stuff">
-      <Link href={MUSIC_HREF}>Music</Link>
-      {/* Verity's Storybook: “Coming soon” until VERITY_STORYBOOK_URL is set */}
-      <VerityLink>Verity Design System</VerityLink>
-    </LinkGroup>
-    <LinkGroup label="Connect">
-      {/* PLACEHOLDER: replace with Erin's LinkedIn URL */}
-      <Link href="#placeholder-linkedin">LinkedIn</Link>
-    </LinkGroup>
-  </>
-);
-
 export const siteFooter = (
   <Footer
     callToAction={{
@@ -90,7 +67,6 @@ export const siteFooter = (
       href: CALENDLY_URL,
       opensInNewTab: true,
     }}
-    linkGroups={linkGroups}
     copyrightName="Erin Tozour"
   />
 );
