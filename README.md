@@ -17,7 +17,7 @@ This is a work in progress. I’m rebuilding my portfolio in code, with AI as a 
 
 ## Running it locally
 
-You need [Node.js](https://nodejs.org) and access to the private Verity repo on GitHub (signing in with the GitHub CLI, `gh auth login`, is enough).
+You need [Node.js](https://nodejs.org) 24. Verity's repo is public, so nothing else is needed.
 
 ```sh
 npm install        # install everything, including Verity from its GitHub tag
@@ -37,11 +37,20 @@ npm run preview    # serve it at http://localhost:4173, like a host would
 
 1. **Link it.** In the site, run `npm run verity:local`. It replaces the installed copy with a link (a shortcut) to `../verity-design-system`. `package.json` and `package-lock.json` don’t change, so a link can’t be committed by accident.
 2. **Run two terminals.** In Verity: `npm run build:watch`, which rebuilds Verity on every save. In the site: `npm run dev`, which reloads when Verity rebuilds.
-3. **Switch back** with `npm run verity:tag`. Running a plain `npm install` also switches back.
+3. **Switch back** with `npm run verity:tag`.
 
 **Which one am I using?** Run `npm run verity:which`. It says “Local: linked to …” or “Tag: … (commit …)”.
 
-**Updating to a new Verity release:** after tagging Verity (see its README), change the tag in `package.json` and run `npm install`.
+**Updating to a new Verity release:** after tagging Verity (see its README), change the tag in `package.json` and run `npm run verity:tag`. It installs that tag by name, so the lock file gets the tag's commit, and keeps Verity's address in the lock file on HTTPS (npm writes SSH, which Vercel's build machine can't use).
+
+## Hosting and deploying
+
+The site is hosted on [Vercel](https://vercel.com), on the free Hobby plan, and Vercel builds it from this GitHub repo:
+
+- **Every push to `main` deploys** the site to production.
+- **Every pull request gets a preview address,** a copy of the site with that pull request's changes, which Vercel posts on the pull request.
+
+Vercel builds on a clean machine, so everything the build needs is in the repo: `vercel.json` (serve `build/client` as a static site, with long-lived caching for the fingerprinted files in `assets/`), the Node version (`engines` in `package.json`), and Verity's HTTPS address in `package-lock.json`. Addresses with no page get the Page not found page with a 404 status. CLAUDE.md explains each setting.
 
 ## Folders
 

@@ -1,6 +1,6 @@
 # Erin’s portfolio site
 
-The code for erintozour.com, the portfolio of Erin Tozour, a product designer. It’s built entirely from **Verity**, her design system, which lives in its own repo (`~/Documents/verity-design-system`, on GitHub as `erinpantz/verity-design-system`, private). Both repos are portfolio pieces, so clean structure and clear reasoning matter as much as working code.
+The code for erintozour.com, the portfolio of Erin Tozour, a product designer. It’s built entirely from **Verity**, her design system, which lives in its own repo (`~/Documents/verity-design-system`, on GitHub as `erinpantz/verity-design-system`, public). Both repos are portfolio pieces, so clean structure and clear reasoning matter as much as working code.
 
 ## Working with Erin
 
@@ -15,7 +15,7 @@ The code for erintozour.com, the portfolio of Erin Tozour, a product designer. I
 - React and TypeScript, built with **Vite**
 - **React Router** in framework mode. Every page is **pre-rendered**: the build turns each route into a finished HTML file, so the content and the first paint come from HTML and CSS before any JavaScript runs. There’s no server (`ssr: false`).
 - **MDX** for case studies: Markdown with components, plus frontmatter for the header
-- No hosting is set up yet
+- Hosted on **Vercel** (the free Hobby plan), built from GitHub (see “Hosting and deploying” below)
 
 ## The site uses only Verity
 
@@ -44,7 +44,19 @@ Locally they’re in `../verity-design-system/src/guidelines/`. Each component�
 - `npm run build`: pre-render every page into `build/client/`
 - `npm run preview`: serve `build/client/` at http://localhost:4173 the way a static host does (run `npm run build` first). Don’t use `vite preview`: it sends the front page for addresses like `/profile`, which breaks pre-rendered pages.
 - `npm run typecheck`: check the code with TypeScript
-- `npm run verity:local`, `npm run verity:tag`, `npm run verity:which`: switch between the linked Verity folder and the tagged version (see README.md)
+- `npm run verity:local`, `npm run verity:tag`, `npm run verity:which`: switch between the linked Verity folder and the tagged version (see README.md). To update Verity, change the tag in `package.json`, then run `npm run verity:tag`: it installs that tag by name and keeps the lock file on HTTPS (see below)
+
+## Hosting and deploying
+
+- **Vercel builds the site from GitHub, from `main`.** Every push to `main` deploys to production, so pushing is publishing: don't push until Erin has reviewed the work locally. Every pull request (and every other pushed branch) gets its own preview address, which Vercel posts on the pull request.
+- **The build runs on a clean machine** with no SSH key and none of Erin's local setup, so everything it needs comes from the repo: `npm ci` (which installs exactly what `package-lock.json` says), then `npm run build`.
+- **Verity is fetched over HTTPS.** npm writes GitHub addresses as SSH (`git+ssh://git@github.com/…`), which needs a key. `npm run verity:tag`, and a `postinstall` step after every `npm install`, rewrite Verity's address in `package-lock.json` to `git+https://github.com/…` (the same commit). If a diff ever shows `git+ssh` there again, run `npm run verity:tag`.
+- **Node 24**, pinned in `package.json` (`engines`), the same as on Erin's Mac.
+- **`vercel.json`** (JSON has no comments, so they're here):
+  - `framework: null` (Vercel's “Other”): serve `build/client` as plain files. Vercel's React Router preset, which it would otherwise pick, sends any address with no file to the home page with a 200, so a mistyped address would show the Portfolio instead of Page not found.
+  - `buildCommand` and `outputDirectory`: `npm run build`, into `build/client`. The build script also copies the Page not found page (`404/index.html`) to `404.html`, which Vercel serves, with a 404 status, for any address with no page. `npm run preview` does the same.
+  - `headers`: the files in `assets/` have a fingerprint in each name, so browsers can keep them for a year (`immutable`). The HTML keeps Vercel's default, so a new deploy shows up at once.
+  - `/portfolio` needs no setting: the build makes it a page that moves to `/` (see `portfolio-redirect.tsx`).
 
 ## How it fits together
 
@@ -74,7 +86,9 @@ app/
 case-studies/<slug>/     index.mdx, plus the images/, animations/, and videos/ it uses
 assets/                  images and illustrations shared across pages
 plugins/                 build steps, such as remarkProseRuns.ts for case studies
-scripts/                 verity.js (switching Verity copies) and preview.js
+scripts/                 verity.js (switching Verity copies, and keeping it on HTTPS) and
+                         preview.js
+vercel.json              Vercel's build settings (see “Hosting and deploying”)
 public/                  files that need a fixed address, like the favicons, the web
                          manifest, and (later) the résumé PDF; copied into the build as-is
 ```
