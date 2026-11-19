@@ -57,6 +57,8 @@ app/
                          portfolio-redirect.tsx sends the old /portfolio to /, and
                          not-found.tsx is Page not found (built to /404)
   site.tsx               site-wide content: nav addresses, the footer, page titles
+  experience.ts          Erin’s roles for the Profile page’s Experience section (EXPERIENCE),
+                         most recent first
   caseStudies.ts         finds every case-studies/<slug>/index.mdx, and lists the ones on
                          the Portfolio page, in order (PORTFOLIO_ORDER)
   NotFound.tsx           the Page not found content
