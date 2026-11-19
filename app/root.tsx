@@ -1,6 +1,6 @@
 import { useEffect, useRef, type ReactNode } from 'react';
 import { Links, Meta, Outlet, Link as RouterLink, Scripts, ScrollRestoration, useLocation, useNavigation } from 'react-router';
-import { LinkProvider, Section, Shell, themeScript, type LinkComponent, type ShellProps } from 'verity-design-system';
+import { focusPageStart, LinkProvider, Section, Shell, themeScript, type LinkComponent, type ShellProps } from 'verity-design-system';
 import 'verity-design-system/styles.css';
 import type { Route } from './+types/root';
 import { caseStudies } from './caseStudies';
@@ -80,16 +80,21 @@ function sectionOf(pathname: string): ShellProps['current'] {
 const SiteLink: LinkComponent = ({ href = '', ...props }) => <RouterLink to={href} prefetch="intent" {...props} />;
 
 // A page change in the app doesn't reset focus the way a reload does, so after
-// one (not the first load), focus moves to Main, where the skip link sends it:
-// keyboard and screen reader users start at the new page. It doesn't scroll:
-// ScrollRestoration decides that (the top for a new page, where you were for
-// Back and Forward).
-function useFocusMainOnPageChange() {
+// one (not the first load), focus moves to the new page's heading with
+// Verity's focusPageStart(): the first h1 in Main, given tabindex="-1" and no
+// focus ring, since it isn't a control (or Main itself, on a page with no h1).
+// Keyboard users start at the new page, and screen readers announce it by
+// name (“Profile, heading level 1”). Verity's NavOverlay, the phone menu,
+// calls the same function as it closes after one of its links, so whichever
+// runs last, focus ends on the heading, not back on the menu button. It
+// doesn't scroll: ScrollRestoration decides that (the top for a new page,
+// where you were for Back and Forward).
+function useFocusPageStartOnPageChange() {
   const { key } = useLocation();
   const firstKey = useRef(key);
   useEffect(() => {
     if (key === firstKey.current) return;
-    document.querySelector<HTMLElement>('main')?.focus({ preventScroll: true });
+    focusPageStart();
   }, [key]);
 }
 
@@ -127,7 +132,7 @@ function SiteShell({ children }: { children: ReactNode }) {
   const { pathname } = useLocation();
   const subpage = subpageSection(pathname);
   const pending = usePendingSection();
-  useFocusMainOnPageChange();
+  useFocusPageStartOnPageChange();
   return (
     <LinkProvider component={SiteLink}>
       <Shell
