@@ -9,7 +9,8 @@
     "typecheck": "react-router typegen && tsc",
     "verity:local": "node scripts/verity.js local",
     "verity:tag": "node scripts/verity.js tag",
-    "verity:which": "node scripts/verity.js which"
+    "verity:which": "node scripts/verity.js which",
+    "albums:covers": "node scripts/album-covers.js"
   },
   "dependencies": {
     "isbot": "^5.2.2",
@@ -32,6 +33,7 @@
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.1",
     "remark-mdx-frontmatter": "^6.0.0",
+    "sharp": "0.35.5",
     "typescript": "~6.0.3",
     "vite": "^8.3.5"
   }
