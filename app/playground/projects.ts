@@ -8,7 +8,7 @@
 // page is added there, by hand.
 //
 // Plain data with no imports, so the build's config files can read it too.
-export const PLAYGROUND_PROJECTS = ['imperfecto', 'reel'] as const;
+export const PLAYGROUND_PROJECTS = ['imperfecto', 'reel', 'nav-cards'] as const;
 
 export type PlaygroundProject = (typeof PLAYGROUND_PROJECTS)[number];
 
