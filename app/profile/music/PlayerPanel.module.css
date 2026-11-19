@@ -1,0 +1,101 @@
+/* The Music page's player panel. Verity's tokens everywhere but its width,
+   which no token gives: --player-width below. */
+
+/* A full-height panel at the right edge, the full width on a phone. The
+   browser's own dialog styles (centered, with a border) are replaced. */
+.panel {
+  /* About as wide as Spotify's player looks good, with the panel's padding;
+     no Verity token is this width */
+  --player-width: 420px;
+
+  box-sizing: border-box;
+  position: fixed;
+  inset-block: 0;
+  inset-inline: auto 0;
+  inline-size: min(var(--player-width), 100%);
+  max-inline-size: 100%;
+  block-size: 100dvh;
+  max-block-size: 100dvh;
+  margin: 0;
+  padding: var(--verity-padding-md);
+  border: none;
+  background: var(--verity-color-background-subtle);
+  /* An edge against the page, as NavOverlay has */
+  box-shadow: var(--verity-shadow-md-x) var(--verity-shadow-md-y) var(--verity-shadow-md-blur)
+    var(--verity-shadow-md-spread) var(--verity-shadow-md-color);
+  color: var(--verity-color-content-default);
+}
+
+/* Only while open, so the browser's display: none still hides it when closed */
+.panel[open] {
+  display: flex;
+  flex-direction: column;
+  gap: var(--verity-spacing-sm);
+}
+
+/* The scrim over the page behind it */
+.panel::backdrop {
+  background: var(--verity-color-background-scrim);
+}
+
+/* The title and artist, with Close at the end */
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--verity-spacing-xs);
+}
+
+.names {
+  min-inline-size: 0;
+}
+
+/* The artist, in meta/default, subtle */
+.artist {
+  margin: 0;
+  color: var(--verity-color-content-subtle);
+  font-family: var(--verity-viewport-typography-meta-default-font-family);
+  font-size: var(--verity-viewport-typography-meta-default-font-size);
+  font-weight: var(--verity-viewport-typography-meta-default-font-weight);
+  line-height: var(--verity-viewport-typography-meta-default-line-height);
+  letter-spacing: var(--verity-viewport-typography-meta-default-letter-spacing);
+  text-transform: var(--verity-viewport-typography-meta-default-text-transform);
+}
+
+/* Spotify's player, filling the space between the header and the link */
+.player {
+  flex: 1;
+  inline-size: 100%;
+  min-block-size: 0;
+  border: none;
+  border-radius: var(--verity-border-radius-md);
+}
+
+.listen {
+  margin: 0;
+}
+
+/* The slide, NavOverlay's: in from the right edge when it opens, and back out
+   when it closes (PlayerPanel.tsx sets data-closing, then closes the dialog
+   when the slide ends). Only when motion is allowed. */
+@media (prefers-reduced-motion: no-preference) {
+  .panel[open] {
+    animation: slide-in var(--verity-motion-duration-playful) var(--verity-motion-easing-standard);
+  }
+
+  .panel[open][data-closing] {
+    animation: slide-out var(--verity-motion-duration-playful) var(--verity-motion-easing-standard) forwards;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    translate: 100% 0;
+  }
+}
+
+@keyframes slide-out {
+  to {
+    translate: 100% 0;
+  }
+}
