@@ -66,6 +66,13 @@ export const siteFooter = (
       buttonLabel: 'Book a meeting',
       href: CALENDLY_URL,
       opensInNewTab: true,
+      // A second way to get in touch, as an icon button after Book a meeting
+      secondaryAction: {
+        icon: 'linkedin',
+        label: 'LinkedIn',
+        href: 'https://www.linkedin.com/in/erintozour/',
+        opensInNewTab: true,
+      },
     }}
     copyrightName="Erin Tozour"
   />
