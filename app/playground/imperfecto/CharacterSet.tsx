@@ -14,8 +14,8 @@ import styles from './CharacterSet.module.css';
 // Tab moves into a group (at the character last looked at there), the arrow
 // keys move between its characters (Home and End to the first and last), and
 // Tab again moves on to the next group. Nothing holds on to focus. Screen
-// readers can also read each list in browse mode, where every cell says its
-// character and its code point.
+// readers can also read each list in browse mode, and every cell is named by
+// its character and its code point (“é, U+00E9”).
 export function CharacterSet({ groups }: { groups: CharacterGroup[] }) {
   return (
     <VerticalStack width="wide" gap="xl">
@@ -57,6 +57,9 @@ function CharacterGrid({ characters }: { characters: Character[] }) {
           key={item.codePoint}
           className={styles.cell}
           tabIndex={index === current ? 0 : -1}
+          // Its name when focused: the character and its code point, since a
+          // screen reader may skip a lone punctuation mark
+          aria-label={`${item.character}, ${item.codePoint}`}
           onFocus={() => setCurrent(index)}
         >
           <span className={styles.character}>{item.character}</span>
