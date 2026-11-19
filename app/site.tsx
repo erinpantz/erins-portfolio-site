@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Footer, Link, type ShellProps } from 'verity-design-system';
+import { Footer, Link, VerityMark, type ShellProps } from 'verity-design-system';
 
 // Site-wide content: where the nav links go and what the footer says.
 // Anything marked PLACEHOLDER isn't real yet.
@@ -25,8 +25,7 @@ export const MUSIC_HREF = '/profile/music';
 export const RESUME_HREF = '/erin-tozour-resume.pdf';
 
 /**
- * Verity's Storybook, where the footer's Verity link and the Profile intro's
- * link go. PLACEHOLDER: Storybook isn't public yet, so it's empty, and both
+ * Verity's Storybook, where the footer's aside and the Profile intro link. PLACEHOLDER: Storybook isn't public yet, so it's empty, and both
  * links show as “Coming soon” (VerityLink). Put the address here when it goes
  * live, and both become links that open in a new tab.
  */
@@ -74,6 +73,17 @@ export const siteFooter = (
         opensInNewTab: true,
       },
     }}
+    // On the right: a line about how the site is built. “Verity” is
+    // VerityLink, so it's “Coming soon” until Storybook is public.
+    aside={
+      <>
+        <VerityMark />
+        <p>
+          This site is built with <VerityLink>Verity</VerityLink>, my design system. Every color, size, and space comes
+          from a token.
+        </p>
+      </>
+    }
     copyrightName="Erin Tozour"
   />
 );
