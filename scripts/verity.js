@@ -3,12 +3,21 @@
 //   npm run verity:local   your Verity folder (../verity-design-system), linked
 //   npm run verity:tag     the version in package.json (a GitHub tag)
 //   npm run verity:which   which one is in node_modules now
+//   node scripts/verity.js https   (runs on its own after every npm install,
+//                                   as postinstall in package.json)
 //
-// Neither switch changes package.json or package-lock.json, so they always
-// name the tag. A plain `npm install` also goes back to the tag.
+// To update Verity, change the tag at the end of verity-design-system's
+// address in package.json (…#v0.11.2), then run `npm run verity:tag`.
+//
+// verity:local doesn't change package.json or package-lock.json, so they
+// always name the tag. verity:tag installs the tag by name, so the lock file
+// records the tag's commit (a plain `npm install` can keep an older commit
+// for a changed tag), then makes sure the lock file fetches Verity over
+// HTTPS. npm writes GitHub addresses as SSH (git+ssh://git@github.com/…),
+// which needs an SSH key; Vercel's build machine has none.
 
 import { execSync } from 'node:child_process';
-import { lstatSync, readFileSync, realpathSync } from 'node:fs';
+import { lstatSync, readFileSync, realpathSync, writeFileSync } from 'node:fs';
 
 const INSTALLED = 'node_modules/verity-design-system';
 const LOCAL = '../verity-design-system';
@@ -31,14 +40,34 @@ function which() {
 
 const run = (command) => execSync(command, { stdio: 'inherit' });
 
+// Point Verity's address in package-lock.json at HTTPS instead of SSH. The
+// same repo and commit, so nothing else changes.
+function useHttps() {
+  const SSH = 'git+ssh://git@github.com/';
+  const HTTPS = 'git+https://github.com/';
+  const lock = JSON.parse(readFileSync('package-lock.json', 'utf8'));
+  const entry = lock.packages[INSTALLED];
+  if (entry?.resolved?.startsWith(SSH)) {
+    entry.resolved = HTTPS + entry.resolved.slice(SSH.length);
+    writeFileSync('package-lock.json', JSON.stringify(lock, null, 2) + '\n');
+  }
+}
+
 switch (process.argv[2]) {
   case 'local':
     run(`npm install --no-save ${LOCAL}`);
     break;
-  case 'tag':
-    // Remove the link first, so npm reinstalls the tagged copy from the lockfile
+  case 'https':
+    // After any npm install: npm may have written SSH again
+    useHttps();
+    process.exit(0);
+  case 'tag': {
+    // Remove the link first, then install the tag named in package.json
     run(`rm -rf ${INSTALLED}`);
-    run('npm install');
+    const spec = JSON.parse(readFileSync('package.json', 'utf8')).dependencies['verity-design-system'];
+    run(`npm install ${spec}`);
+    useHttps();
     break;
+  }
 }
 console.log(which());

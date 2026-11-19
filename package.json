@@ -10,7 +10,8 @@
     "verity:local": "node scripts/verity.js local",
     "verity:tag": "node scripts/verity.js tag",
     "verity:which": "node scripts/verity.js which",
-    "albums:covers": "node scripts/album-covers.js"
+    "albums:covers": "node scripts/album-covers.js",
+    "postinstall": "node scripts/verity.js https"
   },
   "dependencies": {
     "isbot": "^5.2.2",
