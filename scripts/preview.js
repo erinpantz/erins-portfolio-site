@@ -1,7 +1,7 @@
 // Serves the built site (build/client) the way a static host does, so you can
 // check it before deploying: /profile serves profile/index.html, and an
-// address with no page gets the Page not found page (404/index.html) with a
-// 404 status.
+// address with no page gets the Page not found page (404.html, which the build
+// copies from 404/index.html) with a 404 status, as on Vercel.
 // Run `npm run build` first, then `npm run preview`.
 //
 // (Vite's own preview server sends the front page for /profile, which breaks
@@ -37,7 +37,7 @@ createServer((request, response) => {
   const path = normalize(decodeURIComponent(new URL(request.url, 'http://x').pathname));
   const file = [join(ROOT, path), join(ROOT, path, 'index.html')].find(isFile);
   const status = file ? 200 : 404;
-  const served = file ?? join(ROOT, '404', 'index.html');
+  const served = file ?? join(ROOT, '404.html');
   response.writeHead(status, { 'Content-Type': TYPES[extname(served)] ?? 'application/octet-stream' });
   createReadStream(served).pipe(response);
 }).listen(PORT, () => console.log(`Serving the built site at http://localhost:${PORT}`));

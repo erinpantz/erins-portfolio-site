@@ -2,9 +2,12 @@
   "name": "erins-portfolio-site",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "dev": "react-router dev",
-    "build": "react-router build",
+    "build": "react-router build && cp build/client/404/index.html build/client/404.html",
     "preview": "node scripts/preview.js",
     "typecheck": "react-router typegen && tsc",
     "verity:local": "node scripts/verity.js local",
