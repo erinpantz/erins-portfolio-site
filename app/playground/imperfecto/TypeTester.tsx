@@ -1,4 +1,5 @@
 import { useId, useLayoutEffect, useRef, useState } from 'react';
+import { Heading } from 'verity-design-system';
 import utilities from '../../utilities.module.css';
 import styles from './TypeTester.module.css';
 
@@ -11,8 +12,9 @@ const MIN_SIZE = 24;
 const MAX_SIZE = 200;
 const START_SIZE = 96;
 
-// Imperfecto's type tester: a size slider above a large text field set in
-// Imperfecto Bold, on a subtle surface. People type their own text to see it.
+// Imperfecto's type tester, on a subtle surface: its heading, “Try it” (a
+// level 2 heading in the page's outline), then a size slider above a large
+// text field set in Imperfecto Bold. People type their own text to see it.
 //
 // The typed text stays in the visitor's browser. It's only ever the
 // textarea's value, so React treats it as plain text and never renders it as
@@ -49,6 +51,7 @@ export function TypeTester() {
 
   return (
     <div className={styles.tester}>
+      <Heading level={2}>Try it</Heading>
       <div className={styles.size}>
         <label htmlFor={sizeId} className={styles.label}>
           Size
