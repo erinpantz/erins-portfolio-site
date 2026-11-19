@@ -90,7 +90,7 @@ scripts/                 verity.js (switching Verity copies, and keeping it on H
                          preview.js
 vercel.json              Vercel's build settings (see “Hosting and deploying”)
 public/                  files that need a fixed address, like the favicons, the web
-                         manifest, and (later) the résumé PDF; copied into the build as-is
+                         manifest, and the résumé PDF; copied into the build as-is
 ```
 
 - **Page titles** use `pageTitle()` from `app/site.tsx`: “Laguna Companion · Erin Tozour”, and “Erin Tozour” for the front page.
