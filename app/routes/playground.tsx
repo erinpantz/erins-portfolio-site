@@ -1,7 +1,8 @@
-import { Section } from 'verity-design-system';
+import { Container } from 'verity-design-system';
 import { PlaygroundGrid } from '../PlaygroundGrid';
 import { PLAYGROUND_PROJECTS } from '../playground/projects';
 import { pageTitle } from '../site';
+import utilities from '../utilities.module.css';
 
 export const meta = () => [{ title: pageTitle('Playground') }];
 
@@ -23,14 +24,17 @@ function playgroundCards() {
   });
 }
 
-// Playground: the page's heading (its h1), then each Playground project as a
-// square thumbnail with its title under it, linking to its page
-// (PlaygroundGrid.tsx). The projects and their order are in
+// Playground: each Playground project as a square thumbnail with its title
+// under it, linking to its page (PlaygroundGrid.tsx), in a Container. The
+// page's heading, “Playground” (its h1), is hidden on screen but still read
+// by screen readers and search engines, as on the Portfolio page: the nav
+// already shows where you are. The projects and their order are in
 // app/playground/projects.ts.
 export default function Playground() {
   return (
-    <Section headingLevel={1} heading="Playground" width="wide">
+    <Container>
+      <h1 className={utilities.visuallyHidden}>Playground</h1>
       <PlaygroundGrid items={playgroundCards()} />
-    </Section>
+    </Container>
   );
 }
