@@ -1,0 +1,110 @@
+/* The Music page's album buttons. Every value is one of Verity's tokens. The
+   lift on hover and focus is ProjectCard's (Verity's linkCard.module.css):
+   the same scale, lift, shadows, durations, and easing. */
+
+/* A plain button: no box of its own, the cover and its words */
+.album {
+  --shadow-x: var(--verity-shadow-sm-x);
+  --shadow-y: var(--verity-shadow-sm-y);
+  --shadow-blur: var(--verity-shadow-sm-blur);
+  --shadow-spread: var(--verity-shadow-sm-spread);
+  --shadow-color: var(--verity-shadow-sm-color);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--verity-spacing-xs);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: var(--verity-border-radius-md);
+  background: none;
+  color: var(--verity-color-content-default);
+  text-align: start;
+  cursor: pointer;
+  transition:
+    scale var(--verity-motion-duration-playful) var(--verity-motion-easing-standard),
+    translate var(--verity-motion-duration-playful) var(--verity-motion-easing-standard);
+}
+
+/* The cover: square, filling the item, with Verity's card corners and
+   shadow */
+.cover {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--verity-border-radius-md);
+  background: var(--verity-color-background-subtle);
+  box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--shadow-spread) var(--shadow-color);
+  transition: box-shadow var(--verity-motion-duration-fast) var(--verity-motion-easing-standard);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+}
+
+/* The title, in title/sm */
+.title {
+  font-family: var(--verity-viewport-typography-title-sm-font-family);
+  font-size: var(--verity-viewport-typography-title-sm-font-size);
+  font-weight: var(--verity-viewport-typography-title-sm-font-weight);
+  line-height: var(--verity-viewport-typography-title-sm-line-height);
+  letter-spacing: var(--verity-viewport-typography-title-sm-letter-spacing);
+  text-transform: var(--verity-viewport-typography-title-sm-text-transform);
+}
+
+/* The artist, in meta/default, subtle */
+.artist {
+  color: var(--verity-color-content-subtle);
+  font-family: var(--verity-viewport-typography-meta-default-font-family);
+  font-size: var(--verity-viewport-typography-meta-default-font-size);
+  font-weight: var(--verity-viewport-typography-meta-default-font-weight);
+  line-height: var(--verity-viewport-typography-meta-default-line-height);
+  letter-spacing: var(--verity-viewport-typography-meta-default-letter-spacing);
+  text-transform: var(--verity-viewport-typography-meta-default-text-transform);
+}
+
+/* Hover only with a real pointer, so a tap doesn't leave a cover raised */
+@media (hover: hover) {
+  .album:hover {
+    --shadow-x: var(--verity-shadow-lg-x);
+    --shadow-y: var(--verity-shadow-lg-y);
+    --shadow-blur: var(--verity-shadow-lg-blur);
+    --shadow-spread: var(--verity-shadow-lg-spread);
+    --shadow-color: var(--verity-shadow-lg-color);
+    scale: var(--verity-motion-scale-hover);
+    translate: 0 calc(-1 * var(--verity-motion-lift-md));
+  }
+}
+
+.album:focus-visible {
+  --shadow-x: var(--verity-shadow-lg-x);
+  --shadow-y: var(--verity-shadow-lg-y);
+  --shadow-blur: var(--verity-shadow-lg-blur);
+  --shadow-spread: var(--verity-shadow-lg-spread);
+  --shadow-color: var(--verity-shadow-lg-color);
+  scale: var(--verity-motion-scale-hover);
+  translate: 0 calc(-1 * var(--verity-motion-lift-md));
+  outline: var(--verity-focus-ring-width) solid var(--verity-color-border-focus);
+  outline-offset: var(--verity-focus-ring-offset);
+}
+
+/* Pressed: it settles back down, as a ProjectCard does */
+.album:active {
+  scale: none;
+  translate: none;
+}
+
+/* Reduce motion: no lift or growth. The shadow still changes, since it
+   doesn't move anything. */
+@media (prefers-reduced-motion: reduce) {
+  .album,
+  .album:hover,
+  .album:focus-visible {
+    scale: none;
+    translate: none;
+  }
+}
