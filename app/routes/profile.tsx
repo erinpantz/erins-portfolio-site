@@ -1,23 +1,36 @@
-import { Container, ExperienceItem, Hero, LayeredImage, Section, VerticalStack } from 'verity-design-system';
+import { Container, ExperienceItem, Hero, LayeredImage, Link, Section, VerticalStack } from 'verity-design-system';
 import box from '../../assets/images/profile/layers/box.svg';
 import glasses from '../../assets/images/profile/layers/glasses.svg';
 import marker from '../../assets/images/profile/layers/marker.svg';
 import photo from '../../assets/images/profile/layers/photo.avif';
 import squiggle from '../../assets/images/profile/layers/squiggle.svg';
 import { EXPERIENCE } from '../experience';
-import { pageTitle } from '../site';
+import { MUSIC_HREF, pageTitle } from '../site';
 
 export const meta = () => [{ title: pageTitle('Profile') }];
 
+// Between an emoji and its link: a space the line can't break at, so an
+// emoji never ends one line with its link starting the next
+const NO_BREAK_SPACE = '\u00A0';
+
+// An emoji that only decorates: hidden from screen readers, so they read the
+// sentence without “pencil” or “headphone” in the middle of it
+function Emoji({ children }: { children: string }) {
+  return <span aria-hidden="true">{children}</span>;
+}
+
 // Profile: a wide Hero on the default background. Its headline is the page's
-// h1, with a two-paragraph intro and Erin's photo beside it (at most
+// h1, with a three-paragraph intro and Erin's photo beside it (at most
 // hero/media-width, wrapping under the text when they don't both fit). The
 // photo is a LayeredImage: the photo and four shapes, exported from the
 // Profile page in Figma (frame erin-profile-photo, 800 × 800), placed and
 // sized in percent of that frame. As a mouse moves over it, each layer moves
 // by its depth and the picture tilts toward the pointer; it stays still on
 // touch and with reduce motion. Screen readers hear it as one image, named by
-// alt.
+// alt. The intro links to two of Erin's side projects, her typeface
+// (Imperfecto, in Playground) and her favorite albums (Music), each with an
+// emoji before it. The links go through the site's router (LinkProvider), so
+// they change the page in the app.
 //
 // Then Experience: a wide Section (its heading is the page's h2) holding a
 // wide list, one ExperienceItem per role in app/experience.ts, most recent
@@ -33,7 +46,17 @@ export default function Profile() {
           heading="Hi, I’m Erin"
           intro={[
             'I’ve been learning new design skills and tools for over 20 years. Lately, that means designing in code, building my own design system with AI as a collaborator.',
-            'I still spend stupid amounts of time on craft, like my own typeface and hand-drawn illustrations, because craft, taste, and human creativity will always matter.',
+            <>
+              I still spend stupid amounts of time on craft, like <Emoji>✏️</Emoji>
+              {NO_BREAK_SPACE}
+              <Link href="/playground/imperfecto">my own typeface</Link> and hand-drawn illustrations, because craft,
+              taste, and human creativity will always matter.
+            </>,
+            <>
+              P.S. Music is life. Here are some of my <Emoji>🎧</Emoji>
+              {NO_BREAK_SPACE}
+              <Link href={MUSIC_HREF}>favorite albums of all time</Link>.
+            </>,
           ]}
           media={
             <LayeredImage
