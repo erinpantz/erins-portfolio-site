@@ -1,0 +1,96 @@
+/* Imperfecto's type tester. Verity's tokens wherever one exists; the two
+   values without one (the text's line height and the width saved for the
+   slider's value) are explained where they're used. */
+
+/* The surface: a subtle fill with Verity's card corners and padding, the
+   slider above the text */
+.tester {
+  display: flex;
+  flex-direction: column;
+  gap: var(--verity-spacing-md);
+  padding: var(--verity-padding-lg);
+  border-radius: var(--verity-border-radius-md);
+  background: var(--verity-color-background-subtle);
+  /* So nothing inside can push the page sideways */
+  min-width: 0;
+}
+
+/* “Size”, the slider, and its value, in one row */
+.size {
+  display: flex;
+  align-items: center;
+  gap: var(--verity-spacing-sm);
+}
+
+.label,
+.value {
+  flex-shrink: 0;
+  color: var(--verity-color-content-default);
+  font-family: var(--verity-viewport-typography-label-default-font-family);
+  font-size: var(--verity-viewport-typography-label-default-font-size);
+  font-weight: var(--verity-viewport-typography-label-default-font-weight);
+  line-height: var(--verity-viewport-typography-label-default-line-height);
+  letter-spacing: var(--verity-viewport-typography-label-default-letter-spacing);
+}
+
+/* The value keeps one width (“200 px”, in tabular numbers), so the slider
+   doesn't jump as it changes */
+.value {
+  min-width: 6ch;
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+/* The browser's own slider, in the theme's text color, as tall as a
+   small control so it's easy to grab, and at most the content column wide */
+.slider {
+  flex: 1;
+  min-width: 0;
+  max-width: var(--verity-content-column-width);
+  height: var(--verity-control-size-sm);
+  margin: 0;
+  accent-color: var(--verity-color-content-default);
+  cursor: pointer;
+}
+
+.slider:focus-visible,
+.field:focus-visible {
+  outline: var(--verity-focus-ring-width) solid var(--verity-color-border-focus);
+  outline-offset: var(--verity-focus-ring-offset);
+}
+
+/* The text field, with no box of its own: Imperfecto Bold on the surface.
+   Its size comes from the slider (inline), and its line height follows it at
+   1.1, the same ratio as Verity's display text (88 on 80); no token says it
+   as a ratio. Long words break instead of scrolling sideways, and the field's
+   height grows with its text (in TypeTester.tsx). */
+.field {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--verity-color-content-default);
+  font-family: var(--verity-typography-font-family-imperfecto);
+  font-weight: var(--verity-viewport-typography-display-default-font-weight);
+  letter-spacing: var(--verity-viewport-typography-display-default-letter-spacing);
+  font-synthesis: none;
+  line-height: 1.1;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  resize: none;
+}
+
+/* The count, quietly */
+.count {
+  margin: 0;
+  color: var(--verity-color-content-subtle);
+  font-family: var(--verity-viewport-typography-meta-default-font-family);
+  font-size: var(--verity-viewport-typography-meta-default-font-size);
+  font-weight: var(--verity-viewport-typography-meta-default-font-weight);
+  line-height: var(--verity-viewport-typography-meta-default-line-height);
+  letter-spacing: var(--verity-viewport-typography-meta-default-letter-spacing);
+  text-transform: var(--verity-viewport-typography-meta-default-text-transform);
+  font-variant-numeric: tabular-nums;
+}

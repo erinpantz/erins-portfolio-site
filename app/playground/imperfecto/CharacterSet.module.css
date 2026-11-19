@@ -1,0 +1,87 @@
+/* Imperfecto's character grids. Verity's tokens wherever one exists; the
+   one value without one (how much larger a character gets on hover) is
+   explained where it's used. */
+
+/* Square cells, all one size, as many to a row as fit. Thin lines run
+   between them: each cell draws a border/width/sm outline, and the gap is the
+   same width, so neighbors' outlines land on the same line. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, var(--verity-size-96));
+  gap: var(--verity-border-width-sm);
+  margin: 0;
+  /* Room for the outer lines, which sit just outside the cells */
+  padding: var(--verity-border-width-sm);
+  list-style: none;
+}
+
+.cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  outline: var(--verity-border-width-sm) solid var(--verity-color-border-subtle);
+  color: var(--verity-color-content-default);
+  cursor: default;
+}
+
+/* The character: Imperfecto at heading/1's size */
+.character {
+  display: block;
+  font-family: var(--verity-typography-font-family-imperfecto);
+  font-size: var(--verity-viewport-typography-heading-1-font-size);
+  font-weight: var(--verity-viewport-typography-heading-1-font-weight);
+  line-height: var(--verity-viewport-typography-heading-1-line-height);
+  font-synthesis: none;
+}
+
+/* The code point, hidden until the cell is hovered or focused. It's
+   transparent, not removed, so screen readers always read it. */
+.codePoint {
+  position: absolute;
+  inset-inline: 0;
+  bottom: var(--verity-spacing-xxs);
+  text-align: center;
+  opacity: 0;
+  color: var(--verity-color-content-subtle);
+  font-family: var(--verity-viewport-typography-meta-sm-font-family);
+  font-size: var(--verity-viewport-typography-meta-sm-font-size);
+  font-weight: var(--verity-viewport-typography-meta-sm-font-weight);
+  line-height: var(--verity-viewport-typography-meta-sm-line-height);
+  letter-spacing: var(--verity-viewport-typography-meta-sm-letter-spacing);
+}
+
+/* Hovered or focused: the cell fills in, the character grows (1.4 times,
+   still inside its cell) and moves up, and the code point shows underneath */
+.cell:hover,
+.cell:focus-visible {
+  background: var(--verity-color-background-subtle);
+}
+
+.cell:hover .character,
+.cell:focus-visible .character {
+  transform: translateY(calc(-1 * var(--verity-spacing-xs))) scale(1.4);
+}
+
+.cell:hover .codePoint,
+.cell:focus-visible .codePoint {
+  opacity: 1;
+}
+
+/* Keyboard focus also gets Verity's focus ring, above the neighbors' lines */
+.cell:focus-visible {
+  z-index: 1;
+  outline: var(--verity-focus-ring-width) solid var(--verity-color-border-focus);
+  outline-offset: var(--verity-focus-ring-offset);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .character,
+  .codePoint {
+    transition:
+      transform var(--verity-motion-duration-fast) var(--verity-motion-easing-standard),
+      opacity var(--verity-motion-duration-fast) var(--verity-motion-easing-standard);
+  }
+}
