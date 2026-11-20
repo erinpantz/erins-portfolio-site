@@ -106,7 +106,7 @@ On Oct 26, I was learning Git and what a `CLAUDE.md` file is. By Oct 28, I’d f
 
 Before I asked Claude to generate anything, I built the bones of the system in Figma myself. I wanted to trust everything I was feeding it.
 
-I followed design token best practices, with three tiers. Core tokens hold the raw values, semantic tokens say what a value is for, and component tokens cover one-off needs. Two themes and four breakpoints sit on top as modes, so a change only has to happen in one place.
+I followed design token best practices recommended by Brad Frost, with three tiers. Core tokens hold the raw values, semantic tokens say what a value is for, and component tokens cover one-off needs. Two themes and four breakpoints sit on top as modes, so a change only has to happen in one place.
 
 Exporting the tokens to code was a good stress test. The first export turned up 267 aliases still pointing at old libraries and two names that clashed. I fixed them at the source in Figma, rather than patching around them in code.
 
