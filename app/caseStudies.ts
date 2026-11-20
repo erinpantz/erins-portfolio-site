@@ -30,7 +30,7 @@ export const caseStudies = Object.fromEntries(
  * these are listed: add a slug here when a case study is ready, and move it
  * to change the order.
  */
-const PORTFOLIO_ORDER = ['laguna-companion', 'navio-med-checklist', 'vim-brand-system'];
+const PORTFOLIO_ORDER = ['laguna-companion', 'navio-med-checklist', 'verity', 'vim-brand-system'];
 
 // Each case study's thumbnail for its PortfolioCard. The name is fixed:
 // case-studies/<slug>/images/case-study-thumbnail.avif.
