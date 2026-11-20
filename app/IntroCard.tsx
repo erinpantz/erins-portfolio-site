@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type RefObject } from 'react';
 import { Link as RouterLink } from 'react-router';
 import { Button, NavIcon } from 'verity-design-system';
 import styles from './IntroCard.module.css';
-import { NAV_HREFS, RESUME_HREF } from './site';
+import { NAV_HREFS, RESUME_PAGE_HREF } from './site';
 
 // How often the idle Profile icon tips the other way, and how long it stays
 // tipped. Verity has no tokens for times this long, so they're named here.
@@ -17,7 +17,7 @@ const IDLE_TIP_HOLD_MS = 900;
 // page's h1 and the cards' h2s. At rest it's in NavIcon's hover pose (tipped
 // right); now and then it tips left (hover-mirrored) and back, and on hover or
 // keyboard focus it tips left and stays there. NavIcon animates each switch.
-// Then the paragraph in body/xl and a button to her résumé. It's the site's
+// Then the paragraph in body/xl and a button to her résumé page. It's the site's
 // own markup because Verity's TextBlock only sets its text in body/default.
 // Its styles are in IntroCard.module.css, using only Verity's CSS variables.
 export function IntroCard() {
@@ -47,9 +47,9 @@ export function IntroCard() {
           I’m a product and visual designer with 20+ years of experience. For the past 11 years, I’ve led design at
           healthcare startups, most recently bringing AI into the tools care teams use every day.
         </p>
-        {/* The résumé PDF (RESUME_HREF), in a new tab, so the Portfolio stays open
-            behind it. This is the only link to it. */}
-        <Button href={RESUME_HREF} startIcon="resume" opensInNewTab>
+        {/* The résumé page (/resume), in the same tab, through React Router
+            like the site's other page links. Its back link returns here. */}
+        <Button href={RESUME_PAGE_HREF} startIcon="resume">
           Résumé
         </Button>
       </div>
