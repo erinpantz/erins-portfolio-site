@@ -1,5 +1,5 @@
-import { useEffect, useRef, type ReactNode } from 'react';
-import { Links, Meta, Outlet, Link as RouterLink, Scripts, ScrollRestoration, useLocation, useNavigation } from 'react-router';
+import { useEffect, useRef, type MouseEvent, type ReactNode } from 'react';
+import { Links, Meta, Outlet, Link as RouterLink, Scripts, ScrollRestoration, useLocation, useNavigate, useNavigation } from 'react-router';
 import { focusPageStart, LinkProvider, Section, Shell, themeScript, type LinkComponent, type ShellProps } from 'verity-design-system';
 import 'verity-design-system/styles.css';
 import type { Route } from './+types/root';
@@ -84,14 +84,16 @@ export function Layout({ children }: { children: ReactNode }) {
 // The pages inside a section, one level down: a case study at
 // /portfolio/<slug> (for a slug with a case-studies/<slug>/index.mdx), a
 // Playground project at /playground/<slug> (for a slug in
-// app/playground/projects.ts), or the Music page at /profile/music. This is the one place that decides it, so a
-// new case study or project is covered as soon as it exists. Each opens in
-// Shell's focused mode, with a link back to its section's page.
+// app/playground/projects.ts), or the Music page at /profile/music. This is
+// the one place that decides it, so a new case study or project is covered as
+// soon as it exists. Each opens in Shell's focused mode, with a back link
+// (see useBackLink). `parent` is its section's page: where the back link goes
+// when there's no page on the site to go back to.
 const SUBPAGES = {
-  portfolio: { isPage: (slug: string) => !!caseStudies[slug], backLink: { href: NAV_HREFS.portfolio, label: 'Portfolio' } },
-  playground: { isPage: isPlaygroundProject, backLink: { href: NAV_HREFS.playground, label: 'Playground' } },
-  profile: { isPage: (slug: string) => `/profile/${slug}` === MUSIC_HREF, backLink: { href: NAV_HREFS.profile, label: 'Profile' } },
-} satisfies Record<string, { isPage: (slug: string) => boolean; backLink: ShellProps['backLink'] }>;
+  portfolio: { isPage: (slug: string) => !!caseStudies[slug], parent: NAV_HREFS.portfolio },
+  playground: { isPage: isPlaygroundProject, parent: NAV_HREFS.playground },
+  profile: { isPage: (slug: string) => `/profile/${slug}` === MUSIC_HREF, parent: NAV_HREFS.profile },
+} satisfies Record<string, { isPage: (slug: string) => boolean; parent: string }>;
 
 // The section of a subpage (above), or undefined for any other address
 function subpageSection(pathname: string) {
@@ -164,10 +166,32 @@ function usePendingSection(): ShellProps['pending'] {
   return sectionOf(going.pathname);
 }
 
+// A focused page's back link, “Back,” with its arrow. It's a real link to the
+// page's parent (Portfolio, the front page, Playground, or Profile), and a
+// click goes back in the history instead when the previous page is on this
+// site, so visitors return exactly where they were, scrolled where they left
+// it (ScrollRestoration). React Router gives the first page a visit opens the
+// location key "default", so any other key means the visitor got here from a
+// page on the site. A visitor who arrived from outside (a shared link, a
+// search, a Home Screen icon) is on that first page, so the click follows
+// the href as a normal link. Cmd-, Ctrl-, Shift-, and Alt-clicks and the
+// middle button are left to the browser, so they still open the parent page
+// in a new tab or window, and a long press shows the browser's menu for it.
+function useBackLink(parent: string): ShellProps['backLink'] {
+  const { key } = useLocation();
+  const navigate = useNavigate();
+  const onClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    const modified = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0;
+    if (modified || key === 'default') return;
+    event.preventDefault();
+    navigate(-1);
+  };
+  return { href: parent, label: 'Back', onClick };
+}
+
 // Subpages (case studies, Playground projects, and Music) are for one piece
-// of work, so they use Shell's focused mode: no nav, and a link back to their
-// section in the corner (Portfolio, the front page, Playground, or Profile). Every other page
-// has the nav. Its links change pages in the app
+// of work, so they use Shell's focused mode: no nav, and a back link in the
+// corner (useBackLink). Every other page has the nav. Its links change pages in the app
 // (SiteLink). Moving to another section shows Verity's PageLoader, with the
 // words in app/pageLoaderWords.ts: Shell decides when, from the section the
 // page change is going to.
@@ -175,12 +199,13 @@ function SiteShell({ children }: { children: ReactNode }) {
   const { pathname } = useLocation();
   const subpage = subpageSection(pathname);
   const pending = usePendingSection();
+  const backLink = useBackLink(subpage ? SUBPAGES[subpage].parent : NAV_HREFS.portfolio);
   useFocusPageStartOnPageChange();
   return (
     <LinkProvider component={SiteLink}>
       <Shell
         mode={subpage ? 'focused' : 'default'}
-        backLink={subpage ? SUBPAGES[subpage].backLink : undefined}
+        backLink={subpage ? backLink : undefined}
         current={sectionOf(pathname)}
         hrefs={NAV_HREFS}
         footer={siteFooter}
