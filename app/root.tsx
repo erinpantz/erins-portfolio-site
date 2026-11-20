@@ -7,7 +7,30 @@ import { caseStudies } from './caseStudies';
 import { isPlaygroundProject } from './playground/projects';
 import { PAGE_LOADER_WORDS } from './pageLoaderWords';
 import { ResumeDownload } from './resume/ResumeDownload';
-import { GA_HOSTNAMES, GA_MEASUREMENT_ID, MUSIC_HREF, NAV_HREFS, RESUME_PAGE_HREF, siteFooter } from './site';
+import { GA_MEASUREMENT_ID, LIVE_HOSTNAMES, MUSIC_HREF, NAV_HREFS, RESUME_PAGE_HREF, siteFooter } from './site';
+
+// Off the live site (localhost, Vercel's preview addresses), each favicon
+// becomes its red -local file (/favicon.svg → /favicon-local.svg, and so on),
+// so a local or preview tab is easy to tell from erintozour.com's.
+// - The pre-rendered HTML has the blue ones (it's what the live site serves),
+//   and localFaviconScript, inline right after them, switches their hrefs
+//   before anything paints, so the tab never shows the blue one first.
+// - React then renders the same red hrefs in the browser (faviconHref), so it
+//   recognizes the switched links as its own. React finds its <link>s in
+//   <head> by href, so if it rendered the blue ones it would add them again.
+// On the live site, neither changes anything.
+const isLiveSite = typeof window === 'undefined' || LIVE_HOSTNAMES.includes(window.location.hostname);
+
+function faviconHref(href: string) {
+  return isLiveSite ? href : href.replace('/favicon', '/favicon-local');
+}
+
+const localFaviconScript = `(function () {
+  if (${JSON.stringify(LIVE_HOSTNAMES)}.indexOf(location.hostname) !== -1) return;
+  document.querySelectorAll('link[rel="icon"]').forEach(function (link) {
+    link.href = link.getAttribute('href').replace('/favicon', '/favicon-local');
+  });
+})();`;
 
 // The EEA (the EU, Iceland, Liechtenstein, and Norway), the UK, and
 // Switzerland, by ISO country code, for Google Analytics' consent defaults
@@ -29,7 +52,7 @@ const CONSENT_REGIONS = [
 // - Page views: GA's enhanced measurement counts the first load and each page
 //   change in the app (from the browser's history), so none are sent here.
 const gaScript = `(function () {
-  if (${JSON.stringify(GA_HOSTNAMES)}.indexOf(location.hostname) === -1) return;
+  if (${JSON.stringify(LIVE_HOSTNAMES)}.indexOf(location.hostname) === -1) return;
   window.dataLayer = window.dataLayer || [];
   function gtag() { dataLayer.push(arguments); }
   window.gtag = gtag;
@@ -63,10 +86,17 @@ export function Layout({ children }: { children: ReactNode }) {
         {/* Google Analytics, on the live site only (see gaScript above) */}
         <script dangerouslySetInnerHTML={{ __html: gaScript }} />
         {/* Icons, exported from Figma into public/. Browsers that read SVG use
-            it; the PNGs are fallbacks for those that don't. */}
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
-        <link rel="icon" href="/favicon-16.png" type="image/png" sizes="16x16" />
+            it; the PNGs are fallbacks for those that don't. Each favicon has a
+            red twin (favicon-local*, from the Verity Library's Branding page,
+            erin-tozour/favicon-local), which localFaviconScript and
+            faviconHref swap in anywhere but the live site, so a localhost or
+            preview tab doesn't look like erintozour.com's. The Home Screen
+            icons (apple-touch-icon and the manifest's) stay as they are: they
+            only come from the live site. */}
+        <link rel="icon" href={faviconHref('/favicon.svg')} type="image/svg+xml" />
+        <link rel="icon" href={faviconHref('/favicon-32.png')} type="image/png" sizes="32x32" />
+        <link rel="icon" href={faviconHref('/favicon-16.png')} type="image/png" sizes="16x16" />
+        <script dangerouslySetInnerHTML={{ __html: localFaviconScript }} />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />

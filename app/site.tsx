@@ -18,8 +18,12 @@ export const SITE_URL = 'https://erintozour.com';
  */
 export const GA_MEASUREMENT_ID = 'G-X9Q27K2L9P';
 
-/** The addresses the tag reports from: the live site only */
-export const GA_HOSTNAMES = ['erintozour.com', 'www.erintozour.com'];
+/**
+ * The live site's addresses. Google Analytics reports only from them, and
+ * only they show the blue favicon (anywhere else gets the red one; see
+ * app/root.tsx).
+ */
+export const LIVE_HOSTNAMES = ['erintozour.com', 'www.erintozour.com'];
 
 /**
  * Where each nav link goes: the logo (home) and the three pages. The
