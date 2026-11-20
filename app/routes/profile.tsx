@@ -29,8 +29,8 @@ function Emoji({ children }: { children: string }) {
 // by its depth and the picture tilts toward the pointer; it stays still on
 // touch and with reduce motion. Screen readers hear it as one image, named by
 // alt. The intro links to three of Erin's side projects, each with an emoji
-// before it: her design system (Verity's Storybook, “Coming soon” until it's
-// public; VerityLink in app/site.tsx), her typeface (Imperfecto, in
+// before it: her design system (Verity's Storybook, in a new tab; VerityLink in
+// app/site.tsx), her typeface (Imperfecto, in
 // Playground), and her favorite albums (Music). The links to the site's own
 // pages go through its router (LinkProvider), so they change the page in the
 // app.

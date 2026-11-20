@@ -26,26 +26,14 @@ export const RESUME_HREF = '/erin-tozour-resume.pdf';
 
 /**
  * Verity's Storybook, where the footer's Verity card and the Profile intro
- * link. PLACEHOLDER: Storybook isn't public yet, so it's empty: the card's
- * button is disabled and the intro's link is disabled (VerityLink), both with
- * “Coming soon.” Put the address here when it goes live, and both open it in
- * a new tab.
+ * link, both in a new tab.
  */
-export const VERITY_STORYBOOK_URL: string | undefined = undefined;
+export const VERITY_STORYBOOK_URL = 'https://verity.erintozour.com';
 
-/**
- * A link to Verity's Storybook: while VERITY_STORYBOOK_URL is empty, a
- * disabled link with the tooltip “Coming soon” (keyboard users can still
- * reach it and hear why); once it's set, a link that opens in a new tab. The
- * Profile intro uses it.
- */
+/** A link to Verity's Storybook, in a new tab. The Profile intro uses it. */
 export function VerityLink({ children }: { children: ReactNode }) {
-  return VERITY_STORYBOOK_URL ? (
+  return (
     <Link href={VERITY_STORYBOOK_URL} opensInNewTab>
-      {children}
-    </Link>
-  ) : (
-    <Link disabled tooltip="Coming soon">
       {children}
     </Link>
   );
@@ -64,9 +52,7 @@ const LINKEDIN_URL = 'https://www.linkedin.com/in/erintozour/';
 // The footer on every page: three ActionCards, in Verity's Footer grid, then
 // the copyright line. Each card's heading is level 3, as in the old footer.
 // - Let’s chat: Book a call (Calendly) and LinkedIn, both in a new tab.
-// - Verity: Check it out, to Verity's Storybook in a new tab. While
-//   VERITY_STORYBOOK_URL is empty, it's disabled with the tooltip “Coming
-//   soon” (keyboard users can still reach it and hear why).
+// - Verity: Check it out, to Verity's Storybook in a new tab.
 // - Music: Take a listen, to the Music page, through the router link
 //   (LinkProvider in root.tsx), so the page changes without reloading.
 export const siteFooter = (
@@ -95,15 +81,9 @@ export const siteFooter = (
           iconColor="accent-two"
           body="This site is built with Verity, my design system. Every color, size, and space comes from a token."
           actions={
-            VERITY_STORYBOOK_URL ? (
-              <Button href={VERITY_STORYBOOK_URL} opensInNewTab>
-                Check it out
-              </Button>
-            ) : (
-              <Button disabled tooltip="Coming soon">
-                Check it out
-              </Button>
-            )
+            <Button href={VERITY_STORYBOOK_URL} opensInNewTab>
+              Check it out
+            </Button>
           }
         />
         <ActionCard
