@@ -83,7 +83,8 @@ app/
                          folder (<slug>/) with its page (route.tsx) and its own code
   profile/music/         the Music page (route.tsx), its albums (albums.ts), their
                          covers, and its own components
-  resume/                the résumé page (route.tsx), at /resume, and its image
+  resume/                the résumé page (route.tsx), at /resume, its image, and its
+                         Download (ResumeDownload.tsx)
 case-studies/<slug>/     index.mdx, plus the images/, animations/, and videos/ it uses
 assets/                  images and illustrations shared across pages
 plugins/                 build steps, such as remarkProseRuns.ts for case studies

@@ -1,12 +1,13 @@
 import { useEffect, useRef, type MouseEvent, type ReactNode } from 'react';
 import { Links, Meta, Outlet, Link as RouterLink, Scripts, ScrollRestoration, useLocation, useNavigate, useNavigation } from 'react-router';
-import { Button, focusPageStart, LinkProvider, Section, Shell, themeScript, type LinkComponent, type ShellProps } from 'verity-design-system';
+import { focusPageStart, LinkProvider, Section, Shell, themeScript, type LinkComponent, type ShellProps } from 'verity-design-system';
 import 'verity-design-system/styles.css';
 import type { Route } from './+types/root';
 import { caseStudies } from './caseStudies';
 import { isPlaygroundProject } from './playground/projects';
 import { PAGE_LOADER_WORDS } from './pageLoaderWords';
-import { GA_HOSTNAMES, GA_MEASUREMENT_ID, MUSIC_HREF, NAV_HREFS, RESUME_HREF, RESUME_PAGE_HREF, siteFooter } from './site';
+import { ResumeDownload } from './resume/ResumeDownload';
+import { GA_HOSTNAMES, GA_MEASUREMENT_ID, MUSIC_HREF, NAV_HREFS, RESUME_PAGE_HREF, siteFooter } from './site';
 
 // The EEA (the EU, Iceland, Liechtenstein, and Norway), the UK, and
 // Switzerland, by ISO country code, for Google Analytics' consent defaults
@@ -113,17 +114,13 @@ interface FocusedPage {
 }
 
 // The résumé (/resume), which counts as the Portfolio, where its button is,
-// and falls back to it, like a case study. Its action downloads the PDF
-// (RESUME_HREF): the browser saves the file instead of opening it, so a
-// visitor in a Home Screen web app isn't stuck in an opened PDF.
+// and falls back to it, like a case study. Its action is Download
+// (app/resume/ResumeDownload.tsx): it saves the PDF, or in a Home Screen web
+// app, opens the share sheet with it.
 const RESUME_PAGE: FocusedPage = {
   section: 'portfolio',
   parent: NAV_HREFS.portfolio,
-  action: (
-    <Button variant="secondary" background="scrim" startIcon="download" href={RESUME_HREF} download="erin-tozour-resume.pdf">
-      Download
-    </Button>
-  ),
+  action: <ResumeDownload />,
 };
 
 // The focused page at an address (a subpage, or the résumé), or undefined

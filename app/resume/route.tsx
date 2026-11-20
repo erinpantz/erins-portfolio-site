@@ -11,7 +11,8 @@ export const meta = ({ location }: Route.MetaArgs) => pageMeta('Résumé', locat
 // It's a page of its own, not the PDF in a new tab, so visitors stay on the
 // site with a way back, even in a Home Screen web app, which has no browser
 // controls. It's in Shell's focused mode: the back link in the top-left
-// corner, and Download in the top-right (both set in app/root.tsx).
+// corner (set in app/root.tsx), and Download (ResumeDownload.tsx) in the
+// top-right.
 //
 // The résumé is one image, column width, like a case study's hero: exported
 // from the résumé frame in the site's Figma file at 3× (1836 × 2448, 3:4,
