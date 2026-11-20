@@ -203,23 +203,36 @@ function usePendingSection(): ShellProps['pending'] {
 // page's parent (Portfolio, the front page, Playground, or Profile), and a
 // click goes back in the history instead when the previous page is on this
 // site, so visitors return exactly where they were, scrolled where they left
-// it (ScrollRestoration). React Router gives the first page a visit opens the
-// location key "default", so any other key means the visitor got here from a
-// page on the site. A visitor who arrived from outside (a shared link, a
-// search, a Home Screen icon) is on that first page, so the click follows
-// the href as a normal link. Cmd-, Ctrl-, Shift-, and Alt-clicks and the
-// middle button are left to the browser, so they still open the parent page
-// in a new tab or window, and a long press shows the browser's menu for it.
+// it (ScrollRestoration). React Router numbers each entry in the tab's
+// history (historyIndex), starting at 0 on the first page of a visit, so an
+// index above 0 means the previous entry is a page on the site. A visitor who
+// arrived from outside (a shared link, a search, a Home Screen icon) is on
+// entry 0, so the click follows the href as a normal link. A reload keeps the
+// entry's number, so Back still returns to the page before it. Cmd-, Ctrl-,
+// Shift-, and Alt-clicks and the middle button are left to the browser, so
+// they still open the parent page in a new tab or window, and a long press
+// shows the browser's menu for it.
+//
+// (React Router's location key isn't the signal here: it's "default" on the
+// first page only without ScrollRestoration, whose script gives every entry a
+// key before the app starts.)
 function useBackLink(parent: string): ShellProps['backLink'] {
-  const { key } = useLocation();
   const navigate = useNavigate();
   const onClick = (event: MouseEvent<HTMLAnchorElement>) => {
     const modified = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0;
-    if (modified || key === 'default') return;
+    if (modified || historyIndex() === 0) return;
     event.preventDefault();
     navigate(-1);
   };
   return { href: parent, label: 'Back', onClick };
+}
+
+// React Router's number for the current entry in the tab's history (idx),
+// which it keeps in history.state: 0 for the first page of a visit, and one
+// more for each page change in the app
+function historyIndex() {
+  const entry: unknown = window.history.state;
+  return typeof entry === 'object' && entry !== null && 'idx' in entry && typeof entry.idx === 'number' ? entry.idx : 0;
 }
 
 // Focused pages (case studies, the résumé, Playground projects, and Music)
