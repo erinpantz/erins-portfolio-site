@@ -121,7 +121,7 @@ const RESUME_PAGE: FocusedPage = {
   parent: NAV_HREFS.portfolio,
   action: (
     <Button variant="secondary" background="scrim" startIcon="download" href={RESUME_HREF} download="erin-tozour-resume.pdf">
-      Download PDF
+      Download
     </Button>
   ),
 };

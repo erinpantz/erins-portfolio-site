@@ -41,7 +41,7 @@ export const RESUME_PAGE_HREF = '/resume';
 
 /**
  * The résumé PDF (public/erin-tozour-resume.pdf), which the résumé page's
- * Download PDF button saves. It isn't in the nav.
+ * Download button saves. It isn't in the nav.
  */
 export const RESUME_HREF = '/erin-tozour-resume.pdf';
 
