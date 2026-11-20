@@ -13,6 +13,15 @@ import { ActionCard, Button, Footer, IconButton, Link, type ShellProps } from 'v
 export const SITE_URL = 'https://erintozour.com';
 
 /**
+ * Google Analytics: the GA4 property the old Webflow site reports to, so the
+ * history carries over. The tag is in app/root.tsx.
+ */
+export const GA_MEASUREMENT_ID = 'G-X9Q27K2L9P';
+
+/** The addresses the tag reports from: the live site only */
+export const GA_HOSTNAMES = ['erintozour.com', 'www.erintozour.com'];
+
+/**
  * Where each nav link goes: the logo (home) and the three pages. The
  * Portfolio is the front page, so the logo and Portfolio both go to /.
  * Case studies stay at /portfolio/<slug>.

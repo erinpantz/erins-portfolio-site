@@ -6,7 +6,48 @@ import type { Route } from './+types/root';
 import { caseStudies } from './caseStudies';
 import { isPlaygroundProject } from './playground/projects';
 import { PAGE_LOADER_WORDS } from './pageLoaderWords';
-import { MUSIC_HREF, NAV_HREFS, siteFooter } from './site';
+import { GA_HOSTNAMES, GA_MEASUREMENT_ID, MUSIC_HREF, NAV_HREFS, siteFooter } from './site';
+
+// The EEA (the EU, Iceland, Liechtenstein, and Norway), the UK, and
+// Switzerland, by ISO country code, for Google Analytics' consent defaults
+const CONSENT_REGIONS = [
+  'AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IE',
+  'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE',
+  'IS', 'LI', 'NO', 'GB', 'CH',
+];
+
+// Google Analytics (GA4's gtag.js), as an inline script in <head>.
+// - Only on the live site: on any other hostname (localhost, Vercel's
+//   addresses) it stops at once, so nothing loads and nothing is sent.
+// - Consent defaults, set before config: analytics_storage is denied for
+//   visitors in the EEA, the UK, and Switzerland, so GA measures those visits
+//   without cookies (no banner needed), and granted everywhere else. The ad
+//   settings are denied everywhere, since the site has no ads.
+// - gtag.js loads with async, so it never holds up the first paint or the
+//   page loader.
+// - Page views: GA's enhanced measurement counts the first load and each page
+//   change in the app (from the browser's history), so none are sent here.
+const gaScript = `(function () {
+  if (${JSON.stringify(GA_HOSTNAMES)}.indexOf(location.hostname) === -1) return;
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  window.gtag = gtag;
+  gtag('consent', 'default', {
+    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied',
+    analytics_storage: 'granted'
+  });
+  gtag('consent', 'default', {
+    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    region: ${JSON.stringify(CONSENT_REGIONS)}
+  });
+  gtag('js', new Date());
+  gtag('config', '${GA_MEASUREMENT_ID}');
+  var s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}';
+  document.head.appendChild(s);
+})();`;
 
 // The HTML around every page
 export function Layout({ children }: { children: ReactNode }) {
@@ -18,6 +59,8 @@ export function Layout({ children }: { children: ReactNode }) {
             so a Red visitor never sees a flash of Blue. It has to stay inline
             and first. */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        {/* Google Analytics, on the live site only (see gaScript above) */}
+        <script dangerouslySetInnerHTML={{ __html: gaScript }} />
         {/* Icons, exported from Figma into public/. Browsers that read SVG use
             it; the PNGs are fallbacks for those that don't. */}
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
