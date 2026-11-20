@@ -28,7 +28,8 @@ export const NAV_HREFS = {
 export const MUSIC_HREF = '/profile/music';
 
 /**
- * Where the résumé goes: the Portfolio intro's button. It isn't in the nav. It points to a PDF that doesn't exist yet.
+ * The résumé PDF (public/erin-tozour-resume.pdf), which the Portfolio intro's
+ * button opens in a new tab. It isn't in the nav.
  */
 export const RESUME_HREF = '/erin-tozour-resume.pdf';
 
