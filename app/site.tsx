@@ -36,6 +36,9 @@ export const NAV_HREFS = {
 /** The Music page, below Profile: Erin's favorite albums */
 export const MUSIC_HREF = '/profile/music';
 
+/** The résumé page (app/resume/), which the Portfolio intro's button opens */
+export const RESUME_PAGE_HREF = '/resume';
+
 /**
  * The résumé PDF (public/erin-tozour-resume.pdf), which the Portfolio intro's
  * button opens in a new tab. It isn't in the nav.

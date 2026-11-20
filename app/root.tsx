@@ -1,12 +1,12 @@
 import { useEffect, useRef, type MouseEvent, type ReactNode } from 'react';
 import { Links, Meta, Outlet, Link as RouterLink, Scripts, ScrollRestoration, useLocation, useNavigate, useNavigation } from 'react-router';
-import { focusPageStart, LinkProvider, Section, Shell, themeScript, type LinkComponent, type ShellProps } from 'verity-design-system';
+import { Button, focusPageStart, LinkProvider, Section, Shell, themeScript, type LinkComponent, type ShellProps } from 'verity-design-system';
 import 'verity-design-system/styles.css';
 import type { Route } from './+types/root';
 import { caseStudies } from './caseStudies';
 import { isPlaygroundProject } from './playground/projects';
 import { PAGE_LOADER_WORDS } from './pageLoaderWords';
-import { GA_HOSTNAMES, GA_MEASUREMENT_ID, MUSIC_HREF, NAV_HREFS, siteFooter } from './site';
+import { GA_HOSTNAMES, GA_MEASUREMENT_ID, MUSIC_HREF, NAV_HREFS, RESUME_HREF, RESUME_PAGE_HREF, siteFooter } from './site';
 
 // The EEA (the EU, Iceland, Liechtenstein, and Norway), the UK, and
 // Switzerland, by ISO country code, for Google Analytics' consent defaults
@@ -103,15 +103,48 @@ function subpageSection(pathname: string) {
   return SUBPAGES[section].isPage(slug) ? section : undefined;
 }
 
+// A page opened in Shell's focused mode: its section (for the page loader),
+// its parent (where the back link goes when there's no page on the site to go
+// back to), and an optional action for the top-right corner.
+interface FocusedPage {
+  section: keyof typeof SUBPAGES;
+  parent: string;
+  action?: ReactNode;
+}
+
+// The résumé (/resume), which counts as the Portfolio, where its button is,
+// and falls back to it, like a case study. Its action downloads the PDF
+// (RESUME_HREF): the browser saves the file instead of opening it, so a
+// visitor in a Home Screen web app isn't stuck in an opened PDF.
+const RESUME_PAGE: FocusedPage = {
+  section: 'portfolio',
+  parent: NAV_HREFS.portfolio,
+  action: (
+    <Button variant="secondary" background="scrim" startIcon="download" href={RESUME_HREF} download="erin-tozour-resume.pdf">
+      Download PDF
+    </Button>
+  ),
+};
+
+// The focused page at an address (a subpage, or the résumé), or undefined
+// for a page with the nav. With SUBPAGES, this is the one place that decides
+// which pages are focused and where their back links fall back to.
+function focusedPage(pathname: string): FocusedPage | undefined {
+  if (pathname.replace(/\/+$/, '') === RESUME_PAGE_HREF) return RESUME_PAGE;
+  const section = subpageSection(pathname);
+  return section && { section, parent: SUBPAGES[section].parent };
+}
+
 // Which section an address is in. The front page is the Portfolio, and a
-// subpage (a case study or a Playground project) counts as its section; an
-// address without a page (Page not found) is in none. The nav marks it as the
+// focused page (a case study, the résumé, a Playground project, or Music)
+// counts as its section; an address without a page (Page not found) is in
+// none. The nav marks it as the
 // current page (except on a subpage, which has no nav), and the page loader
 // uses its words.
 function sectionOf(pathname: string): ShellProps['current'] {
   if (pathname === '/') return 'portfolio';
-  const subpage = subpageSection(pathname);
-  if (subpage) return subpage;
+  const focused = focusedPage(pathname);
+  if (focused) return focused.section;
   const [first, ...rest] = pathname.split('/').filter(Boolean);
   if (rest.length > 0) return undefined;
   if (first === 'playground' || first === 'profile') return first;
@@ -189,23 +222,25 @@ function useBackLink(parent: string): ShellProps['backLink'] {
   return { href: parent, label: 'Back', onClick };
 }
 
-// Subpages (case studies, Playground projects, and Music) are for one piece
-// of work, so they use Shell's focused mode: no nav, and a back link in the
-// corner (useBackLink). Every other page has the nav. Its links change pages in the app
+// Focused pages (case studies, the résumé, Playground projects, and Music)
+// are for one piece of work, so they use Shell's focused mode: no nav, a back
+// link in the top-left corner (useBackLink), and the page's action, if it has
+// one, in the top-right. Every other page has the nav. Its links change pages in the app
 // (SiteLink). Moving to another section shows Verity's PageLoader, with the
 // words in app/pageLoaderWords.ts: Shell decides when, from the section the
 // page change is going to.
 function SiteShell({ children }: { children: ReactNode }) {
   const { pathname } = useLocation();
-  const subpage = subpageSection(pathname);
+  const focused = focusedPage(pathname);
   const pending = usePendingSection();
-  const backLink = useBackLink(subpage ? SUBPAGES[subpage].parent : NAV_HREFS.portfolio);
+  const backLink = useBackLink(focused ? focused.parent : NAV_HREFS.portfolio);
   useFocusPageStartOnPageChange();
   return (
     <LinkProvider component={SiteLink}>
       <Shell
-        mode={subpage ? 'focused' : 'default'}
-        backLink={subpage ? backLink : undefined}
+        mode={focused ? 'focused' : 'default'}
+        backLink={focused ? backLink : undefined}
+        action={focused?.action}
         current={sectionOf(pathname)}
         hrefs={NAV_HREFS}
         footer={siteFooter}

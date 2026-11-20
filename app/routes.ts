@@ -2,8 +2,8 @@ import { type RouteConfig, index, route } from '@react-router/dev/routes';
 import { PLAYGROUND_PROJECTS } from './playground/projects';
 
 // Which page each address shows. Each file is in app/routes/, except the
-// Playground projects and Music, which live with their code in app/playground/
-// and app/profile/.
+// Playground projects, Music, and the résumé, which live with their code in
+// app/playground/, app/profile/, and app/resume/.
 export default [
   // The Portfolio is the front page
   index('routes/portfolio.tsx'),
@@ -17,6 +17,8 @@ export default [
   route('profile', 'routes/profile.tsx'),
   // Music, below Profile, from app/profile/music/
   route('profile/music', 'profile/music/route.tsx'),
+  // The résumé, from app/resume/
+  route('resume', 'resume/route.tsx'),
   // Everything else: Page not found
   route('*', 'routes/not-found.tsx'),
 ] satisfies RouteConfig;

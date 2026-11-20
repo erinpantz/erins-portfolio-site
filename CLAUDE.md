@@ -83,6 +83,7 @@ app/
                          folder (<slug>/) with its page (route.tsx) and its own code
   profile/music/         the Music page (route.tsx), its albums (albums.ts), their
                          covers, and its own components
+  resume/                the résumé page (route.tsx), at /resume, and its image
 case-studies/<slug>/     index.mdx, plus the images/, animations/, and videos/ it uses
 assets/                  images and illustrations shared across pages
 plugins/                 build steps, such as remarkProseRuns.ts for case studies
@@ -96,7 +97,7 @@ public/                  files that need a fixed address, like the favicons, the
 - **Page titles** use `pageTitle()` from `app/site.tsx`: “Laguna Companion · Erin Tozour”, and “Erin Tozour” for the front page.
 - **The front page is the Portfolio,** at `/`. `/portfolio` is built as a redirect to `/`, so old links still work; case studies stay at `/portfolio/<slug>`.
 - **The nav** comes from Verity’s `Shell`. `app/site.tsx` sets where each link goes. The current page is worked out in `app/root.tsx`; the front page and case studies count as Portfolio.
-- **Case studies, Playground projects, and Music use Shell's focused mode:** no nav, and a back link in the top-left corner, “Back.” A click goes back in the history when the previous page is on the site, so visitors return where they were; otherwise (a shared link, a search, a Home Screen icon) it's a link to their section: Portfolio for a case study (`/portfolio/<slug>`), Playground for a project (`/playground/<slug>`), Profile for Music (`/profile/music`). `useBackLink` in `app/root.tsx` decides which. `SUBPAGES` there is the one place that decides focused pages from the address, so a new case study folder, or a new slug in `app/playground/projects.ts`, gets it automatically. They count as their section for the page loader. Every other page has the nav.
+- **Case studies, the résumé, Playground projects, and Music use Shell's focused mode:** no nav, and a back link in the top-left corner, “Back.” A click goes back in the history when the previous page is on the site, so visitors return where they were; otherwise (a shared link, a search, a Home Screen icon) it's a link to their section: Portfolio for a case study (`/portfolio/<slug>`) and the résumé (`/resume`), Playground for a project (`/playground/<slug>`), Profile for Music (`/profile/music`). `useBackLink` in `app/root.tsx` decides which. The résumé also has Download PDF in the top-right corner (Shell's `action`). `focusedPage` and `SUBPAGES` there are the one place that decides focused pages from the address, so a new case study folder, or a new slug in `app/playground/projects.ts`, gets it automatically. They count as their section for the page loader. Every other page has the nav.
 
 ## Building a case study
 
