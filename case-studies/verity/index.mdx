@@ -1,18 +1,254 @@
 ---
-# PLACEHOLDER: title and facts are waiting for Erin's copy
-title: "Placeholder: Verity"
-heading: "Placeholder: Verity case study"
+title: Verity
+heading: How I built Verity with AI
 facts:
+  - title: Company
+    value: Personal project
   - title: Role
-    value: Placeholder
+    value: End-to-end design and implementation
+  - title: Year
+    value: "2026"
 ---
 
-import { Section } from 'verity-design-system';
+import {
+  Container,
+  Divider,
+  Grid,
+  Image,
+  MediaBlock,
+  Section,
+  Video,
+} from 'verity-design-system';
 
-{/* PLACEHOLDER: the hero image Container goes here, first, like every case study */}
+import hero from './images/figma-beside-site.avif';
+import siteSketch from './images/site-sketch.avif';
+import decisionsLog1 from './images/decisions-log-1.avif';
+import decisionsLog2 from './images/decisions-log-2.avif';
+import claudeCodePrompt from './images/claude-code-prompt.avif';
+import typeTesterAndGlyphs from './images/type-tester-and-glyphs.avif';
+import redLinkContrast from './images/red-link-contrast.avif';
 
-<Section heading="Placeholder: coming soon">
+import verityTokens from './videos/verity-tokens.mp4';
+import verityTokensPoster from './videos/verity-tokens-poster.avif';
+import verityComponents from './videos/verity-components.mp4';
+import verityComponentsPoster from './videos/verity-components-poster.avif';
+import motionPrototype from './videos/motion-prototype.mp4';
+import motionPrototypePoster from './videos/motion-prototype-poster.avif';
+import verityDocsStorybook from './videos/verity-docs-storybook.mp4';
+import verityDocsStorybookPoster from './videos/verity-docs-storybook-poster.avif';
 
-Placeholder paragraph. This case study hasn’t been written yet.
+{/* Alt text is a draft for Erin's review. */}
+
+<Container>
+  <MediaBlock width="wide">
+    <Image
+      src={hero}
+      alt="My site’s design in Figma, with the Laguna case study and Profile pages laid out on the canvas, beside the same Laguna case study live in the browser."
+      loading="eager"
+    />
+  </MediaBlock>
+</Container>
+
+<Section heading="Overview">
+
+When I left Laguna, the way designers work had changed. It was such a huge existential moment. Some people were excited about all the amazing things they could do, while others were asking if design was even a career anymore.
+
+I think my best trait is the ability to adapt. I knew I had to embrace the change as I always have, but I wanted to think deeply about how I embraced it. Design is valuable because it creates consistency and ensures quality. It creates trust. It helps you communicate with people and make things easy for them. I wanted to learn how to use AI while still delivering on the promise of good design.
+
+Over the past decade heading design at startups, I’ve always established the rules of the brand, the design system for the product, and the guidelines for writing. I wanted to learn how to harness AI to create these faster and then use them as a foundation for generating.
+
+I set a goal to build a design system and have AI use it to rebuild my website. So I built Verity, and used it to build this site with Claude. In about a month, I learned how to use Claude Code and set up my tech stack, and I built my tokens, about 55 components, 71 releases, a typeface of my own, and the site you’re reading.
+
+You can explore Verity in [its Storybook](https://verity.erintozour.com) and see the code on [GitHub](https://github.com/erinpantz/verity-design-system).
 
 </Section>
+
+<Container><Divider /></Container>
+
+<Section heading="From handing off to building it all">
+
+For 20 years, my work ended at the handoff. I designed in Figma, and developers built it. This time I built everything end to end. I designed the system in Figma, built the components in code, documented them in Storybook, built the site itself, and set up the hosting and the domain.
+
+</Section>
+
+<Container><Divider /></Container>
+
+<Section heading="Why I built a design system first">
+
+AI is non-deterministic. Ask it for the same thing twice and you can get two different answers. A design system is a deterministic set of rules, which is exactly what AI needs to work from. So the system came first, and the site came second.
+
+</Section>
+
+<Container><Divider /></Container>
+
+<Section heading="Getting started, and the day it clicked">
+
+I started with Brad Frost’s courses, [Subatomic: The Complete Guide to Design Tokens](https://designtokenscourse.com/) and [AI and Design Systems](https://aianddesign.systems/). They gave me the big picture and introduced the stack I’d use, which was Cursor, Claude, Claude Code, Storybook, and GitHub.
+
+Then I looked at mature design systems like his, and it felt like it would take me years to get there. I suddenly felt very overwhelmed. But then I thought, it always helps to just start making things. So I put the course down and started building with Claude. In one day, I went from feeling overwhelmed to cruising and having fun.
+
+On Oct 26, I was learning Git and what a `CLAUDE.md` file is. By Oct 28, I’d finished two batches of components a day ahead of plan.
+
+<MediaBlock caption="My first sketch of the site, before anything was in Figma">
+  <Image
+    src={siteSketch}
+    alt="A pencil sketch of the site: a side nav with Profile, Portfolio, and Playground, a hero that says “I’m a producer,” work cards, Music and Design system cards, a case study page, a brand gallery, and a résumé, with notes like “Work or Portfolio?” and “Alliteration?”"
+    aspectRatio="4:3"
+  />
+</MediaBlock>
+
+</Section>
+
+<Container><Divider /></Container>
+
+<Section heading="Building Verity in Figma">
+
+Before I asked Claude to generate anything, I built the bones of the system in Figma myself. I wanted to trust everything I was feeding it.
+
+I followed design token best practices, with three tiers. Core tokens hold the raw values, semantic tokens say what a value is for, and component tokens cover one-off needs. Two themes and four breakpoints sit on top as modes, so a change only has to happen in one place. Every variable has a clear name and a limited scope. Every component is built on variables, with its variants, states, and properties set up the way a developer would expect.
+
+Exporting the tokens to code was a good stress test. The first export turned up 267 aliases still pointing at old libraries and two names that clashed. I fixed them at the source in Figma, rather than patching around them in code.
+
+The rules are written down too. Naming, spacing, and writing guidelines live in Storybook, and a `CLAUDE.md` file points Claude to them, so Claude works from the same standards I do.
+
+<MediaBlock width="wide" caption="Verity’s variables in Figma: core, semantic, and component tiers, with modes for themes and breakpoints">
+  <Video
+    src={verityTokens}
+    poster={verityTokensPoster}
+    alt="Scrolling through Verity’s variable collections in Figma, from the responsive breakpoint values to the color and typography tiers."
+    aspectRatio="3:2"
+  />
+</MediaBlock>
+
+<MediaBlock width="wide" caption="Every component page has a header and an overview, with its variants built on variables">
+  <Video
+    src={verityComponents}
+    poster={verityComponentsPoster}
+    alt="Opening the Verity Library in Figma and moving through component pages, including Button, StatCard, and ProjectCard, each with its overview and variants."
+  />
+</MediaBlock>
+
+</Section>
+
+<Container><Divider /></Container>
+
+<Section heading="Sketch, talk, Figma, code">
+
+I sketched on paper first, talked ideas through with Claude, designed in Figma, and then built in code. Once I saw a page in the browser, I could immediately see what to change, and iterating across screen sizes was fast.
+
+Some things I could just describe. The Music page took about two minutes. Others, like layouts and icons, I needed to get my hands on in Figma or Illustrator.
+
+Motion was my favorite part. Claude built prototypes with sliders for the Reel, my layered photo, and the page loader. I tuned them in minutes and handed the numbers to code.
+
+<MediaBlock width="wide" caption="The prototype I used to tune the Reel on Home">
+  <Video
+    src={motionPrototype}
+    poster={motionPrototypePoster}
+    alt="A motion prototype for the Reel, with sliders for timing, dip angle, overshoot, disc radius, and tilt, being adjusted while the cards turn."
+    aspectRatio="3:2"
+  />
+</MediaBlock>
+
+</Section>
+
+<Container><Divider /></Container>
+
+<Section heading="Keeping one source of truth">
+
+Every designer wrestles with where the source of truth lives, and the answer depends on the workflow. In mine, tokens and core building blocks live in Figma, so anything I drop into a mockup already exists in code. Components and their behavior live in Storybook. The rules live in Storybook’s guidelines, with `CLAUDE.md` pointing to them. Finished pages live on the site.
+
+The decisions log is my memory. I’ll forget what I decided, and I can just ask. It also keeps Claude in line. If I changed my mind and didn’t tell Claude, it might quietly change things back later.
+
+<MediaBlock width="wide" caption="Verity’s docs in Storybook, starting with the guidelines">
+  <Video
+    src={verityDocsStorybook}
+    poster={verityDocsStorybookPoster}
+    alt="Browsing Verity’s Storybook, from the Naming guideline to the foundations and component docs."
+    aspectRatio="3:2"
+  />
+</MediaBlock>
+
+{/* A Grid has no caption of its own, so the pair's caption is on the first image */}
+
+<Grid itemWidth="md" gap="md">
+  <MediaBlock caption="A few entries from the decisions log, each with its date and the reason behind it">
+    <Image
+      src={decisionsLog1}
+      alt="The decisions log’s Structure section, explaining why Verity and the portfolio are separate repos and why Storybook has its own address."
+      aspectRatio="3:2"
+    />
+  </MediaBlock>
+  <MediaBlock>
+    <Image
+      src={decisionsLog2}
+      alt="The decisions log’s Typography section, with dated decisions about code sizes, display sizes, and corner radii, and the reasons for each."
+      aspectRatio="3:2"
+    />
+  </MediaBlock>
+</Grid>
+
+<MediaBlock width="wide" caption="A prompt for Claude Code, with the ProjectCard it changed open in Storybook">
+  <Image
+    src={claudeCodePrompt}
+    alt="Claude Code in the editor, with a prompt that explains why a ProjectCard change is needed and lists each step, below the ProjectCard story in Storybook."
+    aspectRatio="4:3"
+  />
+</MediaBlock>
+
+</Section>
+
+<Container><Divider /></Container>
+
+<Section heading="What AI did well, and what stayed mine">
+
+Claude was amazing at accessibility. It caught a contrast failure in the Red theme, fixed where focus lands after a page change, and named things for screen readers. It also took on the tedious work and explained what it was doing as it went.
+
+Taste, decisions, and craft stayed mine. My typeface, Imperfecto, shows it best. Claude could build the font files and explain spacing, but it couldn’t draw my letters.
+
+Reviewing code turned into a second design review, and every fix went back to Figma first.
+
+<MediaBlock width="wide" caption="Claude built the type tester. I drew the letters in Glyphs.">
+  <Image
+    src={typeTesterAndGlyphs}
+    alt="Imperfecto in Glyphs, with “Erin Tozour” set large and the E’s outline selected, over a type tester with size, tracking, and line height sliders that compares the font with my logo."
+  />
+</MediaBlock>
+
+<MediaBlock caption="Two shades of pink, and only one passes">
+  <Image
+    src={redLinkContrast}
+    alt="The same sentence and link on a red background, twice. Before, the link is a light pink at 3.98:1 contrast, under the 4.5:1 minimum. After, it’s a paler pink at 5.29:1, which passes."
+  />
+</MediaBlock>
+
+</Section>
+
+<Container><Divider /></Container>
+
+<Section heading="What I learned">
+
+Changing a decision is expensive, even with good tokens, because every change ripples.
+
+Flow is hard to find. I work, Claude works, I review, I commit, and repeat. Should I multitask more, or just walk around more? ;)
+
+I traded money for time. I hit my plan’s limit and felt like I was burning through it, so I bought more. Handing off the tedious work was worth it.
+
+And I have a whole new respect for developers and how many details they keep track of.
+
+</Section>
+
+<Container><Divider /></Container>
+
+<Section heading="How I’ll take this into my next role">
+
+If you’re a designer wondering where to start, this is what I’d tell you. It’s also how I’d bring this way of working to my next team.
+
+Start building. The overwhelm passes once you do, and for me it took a day.
+
+Set up the system before the screens. The rules are what make AI’s output look like your team’s own.
+
+Write every decision down somewhere AI will read it, so the people and the tools work from the same standards.
+
+</Section>
+
+<Container><Divider /></Container>
