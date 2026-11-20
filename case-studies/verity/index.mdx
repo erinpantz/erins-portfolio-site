@@ -13,7 +13,6 @@ facts:
 import {
   Container,
   Divider,
-  Grid,
   Image,
   Link,
   MediaBlock,
@@ -24,7 +23,6 @@ import {
 import hero from './images/figma-beside-site.avif';
 import siteSketch from './images/site-sketch.avif';
 import decisionsLog1 from './images/decisions-log-1.avif';
-import decisionsLog2 from './images/decisions-log-2.avif';
 import claudeCodePrompt from './images/claude-code-prompt.avif';
 import typeTesterAndGlyphs from './images/type-tester-and-glyphs.avif';
 import redLinkContrast from './images/red-link-contrast.avif';
@@ -169,24 +167,13 @@ The decisions log is my memory. I’ll forget what I decided, and I can just ask
   />
 </MediaBlock>
 
-{/* A Grid has no caption of its own, so the pair's caption is on the first image */}
-
-<Grid itemWidth="md" gap="md">
-  <MediaBlock caption="A few entries from the decisions log, each with its date and the reason behind it">
-    <Image
-      src={decisionsLog1}
-      alt="The decisions log’s Structure section, explaining why Verity and the portfolio are separate repos and why Storybook has its own address."
-      aspectRatio="3:2"
-    />
-  </MediaBlock>
-  <MediaBlock>
-    <Image
-      src={decisionsLog2}
-      alt="The decisions log’s Typography section, with dated decisions about code sizes, display sizes, and corner radii, and the reasons for each."
-      aspectRatio="3:2"
-    />
-  </MediaBlock>
-</Grid>
+<MediaBlock width="wide" caption="An entry from the decisions log, each with its date and the reason behind it">
+  <Image
+    src={decisionsLog1}
+    alt="The decisions log’s Structure section, explaining why Verity and the portfolio are separate repos and why Storybook has its own address."
+    aspectRatio="3:2"
+  />
+</MediaBlock>
 
 <MediaBlock width="wide" caption="A prompt for Claude Code, with the ProjectCard it changed open in Storybook">
   <Image
