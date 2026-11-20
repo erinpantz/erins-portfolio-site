@@ -1,7 +1,8 @@
 import { Container, Hero, NavCard, NavCardGroup } from 'verity-design-system';
-import { NAV_HREFS, pageTitle } from '../../site';
+import { NAV_HREFS, pageMeta } from '../../site';
+import type { Route } from './+types/route';
 
-export const meta = () => [{ title: pageTitle('Nav cards') }];
+export const meta = ({ location }: Route.MetaArgs) => pageMeta('Nav cards', location.pathname);
 
 // Nav cards, a Playground project: the two tilted cards from Erin's old home
 // page, live. A Hero with its name (the page's h1), why she made them, and

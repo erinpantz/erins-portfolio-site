@@ -1,11 +1,12 @@
 import { useRef, useState } from 'react';
 import { Section } from 'verity-design-system';
-import { pageTitle } from '../../site';
+import { pageMeta } from '../../site';
+import type { Route } from './+types/route';
 import { AlbumGrid } from './AlbumGrid';
 import { musicAlbums, type MusicAlbum } from './musicAlbums';
 import { PlayerPanel } from './PlayerPanel';
 
-export const meta = () => [{ title: pageTitle('Music') }];
+export const meta = ({ location }: Route.MetaArgs) => pageMeta('Music', location.pathname);
 
 // Music, below Profile: Erin's favorite albums. A wide Section, whose heading
 // is the page's h1, with its intro and a grid of the albums' covers

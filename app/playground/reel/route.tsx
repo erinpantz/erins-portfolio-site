@@ -4,9 +4,10 @@ import reelCareCalendar from '../../../assets/images/home-reel/reel-02-care-cale
 import reelMammogramCampaign from '../../../assets/images/home-reel/reel-03-mammogram-campaign.avif';
 import reelProductivityDashboard from '../../../assets/images/home-reel/reel-04-productivity-dashboard.avif';
 import reelCallStoryboard from '../../../assets/images/home-reel/reel-05-call-storyboard.avif';
-import { pageTitle } from '../../site';
+import { pageMeta } from '../../site';
+import type { Route } from './+types/route';
 
-export const meta = () => [{ title: pageTitle('Reel') }];
+export const meta = ({ location }: Route.MetaArgs) => pageMeta('Reel', location.pathname);
 
 // Reel, a Playground project: the reel of Erin's work from her old home page,
 // live. A Hero with its name (the page's h1), why she made it, and Verity's

@@ -5,10 +5,11 @@ import marker from '../../assets/images/profile/layers/marker.svg';
 import photo from '../../assets/images/profile/layers/photo.avif';
 import squiggle from '../../assets/images/profile/layers/squiggle.svg';
 import { EXPERIENCE } from '../experience';
-import { MUSIC_HREF, pageTitle, VerityLink } from '../site';
+import { MUSIC_HREF, pageMeta, VerityLink } from '../site';
+import type { Route } from './+types/profile';
 import utilities from '../utilities.module.css';
 
-export const meta = () => [{ title: pageTitle('Profile') }];
+export const meta = ({ location }: Route.MetaArgs) => pageMeta('Profile', location.pathname);
 
 // Between an emoji and its link: a space the line can't break at, so an
 // emoji never ends one line with its link starting the next

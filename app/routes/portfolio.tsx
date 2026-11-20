@@ -1,11 +1,12 @@
 import { Container, Grid, ProjectCard } from 'verity-design-system';
 import { IntroCard } from '../IntroCard';
 import { portfolioCaseStudies } from '../caseStudies';
-import { pageTitle } from '../site';
+import { pageMeta } from '../site';
+import type { Route } from './+types/portfolio';
 import utilities from '../utilities.module.css';
 
 // The front page, so the tab says just “Erin Tozour”
-export const meta = () => [{ title: pageTitle() }];
+export const meta = ({ location }: Route.MetaArgs) => pageMeta(undefined, location.pathname);
 
 // The front page (/), as in Figma: one wide Grid, with the intro card first,
 // then a ProjectCard for each case study, in the order set in

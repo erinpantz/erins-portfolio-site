@@ -1,10 +1,11 @@
 import { Container } from 'verity-design-system';
 import { PlaygroundGrid } from '../PlaygroundGrid';
 import { PLAYGROUND_PROJECTS } from '../playground/projects';
-import { pageTitle } from '../site';
+import { pageMeta } from '../site';
+import type { Route } from './+types/playground';
 import utilities from '../utilities.module.css';
 
-export const meta = () => [{ title: pageTitle('Playground') }];
+export const meta = ({ location }: Route.MetaArgs) => pageMeta('Playground', location.pathname);
 
 interface PlaygroundCard {
   card: { heading: string; thumbnail: string };

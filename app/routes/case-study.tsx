@@ -1,12 +1,15 @@
 import { CaseStudyHeader, Container, Prose } from 'verity-design-system';
 import { caseStudies } from '../caseStudies';
 import { NotFound } from '../NotFound';
-import { pageTitle } from '../site';
+import { pageMeta } from '../site';
 import type { Route } from './+types/case-study';
 
-export const meta = ({ params }: Route.MetaArgs) => [
-  { title: pageTitle(caseStudies[params.slug]?.frontmatter.title ?? 'Page not found') },
-];
+// An address with no case study is Page not found, with no og:url or
+// canonical link, like the not-found route
+export const meta = ({ params, location }: Route.MetaArgs) => {
+  const caseStudy = caseStudies[params.slug];
+  return caseStudy ? pageMeta(caseStudy.frontmatter.title, location.pathname) : pageMeta('Page not found');
+};
 
 // Components the MDX can use without importing them. Prose comes from
 // plugins/remarkProseRuns.ts, which wraps each run of Markdown inside a

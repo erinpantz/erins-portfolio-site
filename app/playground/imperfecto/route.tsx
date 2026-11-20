@@ -1,11 +1,11 @@
 import { Container, Hero, Section, VerticalStack } from 'verity-design-system';
-import { pageTitle } from '../../site';
+import { pageMeta } from '../../site';
 import type { Route } from './+types/route';
 import { CharacterSet } from './CharacterSet';
 import { imperfectoCharacterGroups } from './characters.server';
 import { TypeTester } from './TypeTester';
 
-export const meta = () => [{ title: pageTitle('Imperfecto') }];
+export const meta = ({ location }: Route.MetaArgs) => pageMeta('Imperfecto', location.pathname);
 
 // Read the font's characters while the site builds. The page is pre-rendered,
 // so this runs once, at build time, and its result is saved with the page.
