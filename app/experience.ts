@@ -26,7 +26,7 @@ export const EXPERIENCE: Experience[] = [
     dates: 'Jan 2024 – Sep 2026',
     description: [
       'Laguna helps care teams use AI to cut admin work and reach more health plan members. I led product and marketing design, from research to shipped work. We launched an AI copilot for case managers, an AI-powered dashboard for supervisors, and a new marketing website.',
-      'At a large health plan, the copilot cut post-call documentation time by 66%. Laguna was acquired by Elligint Health in November 2026.',
+      'Laguna Insight, the supervisor dashboard, was named one of TIME’s Best Inventions of 2024. At a large health plan, the copilot cut post-call documentation time by 66%. Laguna was acquired by Elligint Health in November 2026.',
     ],
   },
   {
