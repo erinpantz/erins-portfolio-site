@@ -23,4 +23,17 @@ export default defineConfig({
     // Storybook), and two copies break components.
     dedupe: ['react', 'react-dom'],
   },
+  environments: {
+    ssr: {
+      resolve: {
+        // The dev server's packages load as on Node, as in the build. React
+        // Router leaves out the "node" condition unless @react-router/node is
+        // in dependencies (it's in devDependencies here, since there's no
+        // server), so packages with a separate Node file got their browser
+        // one: fontkit, which reads the Imperfecto font
+        // (characters.server.ts), lost openSync, and every page failed.
+        externalConditions: ['node'],
+      },
+    },
+  },
 });
