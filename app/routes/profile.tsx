@@ -37,7 +37,7 @@ function Emoji({ children }: { children: string }) {
 // app.
 //
 // Then Experience: a wide Section (its heading is the page's h2) holding a
-// wide list, one ExperienceItem per role in app/experience.ts, most recent
+// wide list, one ExperienceItem per role in app/experience.tsx, most recent
 // first. Each company is an h3 under “Experience.” The list is a ul with no
 // gap: each item draws its own top border and padding. An item sits in a row
 // when it's wide enough and stacks when it isn't; Verity decides where.

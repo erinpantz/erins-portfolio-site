@@ -4,9 +4,16 @@
 // To add a role, add an entry at the right place in the list. Write the dates
 // as they should show, with an en dash between them (“Jan 2024 – Sep 2026”);
 // a current role ends in “Present.” A description is one paragraph (a string)
-// or several (a list of strings).
+// or several (a list, one per paragraph).
+//
+// A paragraph can link to proof of the work, with Verity's Link. Wrap a
+// paragraph that mixes text and links in <>…</>, so it stays one paragraph.
+// Links to other sites open in a new tab (opensInNewTab), and their text says
+// where they go. That's why this file is .tsx: links are JSX.
 //
 // The copy matches the Experience section in the site's Figma file (Profile).
+
+import { Link, type Paragraphs } from 'verity-design-system';
 
 export interface Experience {
   /** The company, or “Freelance” */
@@ -15,8 +22,8 @@ export interface Experience {
   title: string;
   /** “Mon YYYY – Mon YYYY”, with an en dash */
   dates: string;
-  /** One paragraph, or a list of paragraphs */
-  description: string | string[];
+  /** One paragraph, or a list of paragraphs; a paragraph can hold links */
+  description: Paragraphs;
 }
 
 export const EXPERIENCE: Experience[] = [
@@ -26,7 +33,20 @@ export const EXPERIENCE: Experience[] = [
     dates: 'Jan 2024 – Sep 2026',
     description: [
       'Laguna helps care teams use AI to cut admin work and reach more health plan members. I led product and marketing design, from research to shipped work. We launched an AI copilot for case managers, an AI-powered dashboard for supervisors, and a new marketing website.',
-      'Laguna Insight, the supervisor dashboard, was named one of TIME’s Best Inventions of 2024. At a large health plan, the copilot cut post-call documentation time by 66%. Laguna was acquired by Elligint Health in November 2026.',
+      <>
+        Laguna Insight, the supervisor dashboard, was named one of{' '}
+        <Link href="https://time.com/collections/best-inventions-2024/7094937/laguna-insight/" opensInNewTab>
+          TIME’s Best Inventions of 2024
+        </Link>
+        . At a large health plan, the copilot cut{' '}
+        <Link
+          href="https://www.highmarkhealth.org/blog/care/Highmarks-Transformed-Case-Management-Powered-by-Laguna-Companion.shtml"
+          opensInNewTab
+        >
+          post-call documentation
+        </Link>{' '}
+        time by 66%. Laguna was acquired by Elligint Health in November 2026.
+      </>,
     ],
   },
   {
