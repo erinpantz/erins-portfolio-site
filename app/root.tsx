@@ -145,8 +145,8 @@ interface FocusedPage {
 
 // The résumé (/resume), which counts as the Portfolio, where its button is,
 // and falls back to it, like a case study. Its action is Download
-// (app/resume/ResumeDownload.tsx): it saves the PDF, or in a Home Screen web
-// app, opens the share sheet with it.
+// (app/resume/ResumeDownload.tsx): on a touch screen, it opens the share
+// sheet with the PDF where the browser can share it; otherwise it saves it.
 const RESUME_PAGE: FocusedPage = {
   section: 'portfolio',
   parent: NAV_HREFS.portfolio,

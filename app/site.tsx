@@ -45,8 +45,8 @@ export const RESUME_PAGE_HREF = '/resume';
 
 /**
  * The résumé PDF (public/erin-tozour-resume.pdf), which the résumé page's
- * Download button saves (or shares, in a Home Screen web app). It isn't in
- * the nav.
+ * Download button shares on a touch screen (or saves, elsewhere and where
+ * sharing isn't possible). It isn't in the nav.
  */
 export const RESUME_HREF = '/erin-tozour-resume.pdf';
 
